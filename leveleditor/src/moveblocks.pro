@@ -8,14 +8,15 @@ SOURCES = main.cpp \
 HEADERS += mainwindow.h \
     objects.h
 
+TARGET = leveleditor
+
 INSTALLS += target
 
 FORMS += \
     mainwindow.ui
 
-OTHER_FILES += \
-    level1
+OTHER_FILES +=
 
 RESOURCES += \
-    resources.qrc
+    defaults.qrc
 

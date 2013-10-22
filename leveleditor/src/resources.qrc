@@ -1,0 +1,4 @@
+<RCC>
+    <qresource prefix="/sprites"/>
+    <qresource prefix="/levels"/>
+</RCC>

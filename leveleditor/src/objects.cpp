@@ -9,5 +9,5 @@ QGraphicsRectWidget::QGraphicsRectWidget(QPixmap pMap){
 
 //default
 QGraphicsRectWidget::QGraphicsRectWidget(){
-    brush= new QBrush(QPixmap("concrete.png"));
+    brush= new QBrush(QPixmap("sprites/concrete.png"));
 }

@@ -20,13 +20,11 @@ engine::~engine(){
     delete uiScene;
 }
 
-void engine::begin( MainWindow *mainWindow )
+void engine::Setup( MainWindow *mainWindow )
 {
     mainWindow->ui->graphicsView->setGeometry( *wSize );
-
     mainWindow->ui->graphicsView->setScene( uiScene );
-
-    LoadMap( uiScene );
+    parentWindow = mainWindow;
 }
 
 /* Moves a block by offset of their size
@@ -52,10 +50,9 @@ void engine::DrawGrid(QGraphicsScene *scene){
 /* Loads a map into the Graphics Scene
  * Open a file chooser dialog */
 int engine::LoadMap(QGraphicsScene *scene){
-    QFile file(QFileDialog::getOpenFileName(0,"Open Level","","Files (*.*)"));
+    QFile file(QFileDialog::getOpenFileName(parentWindow, "Open Level", "", "Files (*.*)"));
     if(!file.open(QIODevice::ReadOnly)) {
         QMessageBox::information(0, "Error!",file.fileName()+" : "+ file.errorString()+"\nLoading Default");
-        //return 0;
         file.setFileName(":levels/defaultlevel");
         file.open(QIODevice::ReadOnly);
     }
@@ -83,8 +80,10 @@ int engine::LoadMap(QGraphicsScene *scene){
     return 1;
 }
 
-/* Loads the level file specified by the fileName */
+/* Loads the level file specified by the fileName
+ * Useful for autoloading the next level upon winning */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
+
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly)) {
         QMessageBox::information(0, "Error!",file.fileName()+" : "+ file.errorString()+"\nLoading Default");
@@ -114,4 +113,15 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
     }
     file.close();
     return 1;
+}
+
+/* Opens the file chooser dialog and loads the map */
+void engine::ClickedOpenMap(void){
+    LoadMap(uiScene);
+}
+
+void engine::CloseMap(void){
+    //AskToSave...
+    qDeleteAll( uiScene->items());
+    uiScene->setBackgroundBrush(QBrush(Qt::white));
 }

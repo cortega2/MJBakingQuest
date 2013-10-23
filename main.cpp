@@ -1,8 +1,5 @@
 #include <QtGui>
-#include <QGraphicsScene>
-#include <QGraphicsPixmapItem>
-#include <QPainter>
-#include <QStyleOption>
+#include "draw.h"
 
 struct TransparentSprite : public QGraphicsPixmapItem
 {
@@ -57,9 +54,16 @@ int main(int argc, char* argv[]){
     view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "TEST"));
 
     TransparentSprite sprite(":/stuff/cheese.jpg");
-    sprite.setRect(40, 40);
+    sprite.setRect(10,10);
 
     scene.addItem(&sprite);
+
+    //add object, hopefully
+    draw *obj = new draw;
+    obj->setPos(-10, -10);
+    scene.addItem(obj);
+
+
     view.show();
 
     return app.exec();

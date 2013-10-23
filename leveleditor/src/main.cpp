@@ -1,13 +1,9 @@
 #include <QtCore>
-#include <QtWidgets>
+//#include <QtWidgets>
+
+#include "engine.h"
+
 #include "mainwindow.h"
-#include "objects.h"
-
-#define BLOCK_SIZE (50)
-
-//int offset = 50;
-const QRect *sSize = new QRect(0,0,1000,600);
-const QRect *wSize = new QRect(0,0,1010,700);
 
 #ifdef Q_OS_WIN
 #include <windows.h> // for Sleep
@@ -22,7 +18,7 @@ void qSleep(int ms)
 #endif
 }
 
-
+/*
 void moveBlock(QGraphicsWidget *box, int x, int y){
     box->moveBy(BLOCK_SIZE*x,wSize->height()-BLOCK_SIZE*y);
 }
@@ -69,40 +65,21 @@ int LoadMap(QGraphicsScene *scene){
     file.close();
     return 1;
 }
+*/
 
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-    MainWindow mainWindow;
+    MainWindow *mainWindow = new MainWindow();
 
-    QGraphicsScene *uiScene = new QGraphicsScene(*sSize);
+    engine *gameEngine = new engine();
 
-    mainWindow.ui->graphicsView->setGeometry(*wSize);
-/*
-    QGraphicsRectWidget *redBox = new QGraphicsRectWidget(Qt::red);
-    QGraphicsRectWidget *yellowBox = new QGraphicsRectWidget(Qt::yellow);
-    QGraphicsRectWidget *cBlock = new QGraphicsRectWidget(QPixmap("sprites/concrete.png"));
+    gameEngine->begin(mainWindow);
 
-    moveBlock(redBox,1,2);
-    moveBlock(yellowBox,0,2);
-    moveBlock(cBlock,10,10);
-
-    uiScene->addItem(redBox);
-    uiScene->addItem(yellowBox);
-    uiScene->addItem(cBlock);
-*/
-
-    mainWindow.ui->graphicsView->setScene(uiScene);
-
-    mainWindow.setWindowIcon(QIcon("sprites/MJ_left.png"));
-    mainWindow.setWindowTitle(QString("Mary Jane's Baking Quest"));
-
-
-    LoadMap(uiScene);
-    DrawGrid(uiScene);
-    mainWindow.showMaximized();
+    mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
+    mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
+    mainWindow->showMaximized();
 
     return app.exec();
 }
-
 //#include "main.moc"

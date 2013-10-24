@@ -21,7 +21,7 @@
 #define BLOCK_SIZE ( 30 )
 
 engine::engine(){
-    sSize = new QRect(0,0,1000,600);
+    sSize = new QRect(0,0,900,700);
     wSize = new QRect(0,0,1010,700);
 
     uiScene = new QGraphicsScene( *sSize );
@@ -35,7 +35,7 @@ engine::~engine(){
 
 void engine::Setup( MainWindow *mainWindow )
 {
-    mainWindow->ui->graphicsView->setGeometry( *wSize );
+    mainWindow->ui->graphicsView->setGeometry( *sSize );
     mainWindow->ui->graphicsView->setScene( uiScene );
     parentWindow = mainWindow;
 }
@@ -49,8 +49,8 @@ void engine::MoveBlock(QGraphicsWidget *box, int x, int y){
 /* Draws a grid lines through the
  * scene for line up/snap to purposes */
 void engine::DrawGrid(QGraphicsScene *scene){
-    int gridWidth = floor(wSize->width()/BLOCK_SIZE);
-    int gridHeight = floor(wSize->height()/BLOCK_SIZE);
+    int gridWidth = floor(sSize->width()/BLOCK_SIZE);
+    int gridHeight = floor(sSize->height()/BLOCK_SIZE);
 
     for(int x=1; x<gridWidth; x++){
         scene->addLine(BLOCK_SIZE*x, 0, BLOCK_SIZE*x, BLOCK_SIZE*gridHeight,QPen(Qt::red));
@@ -136,9 +136,10 @@ void engine::ClickedOpenMap(void){
     LoadMap(uiScene);
 }
 
+/* Clears out the scene */
 void engine::CloseMap(void){
     //AskToSave...
-    qDeleteAll( uiScene->items());
+    qDeleteAll( uiScene->items() );
     uiScene->setBackgroundBrush(QBrush(Qt::white));
 }
 

@@ -8,13 +8,13 @@ BLOCK, concrete, 6, 2
 BLOCK, concrete, 7, 2
 BLOCK, concrete, 8, 2
 BLOCK, concrete, 9, 2
-BLOCK, concrete, 10, 2
-BLOCK, concrete, 11, 2
-BLOCK, concrete, 12, 2
-BLOCK, concrete, 13, 2
-BLOCK, concrete, 14, 2
-BLOCK, concrete, 15, 2
-BLOCK, concrete, 16, 2
-BLOCK, concrete, 17, 2
+BLOCK, concrete, 10, 3
+BLOCK, concrete, 11, 4
+BLOCK, concrete, 12, 5
+BLOCK, concrete, 13, 6
+BLOCK, concrete, 14, 7
+BLOCK, concrete, 15, 8
+BLOCK, concrete, 16, 9
+BLOCK, concrete, 17, 10
 BACKGROUND, starrynight
 BLOCK, MJ_left, 3, 3

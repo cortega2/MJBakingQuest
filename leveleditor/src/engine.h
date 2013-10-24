@@ -9,9 +9,10 @@ class engine
 public:
     engine();
     ~engine();
-    void Setup( MainWindow *mainWindow );
+    void Setup(MainWindow *ParentWindow );
     void ClickedOpenMap(void);
     void CloseMap(void);
+    void ClickedDrawGridLines(void);
 
 private:
     const QRect *sSize;

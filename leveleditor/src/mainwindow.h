@@ -6,10 +6,10 @@
 
 //#include "engine.h"
 
-/*
+
 namespace Ui {
 class MainWindow;
-}*/
+}
 
 class engine;
 class MainWindow : public QMainWindow

@@ -7,14 +7,16 @@
 class QGraphicsRectWidget : public QGraphicsWidget{
 
     QBrush *brush;
+    QRect *size;
 public:
-    QGraphicsRectWidget::QGraphicsRectWidget(Qt::GlobalColor color);
-    QGraphicsRectWidget::QGraphicsRectWidget(QPixmap pMap);
-    QGraphicsRectWidget::QGraphicsRectWidget();
+    QGraphicsRectWidget();
+    ~QGraphicsRectWidget();
+    QGraphicsRectWidget(Qt::GlobalColor color, int blockWidth, int blockHeight);
+    QGraphicsRectWidget(QPixmap pMap, int blockWidth, int blockHeight);
+    QGraphicsRectWidget(const char* spriteName, int blockWidth, int blockHeight);
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-    {
-        painter->fillRect(rect(), *brush);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
+        painter->fillRect(*size, *brush);
     }
 };
 

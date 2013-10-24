@@ -30,3 +30,8 @@ void MainWindow::on_actionClose_triggered()
 {
     ginny->CloseMap();
 }
+
+void MainWindow::on_actionDraw_Grid_Lines_triggered()
+{
+    ginny->ClickedDrawGridLines();
+}

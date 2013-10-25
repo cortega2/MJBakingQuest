@@ -24,13 +24,18 @@ engine::~engine(){
     delete uiScene;
 }
 
-void engine::Setup( MainWindow *mainWindow )
+/* returns a pointer to the current graphics scene */
+QGraphicsScene* engine::GetScene(){
+    return uiScene;
+}
+
+void engine::SetParentWindow( QWidget *pWindow )
 {
-    mainWindow->ui->graphicsView->setGeometry( *sSize );
-    mainWindow->ui->graphicsView->setScene( uiScene );
-    mainWindow->ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mainWindow->ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    parentWindow = mainWindow;
+   // mainWindow->ui->graphicsView->setGeometry( *sSize );
+   // mainWindow->ui->graphicsView->setScene( uiScene );
+   // mainWindow->ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+   // mainWindow->ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    parentWindow = pWindow;
 }
 
 /* Moves a block by offset of their size

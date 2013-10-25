@@ -9,7 +9,6 @@
 #endif
 
 #include "objects.h"
-#include "editormainwindow.h"
 
 class engine
 {
@@ -18,7 +17,8 @@ public:
     engine();
     ~engine();
 
-    void Setup(MainWindow *ParentWindow );
+    QGraphicsScene* GetScene();
+    void SetParentWindow(QWidget *pWindow );
     void ClickedOpenMap(void);
     void CloseMap(void);
     void ClickedDrawGridLines(void);

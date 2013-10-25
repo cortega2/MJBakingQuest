@@ -22,5 +22,5 @@ FORMS += \
 OTHER_FILES +=
 
 RESOURCES += \
-    defaults.qrc
+    resources.qrc
 

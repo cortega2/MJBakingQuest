@@ -7,11 +7,16 @@
 #include "editormainwindow.h"
 #include "engine.h"
 
-MainWindow::MainWindow(QWidget *parent, engine *gin) :
+MainWindow::MainWindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, int BLOCK_SIZE) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ginny = gin;
     ui->setupUi(this);
+
+    ui->graphicsView->setGeometry( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
+    ui->graphicsView->setScene( uiScene );
+    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 MainWindow::~MainWindow()

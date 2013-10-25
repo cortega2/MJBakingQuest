@@ -30,7 +30,7 @@ private:
     QWidget *parentWindow;
 
     void DrawGrid(QGraphicsScene *scene);
-    void MoveBlock(QGraphicsWidget *box, int x, int y);
+    void MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int y);
 
     int LoadMap(QGraphicsScene *scene);
     int LoadMap(QGraphicsScene *scene, QString fileName);

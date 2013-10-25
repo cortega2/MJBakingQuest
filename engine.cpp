@@ -31,24 +31,20 @@ QGraphicsScene* engine::GetScene(){
 
 void engine::SetParentWindow( QWidget *pWindow )
 {
-   // mainWindow->ui->graphicsView->setGeometry( *sSize );
-   // mainWindow->ui->graphicsView->setScene( uiScene );
-   // mainWindow->ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-   // mainWindow->ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     parentWindow = pWindow;
 }
 
 /* Moves a block by offset of their size
  * 0,0 is in the lower left, e.g. Quadrant 1 */
-void engine::MoveBlock(QGraphicsWidget *box, int x, int y){
-    box->moveBy(BLOCK_SIZE*x,sSize->height()-BLOCK_SIZE*y);
+void engine::MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int y){
+    box->moveBy(BLOCK_SIZE*x,scene->height()-BLOCK_SIZE*y);
 }
 
 /* Draws a grid lines through the
  * scene for line up/snap to purposes */
 void engine::DrawGrid(QGraphicsScene *scene){
-    int gridWidth = (sSize->width())/BLOCK_SIZE;
-    int gridHeight = (sSize->height())/BLOCK_SIZE;
+    int gridWidth = (scene->width())/BLOCK_SIZE;
+    int gridHeight = (scene->height())/BLOCK_SIZE;
 
     for(int x=1; x<=gridWidth; x++){
         scene->addLine(BLOCK_SIZE*x, 0, BLOCK_SIZE*x, BLOCK_SIZE*gridHeight,QPen(Qt::red));
@@ -63,11 +59,12 @@ void engine::DrawGrid(QGraphicsScene *scene){
 int engine::LoadMap(QGraphicsScene *scene){
     //Opens a file chooser Dialog box
     QFile file(QFileDialog::getOpenFileName(parentWindow, "Open Level", "", "Files (*.*)"));
+
     //if the file can't be opened, then load the default map
     //which is compiled in as a resource
     if(!file.open(QIODevice::ReadOnly)) {
         QMessageBox::information(0, "Error!",file.fileName()+" : "+ file.errorString()+"\nLoading Default");
-        file.setFileName(":levels/defaultlevel");
+        file.setFileName("levels/defaultlevel");
         file.open(QIODevice::ReadOnly);
     }
     QTextStream in(&file);
@@ -84,7 +81,7 @@ int engine::LoadMap(QGraphicsScene *scene){
         if(fields.at(0).compare( QString("BLOCK") ) == 0 )
         {
             QGraphicsRectWidget *block = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
-            MoveBlock(block,fields.at(2).toInt(), fields.at(3).toInt() );
+            MoveBlock(block, scene, fields.at(2).toInt(), fields.at(3).toInt() );
             scene->addItem(block);
         }else if(fields.at(0).compare( QString("BACKGROUND") ) == 0){
 
@@ -118,7 +115,7 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         if(fields.at(0).compare( QString("BLOCK") ) == 0 )
         {
             QGraphicsRectWidget *block = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
-            MoveBlock(block,fields.at(2).toInt(), fields.at(3).toInt() );
+            MoveBlock(block, scene, fields.at(2).toInt(), fields.at(3).toInt() );
             scene->addItem(block);
         }else if(fields.at(0).compare( QString("BACKGROUND") ) == 0){
 

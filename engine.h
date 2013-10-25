@@ -1,7 +1,15 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "mainwindow.h"
+#include <QtCore>
+#include <QtGui>
+
+#if QT_VERSION >= 0x050000
+    #include <QtWidgets>
+#endif
+
+#include "objects.h"
+#include "editormainwindow.h"
 
 class engine
 {
@@ -9,13 +17,14 @@ class engine
 public:
     engine();
     ~engine();
-    void Setup( MainWindow *mainWindow );
+
+    void Setup(MainWindow *ParentWindow );
     void ClickedOpenMap(void);
     void CloseMap(void);
+    void ClickedDrawGridLines(void);
 
 private:
     const QRect *sSize;
-    const QRect *wSize;
 
     QGraphicsScene *uiScene;
     QWidget *parentWindow;

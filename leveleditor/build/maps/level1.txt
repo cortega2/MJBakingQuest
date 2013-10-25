@@ -1,5 +1,0 @@
-BLOCK, concrete, 5, 5
-BLOCK, concrete, 6, 6
-BLOCK, concrete, 7, 7
-BLOCK, concrete, 8, 8
-BACKGROUND, starrynight

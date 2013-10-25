@@ -1,21 +1,23 @@
 QT += widgets
 QT += core gui
 
-SOURCES = main.cpp \
-    mainwindow.cpp \
+SOURCES = \
     objects.cpp \
-    engine.cpp
+    engine.cpp \
+    leveleditor.cpp \
+    editormainwindow.cpp
 
-HEADERS += mainwindow.h \
+HEADERS += \
     objects.h \
-    engine.h
+    engine.h \
+    editormainwindow.h
 
 TARGET = leveleditor
 
 INSTALLS += target
 
 FORMS += \
-    mainwindow.ui
+    editormainwindow.ui
 
 OTHER_FILES +=
 

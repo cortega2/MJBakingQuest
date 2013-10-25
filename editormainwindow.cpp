@@ -1,7 +1,10 @@
 #include <QtCore>
-#include <QtWidgets>
+#include <QtGui>
+#if QT_VERSION >= 0x050000
+    #include <QtWidgets>
+#endif
 
-#include "mainwindow.h"
+#include "editormainwindow.h"
 #include "engine.h"
 
 MainWindow::MainWindow(QWidget *parent, engine *gin) :
@@ -29,4 +32,9 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionClose_triggered()
 {
     ginny->CloseMap();
+}
+
+void MainWindow::on_actionDraw_Grid_Lines_triggered()
+{
+    ginny->ClickedDrawGridLines();
 }

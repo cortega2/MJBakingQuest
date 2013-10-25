@@ -2,14 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ui_mainwindow.h"
 
-//#include "engine.h"
+#include "ui_editormainwindow.h"
 
-/*
 namespace Ui {
 class MainWindow;
-}*/
+}
 
 class engine;
 class MainWindow : public QMainWindow
@@ -29,6 +27,7 @@ private slots:
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
     void on_actionClose_triggered();
+    void on_actionDraw_Grid_Lines_triggered();
 };
 
 

@@ -2,7 +2,7 @@
 #include <QObject>
 
 #include "engine.h"
-#include "mainwindow.h"
+#include "editormainwindow.h"
 
 int main(int argc, char **argv)
 {

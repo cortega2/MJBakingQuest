@@ -2,10 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ui_mainwindow.h"
 
-//#include "engine.h"
-
+#include "ui_editormainwindow.h"
 
 namespace Ui {
 class MainWindow;

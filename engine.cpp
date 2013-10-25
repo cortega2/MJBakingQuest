@@ -10,29 +10,17 @@
  *   *Make datastructure class for keeeping track of the objects generated
 */
 
-#include <QtCore>
-#include <QtGui>
-#if QT_VERSION >= 0x050000
-    #include <QtWidgets>
-#endif
-
-#include "mainwindow.h"
-#include "objects.h"
-
 #include "engine.h"
 
 #define BLOCK_SIZE ( 30 )
 
 engine::engine(){
-    sSize = new QRect(0,0,900,700);
-    wSize = new QRect(0,0,1010,700);
-
+    sSize = new QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20);
     uiScene = new QGraphicsScene( *sSize );
 }
 
 engine::~engine(){
     delete sSize;
-    delete wSize;
     delete uiScene;
 }
 
@@ -40,25 +28,27 @@ void engine::Setup( MainWindow *mainWindow )
 {
     mainWindow->ui->graphicsView->setGeometry( *sSize );
     mainWindow->ui->graphicsView->setScene( uiScene );
+    mainWindow->ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mainWindow->ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     parentWindow = mainWindow;
 }
 
 /* Moves a block by offset of their size
  * 0,0 is in the lower left, e.g. Quadrant 1 */
 void engine::MoveBlock(QGraphicsWidget *box, int x, int y){
-    box->moveBy(BLOCK_SIZE*x,wSize->height()-BLOCK_SIZE*y);
+    box->moveBy(BLOCK_SIZE*x,sSize->height()-BLOCK_SIZE*y);
 }
 
 /* Draws a grid lines through the
  * scene for line up/snap to purposes */
 void engine::DrawGrid(QGraphicsScene *scene){
-    int gridWidth = floor(sSize->width()/BLOCK_SIZE);
-    int gridHeight = floor(sSize->height()/BLOCK_SIZE);
+    int gridWidth = (sSize->width())/BLOCK_SIZE;
+    int gridHeight = (sSize->height())/BLOCK_SIZE;
 
-    for(int x=1; x<gridWidth; x++){
+    for(int x=1; x<=gridWidth; x++){
         scene->addLine(BLOCK_SIZE*x, 0, BLOCK_SIZE*x, BLOCK_SIZE*gridHeight,QPen(Qt::red));
     }
-    for(int y=1; y<gridHeight; y++){
+    for(int y=gridHeight; y>=0; y--){
         scene->addLine(0, BLOCK_SIZE*y, BLOCK_SIZE*gridWidth, BLOCK_SIZE*y,QPen(Qt::red));
     }
 }

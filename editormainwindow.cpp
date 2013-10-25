@@ -4,7 +4,7 @@
     #include <QtWidgets>
 #endif
 
-#include "mainwindow.h"
+#include "editormainwindow.h"
 #include "engine.h"
 
 MainWindow::MainWindow(QWidget *parent, engine *gin) :

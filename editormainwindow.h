@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtCore>
+#include <QtGui>
+#if QT_VERSION >= 0x050000
+    #include <QtWidgets>
+#endif
+#include "engine.h"
 
 #include "ui_editormainwindow.h"
 
@@ -27,6 +33,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QPushButton *mexican;
     engine *ginny;
 };
 

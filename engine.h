@@ -15,9 +15,11 @@ class engine
 
 public:
     engine();
+    engine( QGraphicsScene *scene );
     ~engine();
 
     QGraphicsScene* GetScene();
+    void SetScene( QGraphicsScene *scene );
     void SetParentWindow(QWidget *pWindow );
     void ClickedOpenMap(void);
     void CloseMap(void);

@@ -19,6 +19,10 @@ engine::engine(){
     uiScene = new QGraphicsScene( *sSize );
 }
 
+engine::engine( QGraphicsScene *scene ){
+    uiScene = scene;
+}
+
 engine::~engine(){
     delete sSize;
     delete uiScene;
@@ -29,6 +33,11 @@ QGraphicsScene* engine::GetScene(){
     return uiScene;
 }
 
+/* Sets the engine's graphicsscene to a different externally defined one */
+void engine::SetScene( QGraphicsScene *scene ){
+    uiScene = scene;
+}
+
 void engine::SetParentWindow( QWidget *pWindow )
 {
     parentWindow = pWindow;
@@ -36,8 +45,8 @@ void engine::SetParentWindow( QWidget *pWindow )
 
 /* Moves a block by offset of their size
  * 0,0 is in the lower left, e.g. Quadrant 1 */
-void engine::MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int y){
-    box->moveBy(BLOCK_SIZE*x,scene->height()-BLOCK_SIZE*y);
+void engine::MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int yOffset){
+    box->moveBy(BLOCK_SIZE*x,scene->height()-BLOCK_SIZE*yOffset);
 }
 
 /* Draws a grid lines through the

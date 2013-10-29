@@ -24,3 +24,40 @@ QGraphicsRectWidget::QGraphicsRectWidget(const char* spriteName, int blockWidth,
     brush= new QBrush( QPixmap(spriteName) );
     size = new QRect(0,0, blockWidth, blockHeight);
 }
+
+void BlockArray::AddBlock(unsigned int xLocation, unsigned int yLocation, BlockObject *block ){
+    board[xLocation][yLocation] = block;
+
+    if ( block->isStandable ){
+        standableBlocks << block;
+    }
+
+}
+
+BlockArray::BlockArray(int width, int height){
+
+    board = new BlockObject**[width];
+
+    for (int i = 0; i < width; ++i) {
+      board[i] = new BlockObject*[height];
+    }
+
+    for (int i = 0; i < width; ++i) {   // for each row
+      for (int j = 0; j < height; ++j) { // for each column
+        board[i][j] = NULL;
+      }
+    }
+}
+
+BlockObject::BlockObject( QGraphicsWidget *block, bool isStandable, bool isPickupable, bool isPowerUp, bool isNPC ){
+    this->block = block;
+
+    this->isStandable = isStandable;
+    this->isPickupable = isPickupable;
+    this->isNPC = isNPC;
+    this->isPowerUp = isPowerUp;
+}
+
+BlockObject::~BlockObject(){
+    delete block;
+}

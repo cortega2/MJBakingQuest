@@ -38,4 +38,33 @@ protected:
         QGraphicsView::resizeEvent(event);
     }
 };
+
+class BlockObject{
+
+public:
+    BlockObject( QGraphicsWidget *block, bool isStandable, bool isPickupable, bool isPowerUp, bool isNPC );
+    ~BlockObject();
+
+    QGraphicsWidget *block;
+
+    bool isStandable;
+    bool isPickupable;
+    bool isPowerUp;
+    bool isNPC;
+
+};
+
+class BlockArray {
+
+public:
+    BlockArray( int width, int height );
+    ~BlockArray();
+    void AddBlock( unsigned int xLocation, unsigned int yLocation, BlockObject *block );
+
+private:
+    BlockObject*** board;
+    QLinkedList<BlockObject*> standableBlocks;
+
+};
+
 #endif // OBJECTS_H

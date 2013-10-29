@@ -31,10 +31,15 @@ private slots:
     void on_actionClose_triggered();
     void on_actionDraw_Grid_Lines_triggered();
 
+    void on_mexican_man_pressed();
+
 private:
     Ui::MainWindow *ui;
-    QPushButton *mexican;
     engine *ginny;
+
+    QPushButton *mexican_man;
+    QGraphicsScene *charscene;
+    QGraphicsView *charview;
 };
 
 

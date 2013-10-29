@@ -11,9 +11,22 @@ MainWindow::MainWindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, in
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ui->tabWidget->setGeometry(ui->graphicsView->width()+5,5,150,300);
-    mexican = new QPushButton(QIcon(QString("sprites/mexican_man.png")),QString(""),ui->characters);
-    mexican->setFixedSize(30,30);
+    ui->tabWidget->setGeometry(ui->graphicsView->width()+5,5,350,300);
+    /*mexican_man = new QPushButton(QIcon(QString("sprites/mexican_man.png")),QString(""),ui->characters);
+    mexican_man->setCursor(QCursor(Qt::OpenHandCursor));
+    mexican_man->setFixedSize(30,30);*/
+
+    charscene = new QGraphicsScene();
+    charview = new QGraphicsView(charscene, ui->characters);
+    charscene->setParent(charview);
+
+    charview->setGeometry(4,4,ui->tabWidget->width()-12, ui->tabWidget->height()-12);
+    charscene->setSceneRect(0,0,ui->tabWidget->width()-16, ui->tabWidget->height()-16);
+
+    charview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    charscene->addItem(new QGraphicsRectWidget("sprites/MJ_right.png", 30, 30));
+    charscene->addItem(new QGraphicsRectWidget(Qt::red, 30,30));
 }
 
 MainWindow::~MainWindow()
@@ -39,4 +52,9 @@ void MainWindow::on_actionClose_triggered()
 void MainWindow::on_actionDraw_Grid_Lines_triggered()
 {
     ginny->ClickedDrawGridLines();
+}
+
+void MainWindow::on_mexican_man_pressed()
+{
+
 }

@@ -1,5 +1,10 @@
 #ifndef PARSER_H
 #define PARSER_H
+#define BLOCK 0
+#define BACKGROUND 1
+#define PROTAG 2
+#define ANTAG 3
+
 class Node{
 public:
     int blockType;
@@ -8,14 +13,20 @@ public:
     Node *next = 0;
     Node *prev = 0;
     //add field for object, either that or a QGraphicsRectWidget
+    Node();
+    Node(int type, int x, int y);
+
 };
 
 class doublyLL{
 public:
     doublyLL();
-    void add();
-    void remove();
-
+    void add(int type, int x, int y);
+    void remove(int type, int x, int y);
+private:
+    Node* head;
+    Node* tail;
+    int count;
 
 };
 
@@ -29,10 +40,10 @@ public:
     void createFile();
 
 private:
-    Node *Block;
-    Node *Background;
-    Node *Protag;
-    Node *Antag;
+    doublyLL Block;
+    doublyLL Background;
+    doublyLL Protag;
+    doublyLL Antag;
 };
 
 #endif // PARSER_H

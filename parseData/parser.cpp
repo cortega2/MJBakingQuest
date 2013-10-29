@@ -33,6 +33,10 @@ void doublyLL::add(int type, int x, int y){
     }
 }
 
+int doublyLL::getCount(){
+    return count;
+}
+
 parser::parser(){
 }
 void parser::add(int type, int x, int y){
@@ -49,6 +53,25 @@ void parser::add(int type, int x, int y){
         Antag.add(type, x, y);
     }
     else{
+        std::cout<<"Unsupported type"<<std::endl;
+    }
+}
+
+int parser::getCount(int type){
+    if(type == BLOCK){
+        return Block.getCount();
+    }
+    else if(type == BACKGROUND){
+        return Background.getCount();
+    }
+    else if(type == PROTAG){
+        return Protag.getCount();
+    }
+    else if(type == ANTAG){
+        return Antag.getCount();
+    }
+    else{
+        return -1;
         std::cout<<"Unsupported type"<<std::endl;
     }
 }

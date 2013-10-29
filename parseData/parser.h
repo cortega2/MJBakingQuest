@@ -23,6 +23,7 @@ public:
     doublyLL();
     void add(int type, int x, int y);
     void remove(int type, int x, int y);
+    int getCount();
 private:
     Node* head;
     Node* tail;
@@ -38,6 +39,7 @@ public:
     void add(int type, int x, int y);
     bool remove(int type, int x, int y);
     void createFile();
+    int getCount(int type);
 
 private:
     doublyLL Block;

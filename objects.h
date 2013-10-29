@@ -39,6 +39,7 @@ protected:
     }
 };
 
+/* A BlockObject holds the block itself and modifiers */
 class BlockObject{
 
 public:
@@ -47,13 +48,16 @@ public:
 
     QGraphicsWidget *block;
 
+    //block modifiers
     bool isStandable;
     bool isPickupable;
     bool isPowerUp;
+    //npc is Non Player Character
     bool isNPC;
 
 };
 
+/* The BlockArray is the master container of blocks on the field */
 class BlockArray {
 
 public:

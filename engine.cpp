@@ -12,11 +12,17 @@
 
 #include "engine.h"
 
+//test code
+#include <iostream>
+
 #define BLOCK_SIZE ( 30 )
 
 engine::engine(){
     sSize = new QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20);
     uiScene = new QGraphicsScene( *sSize );
+
+    spritesAndStuff = new objStructure();
+    parsley = new parser();
 }
 
 engine::~engine(){
@@ -29,8 +35,7 @@ QGraphicsScene* engine::GetScene(){
     return uiScene;
 }
 
-void engine::SetParentWindow( QWidget *pWindow )
-{
+void engine::SetParentWindow( QWidget *pWindow ){
     parentWindow = pWindow;
 }
 
@@ -57,6 +62,7 @@ void engine::DrawGrid(QGraphicsScene *scene){
 /* Loads a map into the Graphics Scene
  * Open a file chooser dialog */
 int engine::LoadMap(QGraphicsScene *scene){
+
     //Opens a file chooser Dialog box
     QFile file(QFileDialog::getOpenFileName(parentWindow, "Open Level", "", "Files (*.*)"));
 
@@ -83,13 +89,19 @@ int engine::LoadMap(QGraphicsScene *scene){
             QGraphicsRectWidget *block = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(block, scene, fields.at(2).toInt(), fields.at(3).toInt() );
             scene->addItem(block);
+
         }else if(fields.at(0).compare( QString("BACKGROUND") ) == 0){
 
             scene->setBackgroundBrush(QBrush(Qt::black,QPixmap(spriteName)));
         }
     }
     file.close();
+
+    parsley->readFile(scene);
+
     return 1;
+
+    //parsley.readFile();
 }
 
 /* Loads the level file specified by the fileName

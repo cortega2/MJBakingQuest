@@ -25,6 +25,7 @@ QGraphicsRectWidget::QGraphicsRectWidget(const char* spriteName, int blockWidth,
     size = new QRect(0,0, blockWidth, blockHeight);
 }
 
+
 void BlockArray::AddBlock(unsigned int xLocation, unsigned int yLocation, BlockObject *block ){
     board[xLocation][yLocation] = block;
 

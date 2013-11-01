@@ -3,14 +3,16 @@
 #include <QtCore>
 #include <QtWidgets>
 #include <QtGui>
+#include "objStructure.h"
 
 class parser
 {
 public:
     parser();
-    void readFile(QGraphicsScene *scene);
+    int readFile(objStructure *objs, QString fileName, bool readSpecific);
     void createFile(QString name);
-
+private:
+    objStructure* sprites;
 };
 
 #endif // PARSER_H

@@ -62,79 +62,39 @@ void engine::DrawGrid(QGraphicsScene *scene){
 /* Loads a map into the Graphics Scene
  * Open a file chooser dialog */
 int engine::LoadMap(QGraphicsScene *scene){
+    parsley->readFile(spritesAndStuff, "", false);
 
-    //Opens a file chooser Dialog box
-    QFile file(QFileDialog::getOpenFileName(parentWindow, "Open Level", "", "Files (*.*)"));
-
-    //if the file can't be opened, then load the default map
-    //which is compiled in as a resource
-    if(!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(0, "Error!",file.fileName()+" : "+ file.errorString()+"\nLoading Default");
-        file.setFileName("levels/defaultlevel");
-        file.open(QIODevice::ReadOnly);
-    }
-    QTextStream in(&file);
-
-    //process each line of the file and take appropiate actions
-    while(!in.atEnd()) {
-        QString line = in.readLine();
-        QStringList fields = line.split(",");
-
-        QString spriteName("sprites/");
-        spriteName.append(fields.at(1).trimmed());
-        spriteName.append(".png");
-
-        if(fields.at(0).compare( QString("BLOCK") ) == 0 )
-        {
-            QGraphicsRectWidget *block = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
-            MoveBlock(block, scene, fields.at(2).toInt(), fields.at(3).toInt() );
-            scene->addItem(block);
-
-        }else if(fields.at(0).compare( QString("BACKGROUND") ) == 0){
-
-            scene->setBackgroundBrush(QBrush(Qt::black,QPixmap(spriteName)));
+    Node *tmp = spritesAndStuff->head;
+    while(tmp != 0){
+        if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
+            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
+        else{
+            tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+            MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+            scene->addItem(tmp->sprite);
         }
+        tmp = tmp->next;
     }
-    file.close();
-
-    parsley->readFile(scene);
-
     return 1;
-
-    //parsley.readFile();
 }
 
 /* Loads the level file specified by the fileName
  * Useful for autoloading the next level upon winning
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
+    parsley->readFile(spritesAndStuff, fileName, true);
 
-    QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly)) {
-        return -1;
-    }
-
-    QTextStream in(&file);
-
-    while(!in.atEnd()) {
-        QString line = in.readLine();
-        QStringList fields = line.split(",");
-
-        QString spriteName("sprites/");
-        spriteName.append(fields.at(1).trimmed());
-        spriteName.append(".png");
-
-        if(fields.at(0).compare( QString("BLOCK") ) == 0 )
-        {
-            QGraphicsRectWidget *block = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
-            MoveBlock(block, scene, fields.at(2).toInt(), fields.at(3).toInt() );
-            scene->addItem(block);
-        }else if(fields.at(0).compare( QString("BACKGROUND") ) == 0){
-
-            scene->setBackgroundBrush(QBrush(Qt::black,QPixmap(spriteName)));
+    Node *tmp = spritesAndStuff->head;
+    while(tmp != 0){
+        if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
+            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
+        else{
+            tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+            MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+            scene->addItem(tmp->sprite);
         }
+        tmp = tmp->next;
     }
-    file.close();
     return 1;
 }
 

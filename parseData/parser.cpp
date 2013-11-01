@@ -1,7 +1,7 @@
 #include "parser.h"
 #include <iostream>
 
-Node::Node(int type, int x, int y){
+Node::Node(QString type, int x, int y){
     blockType = type;
     this->x = x;
     this->y = y;
@@ -37,7 +37,7 @@ int doublyLL::getCount(){
     return count;
 }
 
-parser::parser(){
+parser::parser(objStructure *sprites){
 }
 void parser::add(int type, int x, int y){
     if(type == BLOCK){

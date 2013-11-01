@@ -10,8 +10,8 @@ public:
     int blockType;
     int x;
     int y;
-    Node *next = 0;
-    Node *prev = 0;
+    Node *next;
+    Node *prev;
     //add field for object, either that or a QGraphicsRectWidget
     Node();
     Node(int type, int x, int y);

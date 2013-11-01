@@ -1,29 +1,32 @@
 #ifndef OBJSTRUCTURE_H
 #define OBJSTRUCTURE_H
 #include <QtCore>
+#include "objects.h"
 
 class Node{
 public:
     QString blockType;
+    QString location;
     int x;
     int y;
     Node *next;
     Node *prev;
-    //add field for object, either that or a QGraphicsRectWidget
+    QGraphicsRectWidget *sprite;
     Node();
-    Node(QString type, int x, int y);
+    Node(QString type, QString location, int x, int y);
 };
 
 class objStructure
 {
 public:
     objStructure();
-    void add(QString type, int x, int y);
+    void add(QString type, QString location,int x, int y);
     void remove(QString type, int x, int y);
     int getCount();
-private:
     Node* head;
     Node* tail;
+
+private:
     int count;
 };
 

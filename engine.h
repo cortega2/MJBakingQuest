@@ -9,6 +9,8 @@
 #endif
 
 #include "objects.h"
+#include "parser.h"
+#include "objStructure.h"
 
 class engine
 {
@@ -28,6 +30,9 @@ public:
 private:
     const QRect *sSize;
 
+    objStructure *spritesAndStuff;
+    parser *parsley;
+
     QGraphicsScene *uiScene;
     QWidget *parentWindow;
 
@@ -36,6 +41,7 @@ private:
 
     int LoadMap(QGraphicsScene *scene);
     int LoadMap(QGraphicsScene *scene, QString fileName);
+
 };
 
 #endif // ENGINE_H

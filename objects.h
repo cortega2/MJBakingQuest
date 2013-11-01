@@ -39,7 +39,9 @@ protected:
     }
 };
 
-/* A BlockObject holds the block itself and modifiers */
+
+/***********NOT Used right now************************************************************
+//A BlockObject holds the block itself and modifiers
 class BlockObject{
 
 public:
@@ -57,7 +59,7 @@ public:
 
 };
 
-/* The BlockArray is the master container of blocks on the field */
+// The BlockArray is the master container of blocks on the field
 class BlockArray {
 
 public:
@@ -70,5 +72,5 @@ private:
     QLinkedList<BlockObject*> standableBlocks;
 
 };
-
+*/
 #endif // OBJECTS_H

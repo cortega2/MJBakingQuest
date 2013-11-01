@@ -8,8 +8,12 @@
     #include <QtWidgets>
 #endif
 #include "engine.h"
-
 #include "ui_editormainwindow.h"
+
+
+//test code for key presses
+#include <QKeyEvent>
+
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +44,10 @@ private:
     QPushButton *mexican_man;
     QGraphicsScene *charscene;
     QGraphicsView *charview;
+
+//this is needed to listen to keys
+protected:
+    void keyPressEvent(QKeyEvent * event);
 };
 
 

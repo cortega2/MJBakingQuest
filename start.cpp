@@ -1,15 +1,29 @@
-#include <QtCore>
-#include <QObject>
+#include "start.h"
 
-#include "engine.h"
-#include "editormainwindow.h"
-
-#define BLOCK_SIZE ( 30 )
-
-int main(int argc, char **argv)
+start::start(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::start)
 {
-    QApplication app(argc, argv);
+    ui->setupUi(this);
+}
 
+start::~start()
+{
+    delete ui;
+}
+
+void start::on_pushButton_clicked()
+{
+
+}
+
+void start::on_pushButton_2_clicked()
+{
+
+}
+
+void start::on_pushButton_3_clicked()
+{
     engine *gameEngine = new engine();
     editWindow *mainWindow = new editWindow(0 , gameEngine, gameEngine->GetScene(), BLOCK_SIZE);
 
@@ -19,5 +33,6 @@ int main(int argc, char **argv)
     mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
     mainWindow->showMaximized();
 
-    return app.exec();
+    hide();
+
 }

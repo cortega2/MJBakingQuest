@@ -16,18 +16,18 @@
 
 
 namespace Ui {
-class MainWindow;
+class editWindow;
 }
 //this statement avoid circular references "forward declation"
 class engine;
-class MainWindow : public QMainWindow
+class editWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0, engine *gin = 0 , QGraphicsScene *uiScene = NULL, int BLOCK_SIZE = 30);
-    void MainWindow::InitGraphics(QGraphicsScene *scene);
-    ~MainWindow();
+    explicit editWindow(QWidget *parent = 0, engine *gin = 0 , QGraphicsScene *uiScene = NULL, int BLOCK_SIZE = 30);
+    void editWindow::InitGraphics(QGraphicsScene *scene);
+    ~editWindow();
 
 private slots:
     void on_actionOpen_triggered();

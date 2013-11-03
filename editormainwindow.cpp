@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-MainWindow::MainWindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, int BLOCK_SIZE) :
+editWindow::editWindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, int BLOCK_SIZE) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ginny = gin;
@@ -33,38 +33,38 @@ MainWindow::MainWindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, in
     charscene->addItem(new QGraphicsRectWidget(Qt::red, 30,30));
 }
 
-MainWindow::~MainWindow()
+editWindow::~editWindow()
 {
     delete ui;
 }
 
-void MainWindow::on_actionOpen_triggered()
+void editWindow::on_actionOpen_triggered()
 {
     ginny->ClickedOpenMap();
 }
 
-void MainWindow::on_actionExit_triggered()
+void editWindow::on_actionExit_triggered()
 {
     qApp->exit();
 }
 
-void MainWindow::on_actionClose_triggered()
+void editWindow::on_actionClose_triggered()
 {
     ginny->CloseMap();
 }
 
-void MainWindow::on_actionDraw_Grid_Lines_triggered()
+void editWindow::on_actionDraw_Grid_Lines_triggered()
 {
     ginny->ClickedDrawGridLines();
 }
 
-void MainWindow::on_mexican_man_pressed()
+void editWindow::on_mexican_man_pressed()
 {
 
 }
 
 //listens to keypresses from the user and does an action based on the key that was pressed
-void MainWindow::keyPressEvent(QKeyEvent *event){
+void editWindow::keyPressEvent(QKeyEvent *event){
    if (event->key() == Qt::Key_A){
        std::cout<<"hello you pressed L key"<<std::endl;
    }

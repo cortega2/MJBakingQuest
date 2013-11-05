@@ -27,6 +27,7 @@ public:
     void ClickedOpenMap(void);
     void CloseMap(void);
     void ClickedDrawGridLines(void);
+    void moveChar(int direction);
 
 private:
     const QRect *sSize;
@@ -42,6 +43,8 @@ private:
 
     int LoadMap(QGraphicsScene *scene);
     int LoadMap(QGraphicsScene *scene, QString fileName);
+
+    QGraphicsRectWidget *mj;
 
 };
 

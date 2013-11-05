@@ -76,6 +76,8 @@ int engine::LoadMap(QGraphicsScene *scene){
             tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
+
+
         }
         tmp = tmp->next;
     }
@@ -96,6 +98,12 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
             tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
+
+            //test code
+            if(tmp->location.compare(QString("sprites/MJ_left.png")) == 0){
+                mj = tmp->sprite;
+            }
+            //end test code
         }
         tmp = tmp->next;
     }
@@ -121,4 +129,16 @@ void engine::CloseMap(void){
 
 void engine::ClickedDrawGridLines(void){
     DrawGrid( uiScene );
+}
+
+// test code //
+void engine::moveChar(int direction){
+    if(direction == 0){
+        std::cout << "move left" << std::endl;
+        mj->moveBy(-30,0);
+    }
+    else if(direction == 1){
+        std::cout << "move right" << std::endl;
+        mj->moveBy(30,0);
+    }
 }

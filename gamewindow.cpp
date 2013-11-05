@@ -27,9 +27,11 @@ gamewindow::~gamewindow()
 void gamewindow::keyPressEvent(QKeyEvent *event){
    if (event->key() == Qt::Key_A){
        std::cout<<"hello you pressed L key"<<std::endl;
+       ginny->moveChar(0);
    }
    else if(event->key() == Qt::Key_D){
        std::cout<<"hello you pressed R key"<<std::endl;
+       ginny->moveChar(1);
    }
    else if(event->key() == Qt::Key_Space){
        std::cout<<"hello you pressed the SPACE key"<<std::endl;

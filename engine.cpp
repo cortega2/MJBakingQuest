@@ -101,7 +101,8 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
             //test code
             if(tmp->location.compare(QString("sprites/MJ_left.png")) == 0){
-                mj = tmp->sprite;
+                mj = tmp;
+                //mj = tmp->sprite;
             }
             //end test code
         }
@@ -135,10 +136,12 @@ void engine::ClickedDrawGridLines(void){
 void engine::moveChar(int direction){
     if(direction == 0){
         std::cout << "move left" << std::endl;
-        mj->moveBy(-30,0);
+        mj->sprite->moveBy(-30,0);
+        mj->x = mj->x - 1;
     }
     else if(direction == 1){
         std::cout << "move right" << std::endl;
-        mj->moveBy(30,0);
+        mj->sprite->moveBy(30,0);
+        mj->x = mj->x + 1;
     }
 }

@@ -44,7 +44,8 @@ private:
     int LoadMap(QGraphicsScene *scene);
     int LoadMap(QGraphicsScene *scene, QString fileName);
 
-    QGraphicsRectWidget *mj;
+    //QGraphicsRectWidget *mj;
+    Node *mj;
 
 };
 

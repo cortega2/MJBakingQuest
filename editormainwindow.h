@@ -45,9 +45,6 @@ private:
     QGraphicsScene *charscene;
     QGraphicsView *charview;
 
-//this is needed to listen to keys
-protected:
-    void keyPressEvent(QKeyEvent * event);
 };
 
 

@@ -102,6 +102,11 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
     return 1;
 }
 
+//loads level without the file chooser, for now default level
+void engine::loadGame(QString level){
+    LoadMap(uiScene, level);
+}
+
 /* Opens the file chooser dialog and loads the map */
 void engine::ClickedOpenMap(void){
     LoadMap(uiScene);

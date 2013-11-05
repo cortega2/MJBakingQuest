@@ -14,7 +14,15 @@ start::~start()
 
 void start::on_pushButton_clicked()
 {
+     engine *gameEngine = new engine();
+     gamewindow *mainWindow = new gamewindow(0 , gameEngine, gameEngine->GetScene(), BLOCK_SIZE);
+     gameEngine->SetParentWindow(mainWindow);
 
+     mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
+     mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
+     mainWindow->showMaximized();
+
+     hide();
 }
 
 void start::on_pushButton_2_clicked()

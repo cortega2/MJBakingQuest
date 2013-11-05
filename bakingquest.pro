@@ -8,7 +8,8 @@ SOURCES = \
     parser.cpp \
     editormainwindow.cpp \
     main.cpp \
-    start.cpp
+    start.cpp \
+    gamewindow.cpp
 
 HEADERS += \
     objects.h \
@@ -16,10 +17,12 @@ HEADERS += \
     objStructure.h \
     parser.h \
     editormainwindow.h \
-    start.h
+    start.h \
+    gamewindow.h
 
 TARGET = bakingquest
 
 FORMS += \
     editormainwindow.ui \
-    start.ui
+    start.ui \
+    gamewindow.ui

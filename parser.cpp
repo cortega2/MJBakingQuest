@@ -43,6 +43,17 @@ int parser::readFile(objStructure *objs, QString fileName, bool readSpecific){
 
     //loads level specified in filename
     else{
+
+        //test code
+        /*
+        std::cout << (QDir::absolutePath()).toStdString() << std::endl;
+
+        if(!QDir::setCurrent("/levels"))
+            std::cout<<"couldnt changed dir"<<std::endl;
+
+        std::cout<< fileName.toStdString() << std::endl;
+        */
+
         QFile file(fileName);
         if(!file.open(QIODevice::ReadOnly))
             return -1;

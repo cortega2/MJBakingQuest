@@ -62,18 +62,3 @@ void editWindow::on_mexican_man_pressed()
 {
 
 }
-
-//listens to keypresses from the user and does an action based on the key that was pressed
-void editWindow::keyPressEvent(QKeyEvent *event){
-   if (event->key() == Qt::Key_A){
-       std::cout<<"hello you pressed L key"<<std::endl;
-   }
-   else if(event->key() == Qt::Key_D){
-       std::cout<<"hello you pressed R key"<<std::endl;
-   }
-   else if(event->key() == Qt::Key_Space){
-       std::cout<<"hello you pressed the SPACE key"<<std::endl;
-   }
-
-}
-

@@ -23,6 +23,7 @@ public:
     QGraphicsScene* GetScene();
     void SetScene( QGraphicsScene *scene );
     void SetParentWindow(QWidget *pWindow );
+    void loadGame(QString level);
     void ClickedOpenMap(void);
     void CloseMap(void);
     void ClickedDrawGridLines(void);

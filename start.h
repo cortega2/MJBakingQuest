@@ -2,11 +2,14 @@
 #define START_H
 
 #include <QWidget>
+#include <QtCore>
+#include <QObject>
+
 #include "ui_start.h"
 #include "engine.h"
 #include "editormainwindow.h"
-#include <QtCore>
-#include <QObject>
+#include "gamewindow.h"
+
 #define BLOCK_SIZE ( 30 )
 
 namespace Ui {

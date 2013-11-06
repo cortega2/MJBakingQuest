@@ -18,9 +18,6 @@
 #define BLOCK_SIZE ( 30 )
 
 engine::engine(){
-    sSize = new QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20);
-    uiScene = new QGraphicsScene( *sSize );
-
     spritesAndStuff = new objStructure();
     parsley = new parser();
 }

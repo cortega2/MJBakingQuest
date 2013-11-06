@@ -32,11 +32,16 @@ engine::engine( QGraphicsScene *scene ){
 engine::~engine(){
     delete sSize;
     delete uiScene;
+    delete spritesAndStuff;
+    delete parsley;
 }
 
 /* returns a pointer to the current graphics scene */
 QGraphicsScene* engine::GetScene(){
     return uiScene;
+}
+void engine::SetScene(QGraphicsScene *scene){
+    uiScene = scene;
 }
 
 void engine::SetParentWindow( QWidget *pWindow ){

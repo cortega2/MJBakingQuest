@@ -15,6 +15,7 @@ gamewindow::gamewindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, in
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+
     ginny->loadGame("levels/defaultlevel");
 }
 

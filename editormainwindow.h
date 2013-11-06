@@ -25,7 +25,10 @@ class editWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit editWindow(QWidget *parent = 0, engine *gin = 0 , QGraphicsScene *uiScene = NULL, int BLOCK_SIZE = 30);
+    QGraphicsScene *graphicsScene;
+    QGraphicsView *graphicsView;
+
+    explicit editWindow(QWidget *parent = 0, int BLOCK_SIZE = 30);
     void editWindow::InitGraphics(QGraphicsScene *scene);
     ~editWindow();
 
@@ -35,16 +38,9 @@ private slots:
     void on_actionClose_triggered();
     void on_actionDraw_Grid_Lines_triggered();
 
-    void on_mexican_man_pressed();
-
 private:
     Ui::MainWindow *ui;
     engine *ginny;
-
-    QPushButton *mexican_man;
-    QGraphicsScene *charscene;
-    QGraphicsView *charview;
-
 };
 
 

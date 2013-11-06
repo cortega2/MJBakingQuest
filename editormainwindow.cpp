@@ -4,38 +4,29 @@
 #include <iostream>
 
 
-editWindow::editWindow(QWidget *parent, engine *gin, QGraphicsScene *uiScene, int BLOCK_SIZE) :
+editWindow::editWindow(QWidget *parent, int BLOCK_SIZE) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    ginny = gin;
+    ginny = new engine();
+
     ui->setupUi(this);
 
-    ui->graphicsView->setGeometry( QRect(4,4,BLOCK_SIZE*30,BLOCK_SIZE*20) );
-    ui->graphicsView->setScene( uiScene );
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    graphicsView = new QGraphicsView( this );
+    graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
+    graphicsScene = new QGraphicsScene( graphicsView );
+    graphicsView->setScene( graphicsScene );
+    ginny->SetScene( graphicsScene );
 
-    ui->tabWidget->setGeometry(ui->graphicsView->width()+5,5,350,300);
-    /*mexican_man = new QPushButton(QIcon(QString("sprites/mexican_man.png")),QString(""),ui->characters);
-    mexican_man->setCursor(QCursor(Qt::OpenHandCursor));
-    mexican_man->setFixedSize(30,30);*/
-
-    charscene = new QGraphicsScene();
-    charview = new QGraphicsView(charscene, ui->characters);
-    charscene->setParent(charview);
-
-    charview->setGeometry(4,4,ui->tabWidget->width()-12, ui->tabWidget->height()-12);
-    charscene->setSceneRect(0,0,ui->tabWidget->width()-16, ui->tabWidget->height()-16);
-
-    charview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    charscene->addItem(new QGraphicsRectWidget("sprites/MJ_right.png", 30, 30));
-    charscene->addItem(new QGraphicsRectWidget(Qt::red, 30,30));
+    graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 editWindow::~editWindow()
 {
     delete ui;
+    delete ginny;
+    delete graphicsView;
+    delete graphicsScene;
 }
 
 void editWindow::on_actionOpen_triggered()
@@ -56,9 +47,4 @@ void editWindow::on_actionClose_triggered()
 void editWindow::on_actionDraw_Grid_Lines_triggered()
 {
     ginny->ClickedDrawGridLines();
-}
-
-void editWindow::on_mexican_man_pressed()
-{
-
 }

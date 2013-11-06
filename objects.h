@@ -23,21 +23,18 @@ public:
     }
 };
 
+/* is the custom implementation of a graphicsview to handle mouse stuff */
 class GraphicsView : public QGraphicsView
-{
-    Q_OBJECT
-public:
-    GraphicsView(QGraphicsScene *scene, QWidget *parent = NULL) : QGraphicsView(scene, parent)
-    {
-    }
+  {
+      Q_OBJECT
+    /* these slots get defined in the windowimplentation */
+  public slots:
+      void mousePressEvent(QMouseEvent * event);
+      void mouseReleaseEvent(QMouseEvent * event);
+      // void mouseDoubleClickEvent(QMouseEvent * e);
+      void mouseMoveEvent(QMouseEvent * event);
+  };
 
-protected:
-    virtual void resizeEvent(QResizeEvent *event)
-    {
-        fitInView(scene()->sceneRect());
-        QGraphicsView::resizeEvent(event);
-    }
-};
 
 
 /***********NOT Used right now************************************************************

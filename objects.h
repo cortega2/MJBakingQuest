@@ -29,10 +29,11 @@ class GraphicsView : public QGraphicsView
       Q_OBJECT
     /* these slots get defined in the windowimplentation */
   public slots:
-      void mousePressEvent(QMouseEvent * event);
-      void mouseReleaseEvent(QMouseEvent * event);
+    /* defining stuff here will work in both editor and game */
+      //void mousePressEvent(QMouseEvent * event);
+      //void mouseReleaseEvent(QMouseEvent * event);
       // void mouseDoubleClickEvent(QMouseEvent * e);
-      void mouseMoveEvent(QMouseEvent * event);
+      //void mouseMoveEvent(QMouseEvent * event);
   };
 
 

@@ -22,6 +22,8 @@ editWindow::editWindow(QWidget *parent, int BLOCK_SIZE) :
 
     graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    setMouseTracking(true);
 }
 /* need to clean up stuff when your done! */
 editWindow::~editWindow(){
@@ -29,6 +31,14 @@ editWindow::~editWindow(){
     delete ginny;
     delete graphicsView;
     delete graphicsScene;
+}
+
+QGraphicsView* editWindow::GetGraphicsView(){
+    return graphicsView;
+}
+
+QGraphicsScene* editWindow::GetGraphicsScene(){
+    return graphicsScene;
 }
 
 void editWindow::on_actionOpen_triggered(){
@@ -47,29 +57,37 @@ void editWindow::on_actionDraw_Grid_Lines_triggered(){
     ginny->ClickedDrawGridLines();
 }
 
-void GraphicsView::mousePressEvent(QMouseEvent * event){
+void editWindow::mousePressEvent(QMouseEvent * event){
 
-    if(event->button() == Qt::LeftButton )
-        this->setCursor(QCursor(Qt::ClosedHandCursor));
-
+    if(event->button() == Qt::LeftButton ){
+        graphicsView->setCursor(QCursor(Qt::ClosedHandCursor));
+        return;
+    }
+    /* Good example code */
+    //will spawn context menu eventually
+    /*
     if(event->button() == Qt::RightButton){
         QMessageBox* msgBox;
         msgBox = new QMessageBox();
-        msgBox->setWindowTitle("Hello");
+        msgBox->setWindowTitle("test");
         msgBox->setText("You Clicked Right Mouse Button");
         msgBox->show();
+        return;
     }
+    */
 }
-void GraphicsView::mouseReleaseEvent(QMouseEvent * event){
-    /*place the object */
-    QPointF point =  mapToScene(event->pos());
-    //blah blah
-    //SnapToBlock()
-    //if()
-    this->setCursor(QCursor(Qt::OpenHandCursor));
+void editWindow::mouseReleaseEvent(QMouseEvent * event){
+    graphicsView->setCursor(QCursor(Qt::OpenHandCursor));
 }
-void GraphicsView::mouseMoveEvent(QMouseEvent * event){
-    double rad = 10;
-    QPointF pt = mapToScene(event->pos());
-    scene()->addEllipse( pt.x()-rad, pt.y()-rad, rad, rad, QPen(), QBrush(Qt::SolidPattern));
+void editWindow::mouseMoveEvent(QMouseEvent * event){
+    if( event->buttons() == Qt::LeftButton ){
+        double rad = 10;
+        QPointF pt = graphicsView->mapToScene(event->pos());
+        graphicsScene->addEllipse( pt.x()-rad, pt.y()-rad, rad, rad, QPen(), QBrush(Qt::blue, Qt::SolidPattern));
+    }
+    else if( event->buttons() == Qt::RightButton ){
+        double rad = 10;
+        QPointF pt = graphicsView->mapToScene(event->pos());
+        graphicsScene->addEllipse( pt.x()-rad, pt.y()-rad, rad, rad, QPen(), QBrush(Qt::red, Qt::SolidPattern));
+    }
 }

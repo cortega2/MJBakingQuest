@@ -12,17 +12,21 @@ class gamewindow;
 }
 //this statement avoid circular references "forward declation"
 class engine;
-class gamewindow : public QWidget
+class gamewindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit gamewindow(QWidget *parent = 0, engine *gin = 0 , QGraphicsScene *uiScene = NULL, int BLOCK_SIZE = 30);
+    explicit gamewindow(QWidget *parent = 0, int BLOCK_SIZE = 30);
     ~gamewindow();
+    QGraphicsView* GetGraphicsView();
 
 private:
     Ui::gamewindow *ui;
     engine *ginny;
+
+    QGraphicsScene *graphicsScene;
+    QGraphicsView *graphicsView;
 
 //this is needed to listen to keys
 protected:

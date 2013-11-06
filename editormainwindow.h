@@ -25,8 +25,8 @@ class editWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    QGraphicsScene *graphicsScene;
-    QGraphicsView *graphicsView;
+    QGraphicsView* GetGraphicsView();
+    QGraphicsScene* GetGraphicsScene();
 
     explicit editWindow(QWidget *parent = 0, int BLOCK_SIZE = 30);
     void editWindow::InitGraphics(QGraphicsScene *scene);
@@ -38,9 +38,18 @@ private slots:
     void on_actionClose_triggered();
     void on_actionDraw_Grid_Lines_triggered();
 
+    /* For some reason, these dont all work...
+        FIXED IT, centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);*/
+    void mousePressEvent(QMouseEvent * event);
+    void mouseReleaseEvent(QMouseEvent * event);
+    // void mouseDoubleClickEvent(QMouseEvent * e);
+    void mouseMoveEvent(QMouseEvent * event);
+
 private:
     Ui::MainWindow *ui;
     engine *ginny;
+    QGraphicsScene *graphicsScene;
+    QGraphicsView *graphicsView;
 };
 
 

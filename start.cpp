@@ -14,13 +14,14 @@ start::~start()
 
 void start::on_pushButton_clicked()
 {
-     engine *gameEngine = new engine();
-     gamewindow *mainWindow = new gamewindow(0 , gameEngine, gameEngine->GetScene(), BLOCK_SIZE);
-     gameEngine->SetParentWindow(mainWindow);
+     gamewindow *mainWindow = new gamewindow( 0, BLOCK_SIZE);
 
      mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
      mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
-     mainWindow->showMaximized();
+
+     mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
+     mainWindow->resize( mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height() );
+     mainWindow->show();
 
      hide();
 }
@@ -36,7 +37,9 @@ void start::on_pushButton_3_clicked()
 
     mainWindow->setWindowIcon(QIcon("sprites/mexican_man.png"));
     mainWindow->setWindowTitle(QString("Mexican Editor v1.0"));
-    mainWindow->setCentralWidget( mainWindow->graphicsView );
+
+    mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
+    mainWindow->centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);
     mainWindow->resize(mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height()+10);
     mainWindow->show();
 

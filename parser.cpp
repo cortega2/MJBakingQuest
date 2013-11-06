@@ -5,20 +5,24 @@
 
 parser::parser(){
 }
+parser::~parser(){
+    delete sprites;
+}
 
 //reads a file, either one specified by user though the file diolog or
 //opens the name specified
 //add sprites to the objStructure
-int parser::readFile(objStructure *objs, QString fileName, bool readSpecific){
+int parser::readFile( QWidget *parent, objStructure *objs, QString fileName){
     sprites = objs;
 
     //Opens a file chooser Dialog box
-    if(!readSpecific){
-        QFile file(QFileDialog::getOpenFileName(0, "Open Level", "", "Files (*.*)"));
+    if( fileName.isNull() ){
+        /* Without putting a parentwindow reference, the dialogBox will background everything */
+        QFile file(QFileDialog::getOpenFileName( parent , "Open Level", "", "Files (*.*)"));
 
         //if the file can't be opened, then load the default map
         if(!file.open(QIODevice::ReadOnly)){
-            QMessageBox::information(0, "Error!",file.fileName()+" : "+ file.errorString()+"\nLoading Default");
+            QMessageBox::information( parent, "Error!",file.fileName()+" : "+ file.errorString()+"\nLoading Default");
             file.setFileName("levels/defaultlevel");
             file.open(QIODevice::ReadOnly);
         }
@@ -39,22 +43,12 @@ int parser::readFile(objStructure *objs, QString fileName, bool readSpecific){
                 sprites->add(fields.at(0), spriteName, -1, -1);
         }
         file.close();
+        return 1;
     }
 
     //loads level specified in filename
     else{
-
-        //test code
-        /*
-        std::cout << (QDir::absolutePath()).toStdString() << std::endl;
-
-        if(!QDir::setCurrent("/levels"))
-            std::cout<<"couldnt changed dir"<<std::endl;
-
-        std::cout<< fileName.toStdString() << std::endl;
-        */
-
-        QFile file(fileName);
+        QFile file( fileName );
         if(!file.open(QIODevice::ReadOnly))
             return -1;
 
@@ -74,8 +68,9 @@ int parser::readFile(objStructure *objs, QString fileName, bool readSpecific){
                 sprites->add(fields.at(0), spriteName, -1, -1);
         }
         file.close();
+        return 1;
     }
 
-
+    //something broke if it gets down here
     return 0;
 }

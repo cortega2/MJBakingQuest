@@ -15,7 +15,9 @@ editWindow::editWindow(QWidget *parent, int BLOCK_SIZE) :
     graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
     graphicsScene = new QGraphicsScene( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
     graphicsView->setScene( graphicsScene );
+
     ginny->SetScene( graphicsScene );
+    ginny->SetParentWindow( this );
 
     graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

@@ -68,7 +68,7 @@ void engine::DrawGrid(QGraphicsScene *scene){
 /* Loads a map into the Graphics Scene
  * Open a file chooser dialog */
 int engine::LoadMap(QGraphicsScene *scene){
-    parsley->readFile(spritesAndStuff, "", false);
+    parsley->readFile( parentWindow, spritesAndStuff, NULL );
 
     Node *tmp = spritesAndStuff->head;
     while(tmp != 0){
@@ -90,7 +90,7 @@ int engine::LoadMap(QGraphicsScene *scene){
  * Useful for autoloading the next level upon winning
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
-    parsley->readFile(spritesAndStuff, fileName, true);
+    parsley->readFile(parentWindow, spritesAndStuff, fileName );
 
     Node *tmp = spritesAndStuff->head;
     while(tmp != 0){

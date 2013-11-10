@@ -23,6 +23,11 @@ gamewindow::gamewindow(QWidget *parent, int BLOCK_SIZE) :
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     ginny->loadGame("levels/defaultlevel");
+
+    //not sure if this is the best place to place the timer
+    QTimer timer;
+    QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer.start(500);
 }
 
 gamewindow::~gamewindow()
@@ -37,15 +42,20 @@ QGraphicsView* gamewindow::GetGraphicsView(){
 //listens to keypresses from the user and does an action based on the key that was pressed
 void gamewindow::keyPressEvent(QKeyEvent *event){
    if (event->key() == Qt::Key_A){
-       std::cout<<"hello you pressed L key"<<std::endl;
+       std::cout<<"you pressed L key"<<std::endl;
        ginny->moveChar(0);
    }
    else if(event->key() == Qt::Key_D){
-       std::cout<<"hello you pressed R key"<<std::endl;
+       std::cout<<"you pressed R key"<<std::endl;
        ginny->moveChar(1);
    }
    else if(event->key() == Qt::Key_Space){
-       std::cout<<"hello you pressed the SPACE key"<<std::endl;
+       std::cout<<"you pressed the SPACE key"<<std::endl;
    }
 
+}
+
+//timer function... maybe
+void gamewindow::moveEvent(QMoveEvent *event){
+    std::cout << "hello" << std::endl;
 }

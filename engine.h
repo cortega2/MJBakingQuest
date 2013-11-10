@@ -32,8 +32,12 @@ public:
 private:
     const QRect *sSize;
 
-    objStructure *spritesAndStuff;
+    objStructure *goodGuys;
+    objStructure *enemies;
+    objStructure *blocks;
+    objStructure *other;
     parser *parsley;
+    Node *walkable[20][30];
 
     QGraphicsScene *uiScene;
     QWidget *parentWindow;

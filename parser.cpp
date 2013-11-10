@@ -12,8 +12,8 @@ parser::~parser(){
 //reads a file, either one specified by user though the file diolog or
 //opens the name specified
 //add sprites to the objStructure
-int parser::readFile( QWidget *parent, objStructure *objs, QString fileName){
-    sprites = objs;
+int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies,
+                      objStructure *blocks, objStructure *other, QString fileName){
 
     //Opens a file chooser Dialog box
     if( fileName.isNull() ){
@@ -31,16 +31,34 @@ int parser::readFile( QWidget *parent, objStructure *objs, QString fileName){
         //process each line of the file and take appropiate actions
         while(!in.atEnd()) {
             QString line = in.readLine();
+            //a comment is encountered
+            if(line.contains('#'))
+                continue;
+
             QStringList fields = line.split(",");
 
             QString spriteName("sprites/");
             spriteName.append(fields.at(1).trimmed());
             spriteName.append(".png");
 
+            /*
             if(fields.at(0).compare( QString("BLOCK") ) == 0 )
                 sprites->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             else if(fields.at(0).compare( QString("BACKGROUND") ) == 0)
                 sprites->add(fields.at(0), spriteName, -1, -1);
+            */
+
+            if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
+                good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            else if(fields.at(0).compare( QString("ENEMY")) == 0 ){
+                enemies->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("BLOCK")) == 0 || fields.at(0).compare( QString("MBLOCK")) == 0 ){
+                 blocks->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else
+                other->add(fields.at(0), spriteName, -1, -1);
+
         }
         file.close();
         return 1;
@@ -56,16 +74,33 @@ int parser::readFile( QWidget *parent, objStructure *objs, QString fileName){
         //process each line of the file and take appropiate actions
         while(!in.atEnd()) {
             QString line = in.readLine();
+            //a comment is encountered
+            if(line.contains('#'))
+                continue;
+
             QStringList fields = line.split(",");
 
             QString spriteName("sprites/");
             spriteName.append(fields.at(1).trimmed());
             spriteName.append(".png");
 
-            if(fields.at(0).compare( QString("BLOCK") ) == 0 )
-                sprites->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
-            else if(fields.at(0).compare( QString("BACKGROUND") ) == 0)
-                sprites->add(fields.at(0), spriteName, -1, -1);
+            /*
+            if(fields.at(0).compare( QString("BACKGROUND") ) == 0)
+                objs->add(fields.at(0), spriteName, -1, -1);
+            else
+                objs->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            */
+
+            if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
+                good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            else if(fields.at(0).compare( QString("ENEMY")) == 0 ){
+                enemies->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("BLOCK")) == 0 || fields.at(0).compare( QString("MBLOCK")) == 0 ){
+                 blocks->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else
+                other->add(fields.at(0), spriteName, -1, -1);
         }
         file.close();
         return 1;

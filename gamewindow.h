@@ -30,6 +30,7 @@ private:
 
 //this is needed to listen to keys
 protected:
+    void moveEvent(QMoveEvent *event);
     void keyPressEvent(QKeyEvent * event);
 };
 

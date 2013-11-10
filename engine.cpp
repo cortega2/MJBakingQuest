@@ -18,8 +18,19 @@
 #define BLOCK_SIZE ( 30 )
 
 engine::engine(){
-    spritesAndStuff = new objStructure();
+    goodGuys = new objStructure();
+    enemies = new objStructure();
+    blocks = new objStructure();
+    other = new objStructure();
     parsley = new parser();
+
+    //initialize array that holds politers to walkable blocks
+    //useful for moving
+    for(int y = 0; y< 20; y++){
+        for(int x = 0; x<30; x++)
+            walkable[y][x] = 0;
+    }
+
 }
 
 engine::engine( QGraphicsScene *scene ){
@@ -29,7 +40,11 @@ engine::engine( QGraphicsScene *scene ){
 engine::~engine(){
     delete sSize;
     delete uiScene;
-    delete spritesAndStuff;
+    delete goodGuys;
+    delete enemies;
+    delete blocks;
+    delete other;
+    delete walkable;
     delete parsley;
 }
 
@@ -68,9 +83,40 @@ void engine::DrawGrid(QGraphicsScene *scene){
 /* Loads a map into the Graphics Scene
  * Open a file chooser dialog */
 int engine::LoadMap(QGraphicsScene *scene){
-    parsley->readFile( parentWindow, spritesAndStuff, NULL );
+    parsley->readFile( parentWindow, goodGuys, enemies, blocks, other, NULL );
 
-    Node *tmp = spritesAndStuff->head;
+    Node *tmp = goodGuys->head;
+    while(tmp != 0){
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        std::cout<< tmp->x<< std::endl << tmp->y << std::endl;
+        scene->addItem(tmp->sprite);
+
+        //asign node to MJ
+        if(tmp->blockType.compare(QString("MJ")) == 0){
+            mj = tmp;
+        }
+        tmp = tmp->next;
+    }
+
+    tmp = enemies->head;
+    while(tmp != 0){
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        scene->addItem(tmp->sprite);
+        tmp = tmp->next;
+    }
+
+    tmp = blocks->head;
+    while(tmp != 0){
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        scene->addItem(tmp->sprite);
+        //walkable[tmp->x][tmp->y-1] = tmp; Might no be needed here... Not sure
+        tmp = tmp->next;
+    }
+
+    tmp = other->head;
     while(tmp != 0){
         if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
             scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
@@ -78,11 +124,10 @@ int engine::LoadMap(QGraphicsScene *scene){
             tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
-
-
         }
         tmp = tmp->next;
     }
+
     return 1;
 }
 
@@ -90,9 +135,39 @@ int engine::LoadMap(QGraphicsScene *scene){
  * Useful for autoloading the next level upon winning
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
-    parsley->readFile(parentWindow, spritesAndStuff, fileName );
+    parsley->readFile(parentWindow, goodGuys, enemies, blocks, other, fileName );
 
-    Node *tmp = spritesAndStuff->head;
+    Node *tmp = goodGuys->head;
+    while(tmp != 0){
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        scene->addItem(tmp->sprite);
+
+        //asign node to MJ
+        if(tmp->blockType.compare(QString("MJ")) == 0){
+            mj = tmp;
+        }
+        tmp = tmp->next;
+    }
+
+    tmp = enemies->head;
+    while(tmp != 0){
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        scene->addItem(tmp->sprite);
+        tmp = tmp->next;
+    }
+
+    tmp = blocks->head;
+    while(tmp != 0){
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        scene->addItem(tmp->sprite);
+        walkable[tmp->y-1][tmp->x] = tmp;
+        tmp = tmp->next;
+    }
+
+    tmp = other->head;
     while(tmp != 0){
         if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
             scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
@@ -100,13 +175,6 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
             tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
-
-            //test code
-            if(tmp->location.compare(QString("sprites/MJ_left.png")) == 0){
-                mj = tmp;
-                //mj = tmp->sprite;
-            }
-            //end test code
         }
         tmp = tmp->next;
     }
@@ -134,16 +202,50 @@ void engine::ClickedDrawGridLines(void){
     DrawGrid( uiScene );
 }
 
-// test code //
+//handle key events
 void engine::moveChar(int direction){
+    //left
     if(direction == 0){
         std::cout << "move left" << std::endl;
-        mj->sprite->moveBy(-30,0);
+
+        //going down
+        if(walkable[mj->y-1][mj->x-1] == NULL && walkable[mj->y-2][mj->x-1] == NULL && walkable[mj->y-3][mj->x-1] != NULL){
+            mj->sprite->moveBy(-BLOCK_SIZE, BLOCK_SIZE);
+            mj->x =mj->x - 1;
+            mj->y = mj->y - 1;
+        }
+        //going up
+        else if(walkable[mj->y-1][mj->x-1] != NULL && walkable[mj->y][mj->x-1] == NULL){
+            mj->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
+            mj->x =mj->x - 1;
+            mj->y = mj->y + 1;
+        }
+        else if( mj->x != 0 && walkable[mj->y-2][mj->x-1] != NULL ){
+        mj->sprite->moveBy(-BLOCK_SIZE,0);
         mj->x = mj->x - 1;
+        }
+         std::cout << mj->x << std::endl;
     }
+    //right
     else if(direction == 1){
         std::cout << "move right" << std::endl;
-        mj->sprite->moveBy(30,0);
-        mj->x = mj->x + 1;
+        //going up
+        if(walkable[mj->y-1][mj->x+1] != NULL && walkable[mj->y][mj->x+1] == NULL){
+            mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
+            mj->x = mj->x + 1;
+            mj->y = mj->y + 1;
+        }
+        //going down
+        else if(walkable[mj->y-1][mj->x+1] == NULL && walkable[mj->y-2][mj->x+1] == NULL && walkable[mj->y-3][mj->x+1] != NULL){
+            mj->sprite->moveBy(BLOCK_SIZE, BLOCK_SIZE);
+            mj->x = mj->x + 1;
+            mj->y = mj->y - 1;
+        }
+        else if(mj->x != 29 && walkable[mj->y-2][mj->x+1] != NULL){
+            mj->sprite->moveBy(BLOCK_SIZE,0);
+            mj->x = mj->x + 1;
+        }
+
+         std::cout << mj->x << std::endl;
     }
 }

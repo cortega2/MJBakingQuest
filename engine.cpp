@@ -155,6 +155,12 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
         MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
         scene->addItem(tmp->sprite);
+
+        //set movement to either left or right
+        QTime time = QTime::currentTime();
+        qsrand((uint)time.msec());
+        tmp->movement = qrand() %(2);
+
         tmp = tmp->next;
     }
 
@@ -179,6 +185,10 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         tmp = tmp->next;
     }
     return 1;
+}
+
+void engine::saveGame(QString name){
+
 }
 
 //loads level without the file chooser, for now default level
@@ -206,8 +216,6 @@ void engine::ClickedDrawGridLines(void){
 void engine::moveChar(int direction){
     //left
     if(direction == 0){
-        std::cout << "move left" << std::endl;
-
         //going down
         if(walkable[mj->y-1][mj->x-1] == NULL && walkable[mj->y-2][mj->x-1] == NULL && walkable[mj->y-3][mj->x-1] != NULL){
             mj->sprite->moveBy(-BLOCK_SIZE, BLOCK_SIZE);
@@ -224,11 +232,9 @@ void engine::moveChar(int direction){
         mj->sprite->moveBy(-BLOCK_SIZE,0);
         mj->x = mj->x - 1;
         }
-         std::cout << mj->x << std::endl;
     }
     //right
     else if(direction == 1){
-        std::cout << "move right" << std::endl;
         //going up
         if(walkable[mj->y-1][mj->x+1] != NULL && walkable[mj->y][mj->x+1] == NULL){
             mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
@@ -245,7 +251,41 @@ void engine::moveChar(int direction){
             mj->sprite->moveBy(BLOCK_SIZE,0);
             mj->x = mj->x + 1;
         }
+    }
+}
 
-         std::cout << mj->x << std::endl;
+void engine::moveEnemies(){
+    Node *tmp = enemies->head;
+    while(tmp != 0){
+        int direction = tmp->movement;
+
+        //left
+        if(direction == 0){
+            if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
+                tmp->sprite->moveBy(-BLOCK_SIZE,0);
+                tmp->x = tmp->x - 1;
+            }
+            //at edge, turn right
+            else if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
+                tmp->sprite->moveBy(BLOCK_SIZE,0);
+                tmp->x = tmp->x + 1;
+                tmp->movement = 1;
+            }
+        }
+        //right
+        else if(direction == 1){
+            if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
+                tmp->sprite->moveBy(BLOCK_SIZE,0);
+                tmp->x = tmp->x + 1;
+            }
+            //at edge turn left
+            else if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
+                tmp->sprite->moveBy(-BLOCK_SIZE,0);
+                tmp->x = tmp->x - 1;
+                tmp->movement = 0;
+            }
+        }
+
+        tmp = tmp->next;
     }
 }

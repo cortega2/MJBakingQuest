@@ -24,10 +24,12 @@ public:
     void SetScene( QGraphicsScene *scene );
     void SetParentWindow(QWidget *pWindow );
     void loadGame(QString level);
+    void saveGame(QString name);
     void ClickedOpenMap(void);
     void CloseMap(void);
     void ClickedDrawGridLines(void);
     void moveChar(int direction);
+    void moveEnemies();
 
 private:
     const QRect *sSize;

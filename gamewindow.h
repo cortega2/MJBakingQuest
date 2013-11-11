@@ -21,6 +21,9 @@ public:
     ~gamewindow();
     QGraphicsView* GetGraphicsView();
 
+public slots:
+    void moveEvent();
+
 private:
     Ui::gamewindow *ui;
     engine *ginny;
@@ -30,8 +33,7 @@ private:
 
 //this is needed to listen to keys
 protected:
-    void moveEvent(QMoveEvent *event);
-    void keyPressEvent(QKeyEvent * event);
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // GAMEWINDOW_H

@@ -9,7 +9,8 @@ SOURCES = \
     editormainwindow.cpp \
     main.cpp \
     start.cpp \
-    gamewindow.cpp
+    gamewindow.cpp \
+    graphicsvieweditor.cpp
 
 HEADERS += \
     objects.h \
@@ -18,7 +19,8 @@ HEADERS += \
     parser.h \
     editormainwindow.h \
     start.h \
-    gamewindow.h
+    gamewindow.h \
+    graphicsvieweditor.h
 
 TARGET = bakingquest
 

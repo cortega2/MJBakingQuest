@@ -9,7 +9,9 @@
 #endif
 
 #include "engine.h"
+#include "graphicsvieweditor.h"
 #include "ui_editormainwindow.h"
+
 
 
 //test code for key presses
@@ -29,7 +31,7 @@ public:
     QGraphicsView* GetGraphicsView();
     QGraphicsScene* GetGraphicsScene();
 
-    explicit editWindow(QWidget *parent = 0, int BLOCK_SIZE = 30);
+    explicit editWindow(QWidget *parent = 0, int BLOCKSIZE = 30);
     void editWindow::InitGraphics(QGraphicsScene *scene);
     ~editWindow();
 
@@ -51,7 +53,6 @@ private:
     engine *ginny;
     QGraphicsScene *graphicsScene;
     GraphicsViewEditor *graphicsView;
-    QListWidget *rightClickMenu;
 };
 
 

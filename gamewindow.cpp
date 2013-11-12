@@ -3,7 +3,7 @@
 //testcode
 #include <iostream>
 
-gamewindow::gamewindow(QWidget *parent, int BLOCK_SIZE) :
+gamewindow::gamewindow(QWidget *parent, int BLOCKSIZE) :
     QMainWindow(parent),
     ui(new Ui::gamewindow)
 {
@@ -11,9 +11,9 @@ gamewindow::gamewindow(QWidget *parent, int BLOCK_SIZE) :
     ginny = new engine();
 
     graphicsView = new GraphicsView();
-    graphicsView->setGeometry( QRect(0, 0, BLOCK_SIZE*30, BLOCK_SIZE*20 ) );
+    graphicsView->setGeometry( QRect(0, 0, BLOCKSIZE*30, BLOCKSIZE*20 ) );
 
-    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
+    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCKSIZE*30,BLOCKSIZE*20) );
     graphicsView->setScene( graphicsScene );
 
     ginny->SetScene( graphicsScene );

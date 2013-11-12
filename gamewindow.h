@@ -17,7 +17,7 @@ class gamewindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit gamewindow(QWidget *parent = 0, int BLOCK_SIZE = 30);
+    explicit gamewindow(QWidget *parent = 0, int BLOCKSIZE = 30);
     ~gamewindow();
     QGraphicsView* GetGraphicsView();
 

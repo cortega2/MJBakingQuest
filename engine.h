@@ -28,6 +28,7 @@ public:
     void CloseMap(void);
     void ClickedDrawGridLines(void);
     void moveChar(int direction);
+    void AddSprite(const char *spriteFName, int xLoc, int yLoc );
 
 private:
     const QRect *sSize;

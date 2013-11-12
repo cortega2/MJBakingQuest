@@ -4,17 +4,17 @@
 #include <iostream>
 
 
-editWindow::editWindow(QWidget *parent, int BLOCK_SIZE) :
+editWindow::editWindow(QWidget *parent, int BLOCKSIZE) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ginny = new engine();
 
     ui->setupUi(this);
 
-    graphicsView = new GraphicsViewEditor();
-    graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
+    graphicsView = new GraphicsViewEditor( ginny );
+    graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCKSIZE*30,BLOCKSIZE*20 + ui->menubar->height()) );
 
-    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
+    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCKSIZE*30,BLOCKSIZE*20) );
     graphicsView->setScene( graphicsScene );
 
     ginny->SetScene( graphicsScene );
@@ -56,30 +56,3 @@ void editWindow::on_actionClose_triggered(){
 void editWindow::on_actionDraw_Grid_Lines_triggered(){
     ginny->ClickedDrawGridLines();
 }
-/*
-void editWindow::mousePressEvent(QMouseEvent * event){
-
-    if(event->button() == Qt::LeftButton ){
-        graphicsView->setCursor(QCursor(Qt::ClosedHandCursor));
-    }
-}
-*/
-/*
-void editWindow::mouseReleaseEvent(QMouseEvent * event){
-    graphicsView->setCursor(QCursor(Qt::OpenHandCursor));
-}
-*/
-/*
-void editWindow::mouseMoveEvent(QMouseEvent * event){
-    if( event->buttons() == Qt::LeftButton ){
-        double rad = 10;
-        QPointF pt = graphicsView->mapToScene(event->pos());
-        graphicsScene->addEllipse( pt.x()-rad, pt.y()-rad, rad, rad, QPen(), QBrush(Qt::blue, Qt::SolidPattern));
-    }
-    else if( event->buttons() == Qt::RightButton ){
-        double rad = 10;
-        QPointF pt = graphicsView->mapToScene(event->pos());
-        graphicsScene->addEllipse( pt.x()-rad, pt.y()-rad, rad, rad, QPen(), QBrush(Qt::red, Qt::SolidPattern));
-    }
-}
-*/

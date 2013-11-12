@@ -41,6 +41,13 @@ void engine::SetScene(QGraphicsScene *scene){
     uiScene = scene;
 }
 
+void engine::AddSprite(const char* spriteFName, int xLoc, int yLoc ){
+    QGraphicsRectWidget *tmp = new QGraphicsRectWidget( spriteFName, BLOCK_SIZE, BLOCK_SIZE );
+    tmp->setFlag(QGraphicsItem::ItemIsMovable, true);
+    MoveBlock(tmp, uiScene, xLoc, yLoc );
+    uiScene->addItem(tmp);
+}
+
 void engine::SetParentWindow( QWidget *pWindow ){
     parentWindow = pWindow;
 }

@@ -44,8 +44,16 @@
     </property>
     <addaction name="actionDraw_Grid_Lines"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionUsage"/>
+    <addaction name="actionCredits"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -70,6 +78,16 @@
   <action name="actionDraw_Grid_Lines">
    <property name="text">
     <string>Draw Grid Lines</string>
+   </property>
+  </action>
+  <action name="actionUsage">
+   <property name="text">
+    <string>Usage</string>
+   </property>
+  </action>
+  <action name="actionCredits">
+   <property name="text">
+    <string>Credits</string>
    </property>
   </action>
  </widget>

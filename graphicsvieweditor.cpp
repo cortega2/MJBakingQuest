@@ -2,7 +2,8 @@
 
 
 void GraphicsViewEditor::cellDoubleClicked(int row, int column){
-    ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(), (int)floor(rightClickMenu->x()/BLOCK_SIZE), (int)floor(rightClickMenu->y()/BLOCK_SIZE) );
+    ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(), (int)floor(rightClickMenu->x()/BLOCK_SIZE), (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
+    rightClickMenu->hide();
 }
 
 GraphicsViewEditor::GraphicsViewEditor(engine *gin){
@@ -67,16 +68,31 @@ void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
 
     if(event->button() == Qt::RightButton ){
         rightClickMenu->move(event->pos());
-        //rightClickMenu->
         rightClickMenu->show();
     }
 }
 void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
     if(event->button() == Qt::LeftButton ){
-        this->setCursor(QCursor(Qt::OpenHandCursor));
+        this->setCursor(QCursor(Qt::ArrowCursor));
     }
-
-    if(event->button() == Qt::RightButton ){
-        //rightClickMenu->hide();
+    if(event->button() == Qt::MiddleButton ){
+        //QGraphicsItem *item;
+        QList<QGraphicsItem*> list = this->items();
+        foreach( QGraphicsItem *item, list ){
+            if(item != NULL ){
+                while( ((int)item->x() % BLOCK_SIZE) != 0){
+                    if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 )
+                        item->moveBy(-1,0);
+                    else
+                        item->moveBy(1,0);
+                }
+                while( ((int)item->y() % BLOCK_SIZE) != 0){
+                    if( ((int)item->y() % BLOCK_SIZE) <= BLOCK_SIZE/2 )
+                        item->moveBy(0,-1);
+                    else
+                        item->moveBy(0,1);
+                }
+            }
+        }
     }
 }

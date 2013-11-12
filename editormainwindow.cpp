@@ -56,3 +56,10 @@ void editWindow::on_actionClose_triggered(){
 void editWindow::on_actionDraw_Grid_Lines_triggered(){
     ginny->ClickedDrawGridLines();
 }
+
+void editWindow::on_actionUsage_triggered()
+{
+    QMessageBox box;
+    box.setText(QString("Right click to open menu\nDouble Click on sprite to add\nDouble Click and drag to move sprite around\nMiddle click to snap to grid."));
+    box.exec();
+}

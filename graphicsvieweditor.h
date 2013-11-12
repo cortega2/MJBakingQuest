@@ -16,7 +16,6 @@ public slots:
     void mousePressEvent(QMouseEvent * event);
     void mouseReleaseEvent(QMouseEvent * event);
     void cellDoubleClicked(int row, int column);
-    // void mouseDoubleClickEvent(QMouseEvent * e);
     //void mouseMoveEvent(QMouseEvent * event);
 protected:
     QTableWidget *rightClickMenu;

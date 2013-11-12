@@ -48,6 +48,8 @@ private slots:
     // void mouseDoubleClickEvent(QMouseEvent * e);
     //void mouseMoveEvent(QMouseEvent * event);
 
+    void on_actionUsage_triggered();
+
 private:
     Ui::MainWindow *ui;
     engine *ginny;

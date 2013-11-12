@@ -44,7 +44,7 @@ void engine::SetScene(QGraphicsScene *scene){
 void engine::AddSprite(const char* spriteFName, int xLoc, int yLoc ){
     QGraphicsRectWidget *tmp = new QGraphicsRectWidget( spriteFName, BLOCK_SIZE, BLOCK_SIZE );
     tmp->setFlag(QGraphicsItem::ItemIsMovable, true);
-    tmp->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    //tmp->setFlag(QGraphicsItem::ItemIsSelectable, true);
     MoveBlock(tmp, uiScene, xLoc, yLoc );
     tmp->setCursor(Qt::OpenHandCursor);
     uiScene->addItem(tmp);

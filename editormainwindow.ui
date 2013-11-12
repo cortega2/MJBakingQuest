@@ -42,7 +42,15 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <widget class="QMenu" name="menuSnap_To_Grid">
+     <property name="title">
+      <string>Snap To Grid</string>
+     </property>
+     <addaction name="actionSnap_Now"/>
+     <addaction name="actionAutomatic_Snapping"/>
+    </widget>
     <addaction name="actionDraw_Grid_Lines"/>
+    <addaction name="menuSnap_To_Grid"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -76,8 +84,11 @@
    </property>
   </action>
   <action name="actionDraw_Grid_Lines">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Draw Grid Lines</string>
+    <string>Grid Lines</string>
    </property>
   </action>
   <action name="actionUsage">
@@ -88,6 +99,19 @@
   <action name="actionCredits">
    <property name="text">
     <string>Credits</string>
+   </property>
+  </action>
+  <action name="actionSnap_Now">
+   <property name="text">
+    <string>Snap Now</string>
+   </property>
+  </action>
+  <action name="actionAutomatic_Snapping">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Automatic Snapping</string>
    </property>
   </action>
  </widget>

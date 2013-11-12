@@ -20,7 +20,8 @@ HEADERS += \
     editormainwindow.h \
     start.h \
     gamewindow.h \
-    graphicsvieweditor.h
+    graphicsvieweditor.h \
+    definitions.h
 
 TARGET = bakingquest
 

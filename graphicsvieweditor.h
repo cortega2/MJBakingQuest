@@ -10,6 +10,7 @@ class GraphicsViewEditor : public GraphicsView
 {
 public:
     GraphicsViewEditor(engine *gin);
+    void SnapToGrid();
 
     Q_OBJECT
 public slots:
@@ -21,6 +22,7 @@ protected:
     QTableWidget *rightClickMenu;
 private:
     engine *ginny;
+
 };
 
 #endif // GRAPHICSVIEWEDITOR_H

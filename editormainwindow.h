@@ -44,11 +44,13 @@ private slots:
     /* For some reason, these dont all work...
         FIXED IT, centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);*/
     //void mousePressEvent(QMouseEvent * event);
-    //void mouseReleaseEvent(QMouseEvent * event);
+    void mouseReleaseEvent(QMouseEvent * event);
     // void mouseDoubleClickEvent(QMouseEvent * e);
     //void mouseMoveEvent(QMouseEvent * event);
 
     void on_actionUsage_triggered();
+
+    void on_actionSnap_Now_triggered();
 
 private:
     Ui::MainWindow *ui;

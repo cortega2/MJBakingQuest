@@ -26,11 +26,17 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
     rightClickMenu->setColumnCount( 5 );
     rightClickMenu->setRowCount( static_cast<int>(ceil(spritesList.size()/5)) );
     for(int i=0; i<rightClickMenu->columnCount(); i++)
-        rightClickMenu->setColumnWidth( i, BLOCK_SIZE );
+        rightClickMenu->setColumnWidth( i, BLOCK_SIZE+2 );
+    for(int i=0; i<rightClickMenu->rowCount(); i++)
+        rightClickMenu->setRowHeight( i, BLOCK_SIZE+2 );
 
     rightClickMenu->setShowGrid(false);
-    rightClickMenu->setMaximumWidth(rightClickMenu->columnCount()*BLOCK_SIZE + rightClickMenu->columnCount() );
-    rightClickMenu->setMaximumHeight(rightClickMenu->rowCount()*BLOCK_SIZE + rightClickMenu->rowCount() );
+
+    rightClickMenu->setMaximumWidth(rightClickMenu->columnWidth(0) * rightClickMenu->columnCount() );
+    rightClickMenu->setMinimumWidth(rightClickMenu->columnWidth(0) * rightClickMenu->columnCount() );
+    rightClickMenu->setMaximumHeight( rightClickMenu->rowHeight(0) * rightClickMenu->rowCount() );
+    rightClickMenu->setMinimumHeight( rightClickMenu->rowHeight(0) * rightClickMenu->rowCount() );
+
     rightClickMenu->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     rightClickMenu->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     rightClickMenu->verticalHeader()->setVisible(false);
@@ -51,7 +57,7 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
             item->setText(QString("sprites/"+spritesList.at(k)));
             item->setSizeHint(QSize(item->sizeHint().width(), BLOCK_SIZE ));
 
-            rightClickMenu->setItem( i,j, item );
+            rightClickMenu->setItem( j,i, item );
             k++;
         }
     }
@@ -71,33 +77,35 @@ void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
         rightClickMenu->show();
     }
 }
-void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
-    if(event->button() == Qt::LeftButton ){
-        this->setCursor(QCursor(Qt::ArrowCursor));
-    }
-    if(event->button() == Qt::MiddleButton ){
-        QList<QGraphicsItem*> list = this->items();
-        foreach( QGraphicsItem *item, list ){
-            if(item != NULL ){
-                if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){
-                    while( ((int)item->x() % BLOCK_SIZE) != 0){
-                        item->moveBy(-1,0);
-                    }
-                }else{
-                    while( ((int)item->x() % BLOCK_SIZE) != 0){
-                        item->moveBy(1,0);
-                    }
+
+void GraphicsViewEditor::SnapToGrid(){
+    QList<QGraphicsItem*> list = this->items();
+    foreach( QGraphicsItem *item, list ){
+        if(item != NULL ){
+            if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){
+                while( ((int)item->x() % BLOCK_SIZE) != 0){
+                    item->moveBy(-1,0);
                 }
-                if( ((int)item->y() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){
-                    while( ((int)item->y() % BLOCK_SIZE) != 0){
-                        item->moveBy(0,-1);
-                    }
-                }else{
-                    while( ((int)item->y() % BLOCK_SIZE) != 0){
-                        item->moveBy(0,1);
-                    }
+            }else{
+                while( ((int)item->x() % BLOCK_SIZE) != 0){
+                    item->moveBy(1,0);
+                }
+            }
+            if( ((int)item->y() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){
+                while( ((int)item->y() % BLOCK_SIZE) != 0){
+                    item->moveBy(0,-1);
+                }
+            }else{
+                while( ((int)item->y() % BLOCK_SIZE) != 0){
+                    item->moveBy(0,1);
                 }
             }
         }
+    }
+}
+
+void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
+    if(event->button() == Qt::LeftButton ){
+        this->setCursor(QCursor(Qt::ArrowCursor));
     }
 }

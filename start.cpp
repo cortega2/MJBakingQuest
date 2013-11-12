@@ -39,7 +39,7 @@ void start::on_pushButton_3_clicked()
     mainWindow->setWindowTitle(QString("Mexican Editor v1.0"));
 
     mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
-    mainWindow->centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);
+    //mainWindow->centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);
     mainWindow->resize(mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height()+10);
     mainWindow->show();
 

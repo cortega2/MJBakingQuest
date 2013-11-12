@@ -11,7 +11,7 @@ editWindow::editWindow(QWidget *parent, int BLOCK_SIZE) :
 
     ui->setupUi(this);
 
-    graphicsView = new GraphicsView();
+    graphicsView = new GraphicsViewEditor();
     graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
 
     graphicsScene = new QGraphicsScene( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
@@ -56,29 +56,20 @@ void editWindow::on_actionClose_triggered(){
 void editWindow::on_actionDraw_Grid_Lines_triggered(){
     ginny->ClickedDrawGridLines();
 }
-
+/*
 void editWindow::mousePressEvent(QMouseEvent * event){
 
     if(event->button() == Qt::LeftButton ){
         graphicsView->setCursor(QCursor(Qt::ClosedHandCursor));
-        return;
     }
-    /* Good example code */
-    //will spawn context menu eventually
-    /*
-    if(event->button() == Qt::RightButton){
-        QMessageBox* msgBox;
-        msgBox = new QMessageBox();
-        msgBox->setWindowTitle("test");
-        msgBox->setText("You Clicked Right Mouse Button");
-        msgBox->show();
-        return;
-    }
-    */
 }
+*/
+/*
 void editWindow::mouseReleaseEvent(QMouseEvent * event){
     graphicsView->setCursor(QCursor(Qt::OpenHandCursor));
 }
+*/
+/*
 void editWindow::mouseMoveEvent(QMouseEvent * event){
     if( event->buttons() == Qt::LeftButton ){
         double rad = 10;
@@ -91,3 +82,4 @@ void editWindow::mouseMoveEvent(QMouseEvent * event){
         graphicsScene->addEllipse( pt.x()-rad, pt.y()-rad, rad, rad, QPen(), QBrush(Qt::red, Qt::SolidPattern));
     }
 }
+*/

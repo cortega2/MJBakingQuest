@@ -36,6 +36,21 @@ class GraphicsView : public QGraphicsView
       //void mouseMoveEvent(QMouseEvent * event);
   };
 
+class GraphicsViewEditor : public GraphicsView
+{
+public:
+    GraphicsViewEditor();
+
+    Q_OBJECT
+public slots:
+    void mousePressEvent(QMouseEvent * event);
+    void mouseReleaseEvent(QMouseEvent * event);
+    // void mouseDoubleClickEvent(QMouseEvent * e);
+    //void mouseMoveEvent(QMouseEvent * event);
+protected:
+    QTableWidget *rightClickMenu;
+};
+
 
 
 /***********NOT Used right now************************************************************

@@ -1,4 +1,5 @@
 #include "objects.h"
+#define BLOCK_SIZE (30)
 
 QGraphicsRectWidget::~QGraphicsRectWidget(){
     delete brush;
@@ -23,6 +24,73 @@ QGraphicsRectWidget::QGraphicsRectWidget(QPixmap pMap, int blockWidth, int block
 QGraphicsRectWidget::QGraphicsRectWidget(const char* spriteName, int blockWidth, int blockHeight){
     brush= new QBrush( QPixmap(spriteName) );
     size = new QRect(0,0, blockWidth, blockHeight);
+}
+GraphicsViewEditor::GraphicsViewEditor(){
+    rightClickMenu = new QTableWidget(this);
+    //rightClickMenu->setFixedWidth(BLOCK_SIZE+10);
+    rightClickMenu->hide();
+
+    //finds just the pngs in the sprites incase of accidents
+    QStringList nameFilter("*.png");
+    QDir directory(QString("sprites/"));
+    QStringList spritesList = directory.entryList(nameFilter);
+
+    //Sets up the rightclick menu
+    rightClickMenu->setIconSize(QSize(BLOCK_SIZE,BLOCK_SIZE));
+    rightClickMenu->setColumnCount( 5 );
+    rightClickMenu->setRowCount( static_cast<int>(ceil(spritesList.size()/5)) );
+    for(int i=0; i<rightClickMenu->columnCount(); i++)
+        rightClickMenu->setColumnWidth( i, BLOCK_SIZE );
+    rightClickMenu->setShowGrid(false);
+    rightClickMenu->setMaximumWidth(rightClickMenu->columnCount()*BLOCK_SIZE + rightClickMenu->columnCount() );
+    rightClickMenu->setMaximumHeight(rightClickMenu->rowCount()*BLOCK_SIZE + rightClickMenu->rowCount() );
+    rightClickMenu->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    rightClickMenu->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    rightClickMenu->verticalHeader()->setVisible(false);
+    rightClickMenu->horizontalHeader()->setVisible(false);
+    rightClickMenu->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    QTableWidgetItem *item;
+    QIcon *ico;
+
+    //fills the table with the sprites
+    int k=0;
+    for(int i=0; i<rightClickMenu->columnCount(); i++){
+        for(int j=0; j<rightClickMenu->rowCount(); j++){
+            item = new QTableWidgetItem();
+            ico = new QIcon("sprites/"+spritesList.at(k));
+
+            item->setIcon( *ico );
+            item->setSizeHint(QSize(item->sizeHint().width(), BLOCK_SIZE ));
+
+            rightClickMenu->setItem( i,j, item );
+            k++;
+        }
+    }
+
+    rightClickMenu->setCursor(Qt::ArrowCursor);
+}
+
+void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
+    if(event->button() == Qt::LeftButton ){
+        this->setCursor(QCursor(Qt::ClosedHandCursor));
+        rightClickMenu->hide();
+    }
+
+    if(event->button() == Qt::RightButton ){
+        rightClickMenu->move(event->pos());
+        //rightClickMenu->
+        rightClickMenu->show();
+    }
+}
+void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
+    if(event->button() == Qt::LeftButton ){
+        this->setCursor(QCursor(Qt::OpenHandCursor));
+    }
+
+    if(event->button() == Qt::RightButton ){
+        //rightClickMenu->hide();
+    }
 }
 
 /************************Not Used Right now****************************************************

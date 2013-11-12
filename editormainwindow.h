@@ -7,6 +7,7 @@
 #if QT_VERSION >= 0x050000
     #include <QtWidgets>
 #endif
+
 #include "engine.h"
 #include "ui_editormainwindow.h"
 
@@ -40,16 +41,17 @@ private slots:
 
     /* For some reason, these dont all work...
         FIXED IT, centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);*/
-    void mousePressEvent(QMouseEvent * event);
-    void mouseReleaseEvent(QMouseEvent * event);
+    //void mousePressEvent(QMouseEvent * event);
+    //void mouseReleaseEvent(QMouseEvent * event);
     // void mouseDoubleClickEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * event);
+    //void mouseMoveEvent(QMouseEvent * event);
 
 private:
     Ui::MainWindow *ui;
     engine *ginny;
     QGraphicsScene *graphicsScene;
-    QGraphicsView *graphicsView;
+    GraphicsViewEditor *graphicsView;
+    QListWidget *rightClickMenu;
 };
 
 

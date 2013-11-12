@@ -20,9 +20,12 @@ public:
     explicit gamewindow(QWidget *parent = 0, int BLOCK_SIZE = 30);
     ~gamewindow();
     QGraphicsView* GetGraphicsView();
+    bool mjHasBlock;
 
 public slots:
     void moveEvent();
+private slots:
+    void mousePressEvent(QMouseEvent * event);
 
 private:
     Ui::gamewindow *ui;

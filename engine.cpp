@@ -213,24 +213,49 @@ void engine::ClickedDrawGridLines(void){
 }
 
 //handle key events
-void engine::moveChar(int direction){
+void engine::moveChar(int direction, bool mjHasBlock){
     //left
+    int mjPrevX = mj->x;
+    int mjPrevY = mj->y;
     if(direction == 0){
         //going down
         if(walkable[mj->y-1][mj->x-1] == NULL && walkable[mj->y-2][mj->x-1] == NULL && walkable[mj->y-3][mj->x-1] != NULL){
             mj->sprite->moveBy(-BLOCK_SIZE, BLOCK_SIZE);
             mj->x =mj->x - 1;
             mj->y = mj->y - 1;
+
+            //move block and update block on array
+            if(mjHasBlock){
+                walkable[mjPrevY][mjPrevX]->sprite->moveBy(-BLOCK_SIZE, BLOCK_SIZE);
+                walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
+                walkable[mjPrevY][mjPrevX] = NULL;
+
+            }
         }
         //going up
         else if(walkable[mj->y-1][mj->x-1] != NULL && walkable[mj->y][mj->x-1] == NULL){
             mj->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
             mj->x =mj->x - 1;
             mj->y = mj->y + 1;
+
+            //move block and update block on array
+            if(mjHasBlock){
+                walkable[mjPrevY][mjPrevX]->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
+                walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
+                walkable[mjPrevY][mjPrevX] = NULL;
+
+            }
         }
         else if( mj->x != 0 && walkable[mj->y-2][mj->x-1] != NULL ){
         mj->sprite->moveBy(-BLOCK_SIZE,0);
         mj->x = mj->x - 1;
+
+             //move block and update block on array
+            if(mjHasBlock){
+                walkable[mjPrevY][mjPrevX]->sprite->moveBy(-BLOCK_SIZE, 0);
+                walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
+                walkable[mjPrevY][mjPrevX] = NULL;
+            }
         }
     }
     //right
@@ -240,16 +265,40 @@ void engine::moveChar(int direction){
             mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
             mj->x = mj->x + 1;
             mj->y = mj->y + 1;
+
+            //move block and update block on array
+            if(mjHasBlock){
+                walkable[mjPrevY][mjPrevX]->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
+                walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
+                walkable[mjPrevY][mjPrevX] = NULL;
+
+            }
         }
         //going down
         else if(walkable[mj->y-1][mj->x+1] == NULL && walkable[mj->y-2][mj->x+1] == NULL && walkable[mj->y-3][mj->x+1] != NULL){
             mj->sprite->moveBy(BLOCK_SIZE, BLOCK_SIZE);
             mj->x = mj->x + 1;
             mj->y = mj->y - 1;
+
+            //move block and update block on array
+            if(mjHasBlock){
+                walkable[mjPrevY][mjPrevX]->sprite->moveBy(BLOCK_SIZE, BLOCK_SIZE);
+                walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
+                walkable[mjPrevY][mjPrevX] = NULL;
+
+            }
         }
         else if(mj->x != 29 && walkable[mj->y-2][mj->x+1] != NULL){
             mj->sprite->moveBy(BLOCK_SIZE,0);
             mj->x = mj->x + 1;
+
+            //move block and update block on array
+            if(mjHasBlock){
+                walkable[mjPrevY][mjPrevX]->sprite->moveBy(BLOCK_SIZE, 0);
+                walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
+                walkable[mjPrevY][mjPrevX] = NULL;
+
+            }
         }
     }
 }

@@ -76,21 +76,26 @@ void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
         this->setCursor(QCursor(Qt::ArrowCursor));
     }
     if(event->button() == Qt::MiddleButton ){
-        //QGraphicsItem *item;
         QList<QGraphicsItem*> list = this->items();
         foreach( QGraphicsItem *item, list ){
             if(item != NULL ){
-                while( ((int)item->x() % BLOCK_SIZE) != 0){
-                    if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 )
+                if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){
+                    while( ((int)item->x() % BLOCK_SIZE) != 0){
                         item->moveBy(-1,0);
-                    else
+                    }
+                }else{
+                    while( ((int)item->x() % BLOCK_SIZE) != 0){
                         item->moveBy(1,0);
+                    }
                 }
-                while( ((int)item->y() % BLOCK_SIZE) != 0){
-                    if( ((int)item->y() % BLOCK_SIZE) <= BLOCK_SIZE/2 )
+                if( ((int)item->y() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){
+                    while( ((int)item->y() % BLOCK_SIZE) != 0){
                         item->moveBy(0,-1);
-                    else
+                    }
+                }else{
+                    while( ((int)item->y() % BLOCK_SIZE) != 0){
                         item->moveBy(0,1);
+                    }
                 }
             }
         }

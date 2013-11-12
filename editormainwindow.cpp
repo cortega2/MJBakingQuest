@@ -23,6 +23,8 @@ editWindow::editWindow(QWidget *parent, int BLOCKSIZE) :
     graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    graphicsView->setMouseTracking(true);
+
     setMouseTracking(true);
 }
 /* need to clean up stuff when your done! */
@@ -62,4 +64,14 @@ void editWindow::on_actionUsage_triggered()
     QMessageBox box;
     box.setText(QString("Right click to open menu\nDouble Click on sprite to add\nDouble Click and drag to move sprite around\nMiddle click to snap to grid."));
     box.exec();
+}
+
+void editWindow::on_actionSnap_Now_triggered()
+{
+    graphicsView->SnapToGrid();
+}
+void editWindow::mouseReleaseEvent(QMouseEvent *event){
+    if(ui->actionAutomatic_Snapping->isChecked()){
+        graphicsView->SnapToGrid();
+    }
 }

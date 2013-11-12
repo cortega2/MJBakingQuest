@@ -32,7 +32,7 @@ public:
     QGraphicsScene* GetGraphicsScene();
 
     explicit editWindow(QWidget *parent = 0, int BLOCKSIZE = 30);
-    void editWindow::InitGraphics(QGraphicsScene *scene);
+    void InitGraphics(QGraphicsScene *scene);
     ~editWindow();
 
 private slots:

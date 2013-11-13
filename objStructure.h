@@ -2,6 +2,7 @@
 #define OBJSTRUCTURE_H
 #include <QtCore>
 #include "objects.h"
+#include "definitions.h"
 
 class Node{
 public:

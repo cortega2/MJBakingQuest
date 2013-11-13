@@ -1,7 +1,5 @@
 #include "objects.h"
 
-#define BLOCK_SIZE (30)
-
 QGraphicsRectWidget::~QGraphicsRectWidget(){
     delete brush;
     delete size;

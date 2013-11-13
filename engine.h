@@ -11,6 +11,7 @@
 #include "objects.h"
 #include "parser.h"
 #include "objStructure.h"
+#include "definitions.h"
 
 class engine
 {

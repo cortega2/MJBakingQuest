@@ -7,6 +7,8 @@
     #include <QtWidgets>
 #endif
 
+#include "definitions.h"
+
 class QGraphicsRectWidget : public QGraphicsWidget{
 
     QBrush *brush;

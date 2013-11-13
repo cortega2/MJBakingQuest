@@ -20,6 +20,8 @@ class gamewindow : public QMainWindow
 public:
     explicit gamewindow(QWidget *parent = 0);
     ~gamewindow();
+    int left=2;
+    int right=-2;
     QGraphicsView* GetGraphicsView();
     bool mjHasBlock;
 

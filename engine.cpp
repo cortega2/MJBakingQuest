@@ -188,14 +188,13 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
     tmp = other->head;
     while(tmp != 0){
-        std::cout<<"in engine other" << std::endl;
-
         if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
             scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
         else{
             tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
+            tmp->sprite->setZValue(-2);
         }
         tmp = tmp->next;
     }

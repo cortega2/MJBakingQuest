@@ -1,3 +1,4 @@
+#Types of blocks: BLOCK, MJ, MX, ENEMY, MBLOCK and others
 BLOCK, concrete, 0, 1
 BLOCK, concrete, 1, 1
 BLOCK, concrete, 3, 1
@@ -17,5 +18,38 @@ BLOCK, concrete, 15, 7
 BLOCK, concrete, 16, 8
 BLOCK, concrete, 17, 9
 BLOCK, concrete, 18, 10
+BLOCK, concrete, 19, 10
+BLOCK, concrete, 20, 10
+BLOCK, concrete, 21, 10
+BLOCK, concrete, 22, 10
+BLOCK, concrete, 23, 10
+BLOCK, concrete, 24, 10
+BLOCK, concrete, 25, 10
+BLOCK, concrete, 26, 10
+other, trash, 24, 11
+BLOCK, concrete, 27, 10
+BLOCK, concrete, 28, 10
+BLOCK, concrete, 29, 10
+MBLOCK, move_wood, 27, 11
+MBLOCK, move_wood, 26, 11
+MBLOCK, move_wood, 28, 11
+MBLOCK, move_wood, 27, 12
+#
+# this is a comment
+#
+BLOCK, concrete, 0, 5
+BLOCK, concrete, 1, 5
+BLOCK, concrete, 3, 5
+BLOCK, concrete, 2, 5
+BLOCK, concrete, 4, 5
+BLOCK, concrete, 8, 5
+BLOCK, concrete, 9, 5
+BLOCK, concrete, 8, 2
+BLOCK, concrete, 7, 3
+BLOCK, concrete, 6, 4
+BLOCK, concrete, 5, 5
 BACKGROUND, starrynight
-MJ, MJ_left, 3, 2
+#
+MJ, MJ_left, 9, 2
+# for a temp time mexican man will be a bad guy
+ENEMY, mexican_man, 1, 6

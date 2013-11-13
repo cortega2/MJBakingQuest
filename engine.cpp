@@ -241,10 +241,19 @@ void engine::moveChar(int direction, bool mjHasBlock){
             std::cout << "move left" << std::endl;
             //collide = collision(mj->x,mj->y);
             if ((direction%4)==2){
-                setNewName("MJ_move_left");
+                if (mjHasBlock){
+                    setNewName("MJ_move_left_up");
+                }
+                else
+                    setNewName("MJ_move_left");
             }
             else{
-                setNewName("MJ_left");}
+                if (mjHasBlock){
+                    setNewName("MJ_left_up");
+                }
+                else
+                setNewName("MJ_left");
+            }
 
             mj->sprite->brush=new QBrush( QPixmap(newName) );
 
@@ -294,10 +303,19 @@ void engine::moveChar(int direction, bool mjHasBlock){
             std::cout << "move right" << std::endl;
 
             if ((direction%4)==2){
-                setNewName("MJ_move");
+                if (mjHasBlock){
+                    setNewName("MJ_move_right_up");
+                }
+                else
+                    setNewName("MJ_move");
             }
             else{
-                setNewName("MJ_right"); }
+                if (mjHasBlock){
+                    setNewName("MJ_right_up");
+                }
+                else
+                setNewName("MJ_right");
+            }
 
             mj->sprite->brush=new QBrush( QPixmap(newName) );
 

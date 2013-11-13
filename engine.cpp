@@ -144,6 +144,9 @@ int engine::LoadMap(QGraphicsScene *scene){
  * Useful for autoloading the next level upon winning
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
+
+    std::cout<<"in engine other" << std::endl;
+
     parsley->readFile(parentWindow, goodGuys, enemies, blocks, other, fileName );
 
     Node *tmp = goodGuys->head;
@@ -183,8 +186,12 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         tmp = tmp->next;
     }
 
+    std::cout<<"in engine other" << std::endl;
+
     tmp = other->head;
     while(tmp != 0){
+        std::cout<<"in engine other" << std::endl;
+
         if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
             scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
         else{

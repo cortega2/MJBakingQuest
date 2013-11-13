@@ -22,7 +22,7 @@ gamewindow::gamewindow(QWidget *parent, int BLOCKSIZE) :
     graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ginny->loadGame("levels/defaultlevel");
+    ginny->loadGame("levels/levelone.txt");
 
     //not sure if this is the best place to place the timer
     QTimer *timer = new QTimer(this);

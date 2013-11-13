@@ -6,6 +6,7 @@
 #include <QtGui>
 #include "engine.h"
 #include "ui_gamewindow.h"
+#include "definitions.h"
 
 namespace Ui {
 class gamewindow;
@@ -17,8 +18,10 @@ class gamewindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit gamewindow(QWidget *parent = 0, int BLOCKSIZE = 30);
+    explicit gamewindow(QWidget *parent = 0);
     ~gamewindow();
+    int left;
+    int right;
     QGraphicsView* GetGraphicsView();
     bool mjHasBlock;
 

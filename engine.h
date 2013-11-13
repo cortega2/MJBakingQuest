@@ -11,6 +11,7 @@
 #include "objects.h"
 #include "parser.h"
 #include "objStructure.h"
+#include "definitions.h"
 
 class engine
 {
@@ -44,13 +45,16 @@ private:
     objStructure *blocks;
     objStructure *other;
     parser *parsley;
+    QBrush *brush;
+    QString newName;
 
     QGraphicsScene *uiScene;
     QWidget *parentWindow;
 
     void DrawGrid(QGraphicsScene *scene);
     void MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int y);
-
+    void setNewName (QString subName);
+    void setBrush();
     int LoadMap(QGraphicsScene *scene);
     int LoadMap(QGraphicsScene *scene, QString fileName);
 

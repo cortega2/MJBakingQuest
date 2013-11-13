@@ -11,7 +11,7 @@
 #include "engine.h"
 #include "graphicsvieweditor.h"
 #include "ui_editormainwindow.h"
-
+#include "definitions.h"
 
 
 //test code for key presses
@@ -31,7 +31,7 @@ public:
     QGraphicsView* GetGraphicsView();
     QGraphicsScene* GetGraphicsScene();
 
-    explicit editWindow(QWidget *parent = 0, int BLOCKSIZE = 30);
+    explicit editWindow(QWidget *parent = 0);
     void InitGraphics(QGraphicsScene *scene);
     ~editWindow();
 
@@ -51,6 +51,8 @@ private slots:
     void on_actionUsage_triggered();
 
     void on_actionSnap_Now_triggered();
+
+    void on_actionCredits_triggered();
 
 private:
     Ui::MainWindow *ui;

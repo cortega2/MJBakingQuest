@@ -3,8 +3,7 @@
 
 #include "objects.h"
 #include "engine.h"
-
-#define BLOCK_SIZE ( 30 )
+#include "definitions.h"
 
 class GraphicsViewEditor : public GraphicsView
 {

@@ -9,8 +9,7 @@
 #include "engine.h"
 #include "editormainwindow.h"
 #include "gamewindow.h"
-
-#define BLOCK_SIZE ( 30 )
+#include "definitions.h"
 
 namespace Ui {
 class start;

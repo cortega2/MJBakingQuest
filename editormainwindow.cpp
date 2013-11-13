@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-editWindow::editWindow(QWidget *parent, int BLOCKSIZE) :
+editWindow::editWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ginny = new engine();
@@ -12,9 +12,9 @@ editWindow::editWindow(QWidget *parent, int BLOCKSIZE) :
     ui->setupUi(this);
 
     graphicsView = new GraphicsViewEditor( ginny );
-    graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCKSIZE*30,BLOCKSIZE*20 + ui->menubar->height()) );
+    graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
 
-    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCKSIZE*30,BLOCKSIZE*20) );
+    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
     graphicsView->setScene( graphicsScene );
 
     ginny->SetScene( graphicsScene );
@@ -70,8 +70,16 @@ void editWindow::on_actionSnap_Now_triggered()
 {
     graphicsView->SnapToGrid();
 }
+
 void editWindow::mouseReleaseEvent(QMouseEvent *event){
     if(ui->actionAutomatic_Snapping->isChecked()){
         graphicsView->SnapToGrid();
     }
+}
+
+void editWindow::on_actionCredits_triggered()
+{
+    QMessageBox box;
+    box.setText(QString("Idea by Joseph Burnitz\nMostly coded by Joseph Burnitz\n"));
+    box.exec();
 }

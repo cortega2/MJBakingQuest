@@ -186,8 +186,6 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         tmp = tmp->next;
     }
 
-    std::cout<<"in engine other" << std::endl;
-
     tmp = other->head;
     while(tmp != 0){
         std::cout<<"in engine other" << std::endl;

@@ -11,7 +11,8 @@ class parser
 public:
     parser();
     ~parser();
-    int readFile(QWidget *parent, objStructure *objs, QString fileName);
+    int readFile(QWidget *parent, objStructure *good, objStructure *enemies,
+                 objStructure *blocks, objStructure *other, QString fileName);
     void createFile(QString name);
 private:
     objStructure* sprites;

@@ -5,13 +5,14 @@
 
 class Node{
 public:
+    QGraphicsRectWidget *sprite;
     QString blockType;
     QString location;
     int x;
     int y;
+    int movement;
     Node *next;
     Node *prev;
-    QGraphicsRectWidget *sprite;
     Node();
     Node(QString type, QString location, int x, int y);
 };

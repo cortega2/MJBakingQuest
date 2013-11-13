@@ -20,6 +20,12 @@ public:
     explicit gamewindow(QWidget *parent = 0, int BLOCKSIZE = 30);
     ~gamewindow();
     QGraphicsView* GetGraphicsView();
+    bool mjHasBlock;
+
+public slots:
+    void moveEvent();
+private slots:
+    void mousePressEvent(QMouseEvent * event);
 
 private:
     Ui::gamewindow *ui;
@@ -30,7 +36,7 @@ private:
 
 //this is needed to listen to keys
 protected:
-    void keyPressEvent(QKeyEvent * event);
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // GAMEWINDOW_H

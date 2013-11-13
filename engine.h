@@ -16,6 +16,9 @@ class engine
 {
 
 public:
+    //made mj and the array of blocks public, might change it back to private later if that is better
+    Node *mj;
+    Node *walkable[20][30];
     engine();
     engine( QGraphicsScene *scene );
     ~engine();
@@ -24,16 +27,22 @@ public:
     void SetScene( QGraphicsScene *scene );
     void SetParentWindow(QWidget *pWindow );
     void loadGame(QString level);
+    void saveGame(QString name);
     void ClickedOpenMap(void);
     void CloseMap(void);
     void ClickedDrawGridLines(void);
-    void moveChar(int direction);
+
     void AddSprite(const char *spriteFName, int xLoc, int yLoc );
+    void moveChar(int direction, bool mjHasBlock);
+    void moveEnemies();
 
 private:
     const QRect *sSize;
 
-    objStructure *spritesAndStuff;
+    objStructure *goodGuys;
+    objStructure *enemies;
+    objStructure *blocks;
+    objStructure *other;
     parser *parsley;
 
     QGraphicsScene *uiScene;
@@ -46,7 +55,7 @@ private:
     int LoadMap(QGraphicsScene *scene, QString fileName);
 
     //QGraphicsRectWidget *mj;
-    Node *mj;
+
 
 };
 

@@ -191,6 +191,7 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
             tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
+            tmp->sprite->setZValue(-1);
         }
         tmp = tmp->next;
     }

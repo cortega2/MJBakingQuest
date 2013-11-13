@@ -18,4 +18,4 @@ BLOCK, concrete, 16, 8
 BLOCK, concrete, 17, 9
 BLOCK, concrete, 18, 10
 BACKGROUND, starrynight
-BLOCK, MJ_left, 3, 2
+MJ, MJ_left, 3, 2

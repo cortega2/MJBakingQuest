@@ -1,4 +1,7 @@
+#
 #Types of blocks: BLOCK, MJ, MX, ENEMY, MBLOCK and others
+#this is a comment
+#
 BLOCK, concrete, 0, 1
 BLOCK, concrete, 1, 1
 BLOCK, concrete, 3, 1

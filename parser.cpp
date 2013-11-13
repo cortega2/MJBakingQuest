@@ -29,6 +29,7 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
 
         QTextStream in(&file);
         //process each line of the file and take appropiate actions
+
         while(!in.atEnd()) {
             QString line = in.readLine();
             //a comment is encountered
@@ -48,6 +49,7 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
                 sprites->add(fields.at(0), spriteName, -1, -1);
             */
 
+
             if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
                 good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             else if(fields.at(0).compare( QString("ENEMY")) == 0 ){
@@ -56,8 +58,15 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
             else if(fields.at(0).compare( QString("BLOCK")) == 0 || fields.at(0).compare( QString("MBLOCK")) == 0 ){
                  blocks->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             }
-            else
-                other->add(fields.at(0), spriteName, -1, -1);
+            else{
+
+                if(fields.at(0).compare( QString("BACKGROUND")) == 0 )
+                    other->add(fields.at(0), spriteName, -1, -1);
+                else{
+                    std::cout << fields.at(2).toInt() << std::endl;
+                    other->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+                }
+            }
 
         }
         file.close();
@@ -99,8 +108,13 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
             else if(fields.at(0).compare( QString("BLOCK")) == 0 || fields.at(0).compare( QString("MBLOCK")) == 0 ){
                  blocks->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             }
-            else
-                other->add(fields.at(0), spriteName, -1, -1);
+            else{
+                if(fields.at(0).compare( QString("BACKGROUND")) == 0 )
+                    other->add(fields.at(0), spriteName, -1, -1);
+                else{
+                    other->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+                }
+           }
         }
         file.close();
         return 1;

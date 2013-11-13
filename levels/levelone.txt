@@ -1,3 +1,7 @@
+#
+#Types of blocks: BLOCK, MJ, MX, ENEMY, MBLOCK and others
+#this is a comment
+#
 BLOCK, woodfloor, 0, 1
 BLOCK, woodfloor, 1, 1
 BLOCK, woodfloor, 2, 1
@@ -175,16 +179,16 @@ BLOCK, stairwood, 29, 8
 BLOCK, stairwood, 29, 9
 BLOCK, stairwood, 29, 10
 BLOCK, stairwood, 29, 11
-BLOCK, window2, 28, 13
-BLOCK, move_wood, 6, 2
-BLOCK, move_wood, 18, 10
-BLOCK, move_wood, 24, 12
-BLOCK, drawer_house, 4, 2
-BLOCK, familypic, 4, 2
-BLOCK, light_house, 2, 20
-BLOCK, light_house, 10, 20
-BLOCK, light_house, 18, 20
-BLOCK, light_house, 26, 20
-BLOCK, door, 23, 2
+other, window2, 28, 13
+MBLOCK, move_wood, 6, 2
+MBLOCK, move_wood, 18, 10
+MBLOCK, move_wood, 24, 12
+other, drawer_house, 4, 2
+other, familypic, 4, 2
+other, light_house, 2, 20
+other, light_house, 10, 20
+other, light_house, 18, 20
+other, light_house, 26, 20
+other, door, 23, 2
 BACKGROUND, hallway_house
-BLOCK, MJ_left, 2, 2
+MJ, MJ_left, 2, 2

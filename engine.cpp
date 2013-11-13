@@ -222,12 +222,41 @@ void engine::ClickedDrawGridLines(void){
     DrawGrid( uiScene );
 }
 
+void engine::setBrush(){
+    brush = new QBrush( QPixmap(newName) );
+}
+
+void engine::setNewName (QString subName){
+    newName = "sprites/";
+    newName.append(subName);
+    newName.append(".png");
+}
+
 //handle key events
 void engine::moveChar(int direction, bool mjHasBlock){
     //left
     int mjPrevX = mj->x;
     int mjPrevY = mj->y;
-    if(direction == 0){
+    if(direction > 0){
+            std::cout << "move left" << std::endl;
+            //collide = collision(mj->x,mj->y);
+            if ((direction%4)==2){
+                if (mjHasBlock){
+                    setNewName("MJ_move_left_up");
+                }
+                else
+                    setNewName("MJ_move_left");
+            }
+            else{
+                if (mjHasBlock){
+                    setNewName("MJ_left_up");
+                }
+                else
+                setNewName("MJ_left");
+            }
+
+            mj->sprite->brush=new QBrush( QPixmap(newName) );
+
         //going down
         if(walkable[mj->y-1][mj->x-1] == NULL && walkable[mj->y-2][mj->x-1] == NULL && walkable[mj->y-3][mj->x-1] != NULL){
             mj->sprite->moveBy(-BLOCK_SIZE, BLOCK_SIZE);
@@ -269,7 +298,27 @@ void engine::moveChar(int direction, bool mjHasBlock){
         }
     }
     //right
-    else if(direction == 1){
+    else if(direction <= 0){
+            direction = direction*-1;
+            std::cout << "move right" << std::endl;
+
+            if ((direction%4)==2){
+                if (mjHasBlock){
+                    setNewName("MJ_move_right_up");
+                }
+                else
+                    setNewName("MJ_move");
+            }
+            else{
+                if (mjHasBlock){
+                    setNewName("MJ_right_up");
+                }
+                else
+                setNewName("MJ_right");
+            }
+
+            mj->sprite->brush=new QBrush( QPixmap(newName) );
+
         //going up
         if(walkable[mj->y-1][mj->x+1] != NULL && walkable[mj->y][mj->x+1] == NULL){
             mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);

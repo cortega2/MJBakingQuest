@@ -3,7 +3,7 @@
 //testcode
 #include <iostream>
 
-gamewindow::gamewindow(QWidget *parent, int BLOCKSIZE) :
+gamewindow::gamewindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::gamewindow)
 {
@@ -11,9 +11,9 @@ gamewindow::gamewindow(QWidget *parent, int BLOCKSIZE) :
     ginny = new engine();
 
     graphicsView = new GraphicsView();
-    graphicsView->setGeometry( QRect(0, 0, BLOCKSIZE*30, BLOCKSIZE*20 ) );
+    graphicsView->setGeometry( QRect(0, 0, BLOCK_SIZE*30, BLOCK_SIZE*20 ) );
 
-    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCKSIZE*30,BLOCKSIZE*20) );
+    graphicsScene = new QGraphicsScene( QRect(0,0,BLOCK_SIZE*30,BLOCK_SIZE*20) );
     graphicsView->setScene( graphicsScene );
 
     ginny->SetScene( graphicsScene );
@@ -45,16 +45,19 @@ QGraphicsView* gamewindow::GetGraphicsView(){
 
 //listens to keypresses from the user and does an action based on the key that was pressed
 void gamewindow::keyPressEvent(QKeyEvent *event){
-   if (event->key() == Qt::Key_A){
-       ginny->moveChar(0, mjHasBlock);
-   }
-   else if(event->key() == Qt::Key_D){
-       ginny->moveChar(1, mjHasBlock);
-   }
-   //might abandon using the space key to pick up wood objects
-   else if(event->key() == Qt::Key_Space){
-       std::cout<<"you pressed the SPACE key"<<std::endl;
-   }
+    if (event->key() == Qt::Key_A){
+           std::cout<<"hello you pressed L key"<<std::endl;
+           ginny->moveChar(left, mjHasBlock);
+           left=left+2;
+       }
+       else if(event->key() == Qt::Key_D){
+           std::cout<<"hello you pressed R key"<<std::endl;
+           ginny->moveChar(right, mjHasBlock);
+           right=right-2;
+       }
+       else if(event->key() == Qt::Key_Space){
+           std::cout<<"hello you pressed the SPACE key"<<std::endl;
+       }
 
 }
 

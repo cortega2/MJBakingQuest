@@ -7,11 +7,14 @@
     #include <QtWidgets>
 #endif
 
+#include "definitions.h"
+
 class QGraphicsRectWidget : public QGraphicsWidget{
 
-    QBrush *brush;
+    //QBrush *brush;
     QRect *size;
 public:
+    QBrush *brush;
     QGraphicsRectWidget();
     ~QGraphicsRectWidget();
     QGraphicsRectWidget(Qt::GlobalColor color, int blockWidth, int blockHeight);

@@ -14,7 +14,7 @@ start::~start()
 
 void start::on_pushButton_clicked()
 {
-     gamewindow *mainWindow = new gamewindow( 0, BLOCK_SIZE);
+     gamewindow *mainWindow = new gamewindow( 0);
 
      mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
      mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
@@ -33,7 +33,7 @@ void start::on_pushButton_2_clicked()
 
 void start::on_pushButton_3_clicked()
 {
-    editWindow *mainWindow = new editWindow(0 , BLOCK_SIZE);
+    editWindow *mainWindow = new editWindow;
 
     mainWindow->setWindowIcon(QIcon("sprites/mexican_man.png"));
     mainWindow->setWindowTitle(QString("Mexican Editor v1.0"));

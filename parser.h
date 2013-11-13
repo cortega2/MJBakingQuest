@@ -5,6 +5,7 @@
 #include <QtGui>
 
 #include "objStructure.h"
+#include "definitions.h"
 
 class parser
 {

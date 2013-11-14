@@ -10,6 +10,7 @@ class GraphicsViewEditor : public GraphicsView
 public:
     GraphicsViewEditor(engine *gin);
     void SnapToGrid();
+    bool AutoSnap;
 
     Q_OBJECT
 public slots:

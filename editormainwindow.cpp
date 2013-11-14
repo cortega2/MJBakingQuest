@@ -72,9 +72,9 @@ void editWindow::on_actionSnap_Now_triggered()
 }
 
 void editWindow::mouseReleaseEvent(QMouseEvent *event){
-    if(ui->actionAutomatic_Snapping->isChecked()){
+    /*if(graphicsView->AutoSnap){
         graphicsView->SnapToGrid();
-    }
+    }*/
 }
 
 void editWindow::on_actionCredits_triggered()
@@ -82,4 +82,9 @@ void editWindow::on_actionCredits_triggered()
     QMessageBox box;
     box.setText(QString("Idea by Joseph Burnitz\nMostly coded by Joseph Burnitz\n"));
     box.exec();
+}
+
+void editWindow::on_actionAutomatic_Snapping_changed()
+{
+        graphicsView->AutoSnap = this->ui->actionAutomatic_Snapping->isChecked();
 }

@@ -107,5 +107,7 @@ void GraphicsViewEditor::SnapToGrid(){
 void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
     if(event->button() == Qt::LeftButton ){
         this->setCursor(QCursor(Qt::ArrowCursor));
+    }if(this->AutoSnap){
+        this->SnapToGrid();
     }
 }

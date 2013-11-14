@@ -7,6 +7,9 @@ gamewindow::gamewindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::gamewindow)
 {
+    left = 2;
+    right = -2;
+
     ui->setupUi(this);
     ginny = new engine();
 

@@ -20,6 +20,7 @@ public:
     //made mj and the array of blocks public, might change it back to private later if that is better
     Node *mj;
     Node *walkable[20][30];
+    bool mjHasBlock;
     engine();
     engine( QGraphicsScene *scene );
     ~engine();
@@ -34,8 +35,10 @@ public:
     void ClickedDrawGridLines(void);
 
     void AddSprite(const char *spriteFName, int xLoc, int yLoc );
-    void moveChar(int direction, bool mjHasBlock);
+    void moveChar(int direction);
     void moveEnemies();
+    void getBlock();
+    void dropBlock();
 
 private:
     const QRect *sSize;
@@ -47,6 +50,10 @@ private:
     parser *parsley;
     QBrush *brush;
     QString newName;
+
+    //variables used for moving and facing MJ in the right place
+    int facing;
+    int prevFacing;
 
     QGraphicsScene *uiScene;
     QWidget *parentWindow;

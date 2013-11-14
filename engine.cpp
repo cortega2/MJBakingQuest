@@ -23,6 +23,9 @@ engine::engine(){
     blocks = new objStructure();
     other = new objStructure();
     parsley = new parser();
+    facing = 0;
+    prevFacing = 0;
+    mjHasBlock = false;
 
     //initialize array that holds politers to walkable blocks
     //useful for moving
@@ -145,8 +148,6 @@ int engine::LoadMap(QGraphicsScene *scene){
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
-    std::cout<<"in engine other" << std::endl;
-
     parsley->readFile(parentWindow, goodGuys, enemies, blocks, other, fileName );
 
     Node *tmp = goodGuys->head;
@@ -237,29 +238,40 @@ void engine::setNewName (QString subName){
 }
 
 //handle key events
-void engine::moveChar(int direction, bool mjHasBlock){
+void engine::moveChar(int direction){
     //left
     int mjPrevX = mj->x;
     int mjPrevY = mj->y;
-    if(direction > 0){
-            std::cout << "move left" << std::endl;
-            //collide = collision(mj->x,mj->y);
-            if ((direction%4)==2){
-                if (mjHasBlock){
-                    setNewName("MJ_move_left_up");
-                }
-                else
-                    setNewName("MJ_move_left");
-            }
-            else{
-                if (mjHasBlock){
-                    setNewName("MJ_left_up");
-                }
-                else
-                setNewName("MJ_left");
-            }
+    if(facing == -direction || facing == 0)
+        facing = facing + direction;
 
-            mj->sprite->brush=new QBrush( QPixmap(newName) );
+    //face left
+    if (facing == -1){
+        if (mjHasBlock)
+            setNewName("MJ_move_left_up");
+        else
+            setNewName("MJ_move_left");
+    }
+    //face right
+    else if (facing == 1){
+        if (mjHasBlock){
+            setNewName("MJ_move_right_up");
+        }
+        else
+            setNewName("MJ_move");
+    }
+    //face foward
+    else if (facing == 0){
+        if (mjHasBlock)
+            setNewName("MJ_left_up");
+        else
+        setNewName("MJ_left");
+    }
+    mj->sprite->brush=new QBrush( QPixmap(newName) );
+    mj->sprite->update();
+
+    //move left
+    if(direction < 0 && prevFacing == facing){
 
         //going down
         if(walkable[mj->y-1][mj->x-1] == NULL && walkable[mj->y-2][mj->x-1] == NULL && walkable[mj->y-3][mj->x-1] != NULL){
@@ -289,9 +301,9 @@ void engine::moveChar(int direction, bool mjHasBlock){
 
             }
         }
-        else if( mj->x != 0 && walkable[mj->y-2][mj->x-1] != NULL ){
-        mj->sprite->moveBy(-BLOCK_SIZE,0);
-        mj->x = mj->x - 1;
+        else if( mj->x != 0 && walkable[mj->y-2][mj->x-1] != NULL && walkable[mj->y-1][mj->x-1] == NULL){
+            mj->sprite->moveBy(-BLOCK_SIZE,0);
+            mj->x = mj->x - 1;
 
              //move block and update block on array
             if(mjHasBlock){
@@ -302,27 +314,7 @@ void engine::moveChar(int direction, bool mjHasBlock){
         }
     }
     //right
-    else if(direction <= 0){
-            direction = direction*-1;
-            std::cout << "move right" << std::endl;
-
-            if ((direction%4)==2){
-                if (mjHasBlock){
-                    setNewName("MJ_move_right_up");
-                }
-                else
-                    setNewName("MJ_move");
-            }
-            else{
-                if (mjHasBlock){
-                    setNewName("MJ_right_up");
-                }
-                else
-                setNewName("MJ_right");
-            }
-
-            mj->sprite->brush=new QBrush( QPixmap(newName) );
-
+    else if(direction > 0 && prevFacing == facing){
         //going up
         if(walkable[mj->y-1][mj->x+1] != NULL && walkable[mj->y][mj->x+1] == NULL){
             mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
@@ -351,7 +343,7 @@ void engine::moveChar(int direction, bool mjHasBlock){
 
             }
         }
-        else if(mj->x != 29 && walkable[mj->y-2][mj->x+1] != NULL){
+        else if(mj->x != 29 && walkable[mj->y-2][mj->x+1] != NULL && walkable[mj->y-1][mj->x+1] == NULL){
             mj->sprite->moveBy(BLOCK_SIZE,0);
             mj->x = mj->x + 1;
 
@@ -364,6 +356,8 @@ void engine::moveChar(int direction, bool mjHasBlock){
             }
         }
     }
+
+    prevFacing = facing;
 }
 
 void engine::moveEnemies(){
@@ -373,7 +367,7 @@ void engine::moveEnemies(){
 
         //left
         if(direction == 0){
-            if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
+            if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL && walkable[tmp->y-1][tmp->x-1] == NULL){
                 tmp->sprite->moveBy(-BLOCK_SIZE,0);
                 tmp->x = tmp->x - 1;
             }
@@ -386,7 +380,7 @@ void engine::moveEnemies(){
         }
         //right
         else if(direction == 1){
-            if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
+            if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL && walkable[tmp->y-1][tmp->x+1] == NULL){
                 tmp->sprite->moveBy(BLOCK_SIZE,0);
                 tmp->x = tmp->x + 1;
             }
@@ -400,4 +394,66 @@ void engine::moveEnemies(){
 
         tmp = tmp->next;
     }
+}
+
+//fix this, its not broken, but it sucks
+void engine::getBlock(){
+    int y = mj->y;
+    int x = mj->x + facing;
+    if(facing ==0)
+        y = y - 1;
+
+
+    //some redunancy with code, needs to be updated
+
+    if(walkable[y-1][x]!= 0 && walkable[y-1][x]->blockType.compare("MBLOCK") == 0){
+        //check to see if mj is in the surrounding area, if yes then mj picks up block
+        int mjX = mj->x;
+        int mjY = mj->y;
+        if((mj->sprite->collidesWithItem(walkable[y-1][x]->sprite)) && (x!= mjX || (y-1)!= mjY)){
+            walkable[y-1][x]->sprite->moveBy((mjX - x) * 30, -(mjY -y+1) * 30);
+            walkable[mjY][mjX] = walkable[y-1][x];
+            walkable[y-1][x] = 0;
+
+            //might have to update block's location on the node
+
+            mjHasBlock = true;
+        }
+    }
+}
+
+//using mj's position we find the position of the block she is carrying and check to see if the place where
+//the player wants to drop it is a legal place, ie there is no block there.
+//NEEDS CLEAN UP!
+void engine::dropBlock(){
+
+    //has to face left or right
+    if(facing == 0)
+        return;
+
+    //get x y for block to be used in the walkable array
+    int blockY = mj->y;
+    int blockX = mj->x;
+
+    //place block
+    if(walkable[blockY][blockX + facing] == NULL){
+        walkable[blockY][blockX]->sprite->moveBy(facing * 30, 0);
+        walkable[blockY][blockX + facing] = walkable[blockY][blockX];
+        walkable[blockY][blockX] = NULL;
+    }
+
+    //move block down if possible
+    Node *tmp = walkable[blockY - 1][blockX + facing];
+    int count = 0;
+    while(tmp == NULL){
+        walkable[blockY - count][blockX + facing]->sprite->moveBy(0, BLOCK_SIZE);
+        walkable[blockY - count - 1][blockX + facing] = walkable[blockY - count][blockX + facing];
+        walkable[blockY - count][blockX + facing] = NULL;
+
+        count ++;
+        tmp = walkable[blockY - 1 - count][blockX + facing];
+    }
+
+    mjHasBlock = false;
+
 }

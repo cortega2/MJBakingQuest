@@ -27,8 +27,6 @@ public:
 
 public slots:
     void moveEvent();
-private slots:
-    void mousePressEvent(QMouseEvent * event);
 
 private:
     Ui::gamewindow *ui;

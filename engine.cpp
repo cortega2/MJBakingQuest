@@ -237,9 +237,12 @@ void engine::setNewName (QString subName){
     newName.append(".png");
 }
 
-//handle key events
+/*method that is used to move mj
+ *THINGS TO DO: when mj moves up and is carrying a block, check to make sure the block fits in the space
+ *ie, make sure blocks dont go through each other
+ */
 void engine::moveChar(int direction){
-    //left
+
     int mjPrevX = mj->x;
     int mjPrevY = mj->y;
     if(facing == -direction || facing == 0)
@@ -289,27 +292,36 @@ void engine::moveChar(int direction){
         }
         //going up
         else if(walkable[mj->y-1][mj->x-1] != NULL && walkable[mj->y][mj->x-1] == NULL){
-            mj->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
-            mj->x =mj->x - 1;
-            mj->y = mj->y + 1;
-
             //move block and update block on array
-            if(mjHasBlock){
+            if(mjHasBlock && walkable[mj->y+1][mj->x-1] == NULL){
+                mj->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
+                mj->x =mj->x - 1;
+                mj->y = mj->y + 1;
+
                 walkable[mjPrevY][mjPrevX]->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
                 walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
                 walkable[mjPrevY][mjPrevX] = NULL;
-
+            }
+            else if(!mjHasBlock){
+                mj->sprite->moveBy(-BLOCK_SIZE, -BLOCK_SIZE);
+                mj->x =mj->x - 1;
+                mj->y = mj->y + 1;
             }
         }
         else if( mj->x != 0 && walkable[mj->y-2][mj->x-1] != NULL && walkable[mj->y-1][mj->x-1] == NULL){
-            mj->sprite->moveBy(-BLOCK_SIZE,0);
-            mj->x = mj->x - 1;
 
              //move block and update block on array
-            if(mjHasBlock){
+            if(mjHasBlock && walkable[mj->y][mj->x - 1] == NULL){
+                mj->sprite->moveBy(-BLOCK_SIZE,0);
+                mj->x = mj->x - 1;
+
                 walkable[mjPrevY][mjPrevX]->sprite->moveBy(-BLOCK_SIZE, 0);
                 walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
                 walkable[mjPrevY][mjPrevX] = NULL;
+            }
+            else if(!mjHasBlock){
+                mj->sprite->moveBy(-BLOCK_SIZE,0);
+                mj->x = mj->x - 1;
             }
         }
     }
@@ -344,15 +356,18 @@ void engine::moveChar(int direction){
             }
         }
         else if(mj->x != 29 && walkable[mj->y-2][mj->x+1] != NULL && walkable[mj->y-1][mj->x+1] == NULL){
-            mj->sprite->moveBy(BLOCK_SIZE,0);
-            mj->x = mj->x + 1;
-
             //move block and update block on array
-            if(mjHasBlock){
+            if(mjHasBlock && walkable[mj->y][mj->x+1] == NULL){
+                mj->sprite->moveBy(BLOCK_SIZE,0);
+                mj->x = mj->x + 1;
+
                 walkable[mjPrevY][mjPrevX]->sprite->moveBy(BLOCK_SIZE, 0);
                 walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
                 walkable[mjPrevY][mjPrevX] = NULL;
-
+            }
+            else if(!mjHasBlock){
+                mj->sprite->moveBy(BLOCK_SIZE,0);
+                mj->x = mj->x + 1;
             }
         }
     }
@@ -373,8 +388,11 @@ void engine::moveEnemies(){
             }
             //at edge, turn right
             else if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
-                tmp->sprite->moveBy(BLOCK_SIZE,0);
+
+                /*tmp->sprite->moveBy(BLOCK_SIZE,0);
                 tmp->x = tmp->x + 1;
+                */
+                //animate sprite here
                 tmp->movement = 1;
             }
         }
@@ -386,39 +404,53 @@ void engine::moveEnemies(){
             }
             //at edge turn left
             else if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
+                /*
                 tmp->sprite->moveBy(-BLOCK_SIZE,0);
                 tmp->x = tmp->x - 1;
+                */
+
+                //animate sprite here
                 tmp->movement = 0;
             }
-        }
-
         tmp = tmp->next;
+        }
     }
 }
 
-//fix this, its not broken, but it sucks
+/*Still needs improvement
+ *right now if mj picks a block under her feet she is moves down,
+ *but she still needs to be able to pick up blocks that are diagnal from her
+ */
 void engine::getBlock(){
     int y = mj->y;
     int x = mj->x + facing;
     if(facing ==0)
         y = y - 1;
 
-
-    //some redunancy with code, needs to be updated
-
+    //needs to be updated
+    //checks to see if the block that mj is facing is of type MBLOCK
     if(walkable[y-1][x]!= 0 && walkable[y-1][x]->blockType.compare("MBLOCK") == 0){
-        //check to see if mj is in the surrounding area, if yes then mj picks up block
         int mjX = mj->x;
         int mjY = mj->y;
-        if((mj->sprite->collidesWithItem(walkable[y-1][x]->sprite)) && (x!= mjX || (y-1)!= mjY)){
+
+        if(facing == 0){
+            walkable[y-1][x]->sprite->moveBy(0, -BLOCK_SIZE);
+            walkable[mjY-1][mjX] = walkable[y-1][x];
+            walkable[y-1][x] = 0;
+
+            mj->sprite->moveBy(0, BLOCK_SIZE);
+            mj->y = mj->y-1;
+
+            //might have to update block's location on the node
+        }
+        else{
             walkable[y-1][x]->sprite->moveBy((mjX - x) * 30, -(mjY -y+1) * 30);
             walkable[mjY][mjX] = walkable[y-1][x];
             walkable[y-1][x] = 0;
 
             //might have to update block's location on the node
-
-            mjHasBlock = true;
         }
+        mjHasBlock = true;
     }
 }
 
@@ -440,20 +472,21 @@ void engine::dropBlock(){
         walkable[blockY][blockX]->sprite->moveBy(facing * 30, 0);
         walkable[blockY][blockX + facing] = walkable[blockY][blockX];
         walkable[blockY][blockX] = NULL;
+
+
+        //move block down if possible
+        Node *tmp = walkable[blockY - 1][blockX + facing];
+        int count = 0;
+        while(tmp == NULL){
+            walkable[blockY - count][blockX + facing]->sprite->moveBy(0, BLOCK_SIZE);
+            walkable[blockY - count - 1][blockX + facing] = walkable[blockY - count][blockX + facing];
+            walkable[blockY - count][blockX + facing] = NULL;
+
+            count ++;
+            tmp = walkable[blockY - 1 - count][blockX + facing];
+        }
+
+        mjHasBlock = false;
     }
-
-    //move block down if possible
-    Node *tmp = walkable[blockY - 1][blockX + facing];
-    int count = 0;
-    while(tmp == NULL){
-        walkable[blockY - count][blockX + facing]->sprite->moveBy(0, BLOCK_SIZE);
-        walkable[blockY - count - 1][blockX + facing] = walkable[blockY - count][blockX + facing];
-        walkable[blockY - count][blockX + facing] = NULL;
-
-        count ++;
-        tmp = walkable[blockY - 1 - count][blockX + facing];
-    }
-
-    mjHasBlock = false;
 
 }

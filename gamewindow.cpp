@@ -48,15 +48,23 @@ QGraphicsView* gamewindow::GetGraphicsView(){
 
 //listens to keypresses from the user and does an action based on the key that was pressed
 void gamewindow::keyPressEvent(QKeyEvent *event){
+    //move left
     if (event->key() == Qt::Key_A)
            ginny->moveChar(-1);
+    //move right
     else if(event->key() == Qt::Key_D)
            ginny->moveChar(1);
+    //pick up or drop block
     else if(event->key() == Qt::Key_Space){
         if(!(ginny->mjHasBlock))
             ginny->getBlock();
         else
             ginny->dropBlock();
+    }
+    //save game
+    else if(event->key() == Qt::Key_S){
+        //dummy for now
+        ginny->saveGame(" ");
     }
 
 }

@@ -203,7 +203,8 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 }
 
 void engine::saveGame(QString name){
-
+    //dummy for now
+    parsley->createFile("", goodGuys, enemies, blocks, other);
 }
 
 //loads level without the file chooser, for now default level
@@ -383,7 +384,9 @@ void engine::moveEnemies(){
         //left
         if(direction == 0){
             if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL && walkable[tmp->y-1][tmp->x-1] == NULL){
-                tmp->sprite->moveBy(-BLOCK_SIZE,0);
+                std::cout<< "i should be moving\n";
+
+                tmp->sprite->moveBy(-30,0);
                 tmp->x = tmp->x - 1;
             }
             //at edge, turn right

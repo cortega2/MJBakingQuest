@@ -1,4 +1,6 @@
 #include "start.h"
+//test
+#include <iostream>
 
 start::start(QWidget *parent) :
     QWidget(parent),

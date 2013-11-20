@@ -38,17 +38,8 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
 
             QStringList fields = line.split(",");
 
-            QString spriteName("sprites/");
+            QString spriteName("");
             spriteName.append(fields.at(1).trimmed());
-            spriteName.append(".png");
-
-            /*
-            if(fields.at(0).compare( QString("BLOCK") ) == 0 )
-                sprites->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
-            else if(fields.at(0).compare( QString("BACKGROUND") ) == 0)
-                sprites->add(fields.at(0), spriteName, -1, -1);
-            */
-
 
             if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
                 good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
@@ -82,6 +73,7 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
         QTextStream in(&file);
         //process each line of the file and take appropiate actions
         while(!in.atEnd()) {
+
             QString line = in.readLine();
             //a comment is encountered
             if(line.contains('#'))
@@ -89,16 +81,8 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
 
             QStringList fields = line.split(",");
 
-            QString spriteName("sprites/");
+            QString spriteName("");
             spriteName.append(fields.at(1).trimmed());
-            spriteName.append(".png");
-
-            /*
-            if(fields.at(0).compare( QString("BACKGROUND") ) == 0)
-                objs->add(fields.at(0), spriteName, -1, -1);
-            else
-                objs->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
-            */
 
             if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
                 good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());

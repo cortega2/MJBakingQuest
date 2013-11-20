@@ -99,11 +99,14 @@ int engine::LoadMap(QGraphicsScene *scene){
 
     Node *tmp = goodGuys->head;
     while(tmp != 0){
-        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
-        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
-        std::cout<< tmp->x<< std::endl << tmp->y << std::endl;
-        scene->addItem(tmp->sprite);
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
 
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        //std::cout<< tmp->x<< std::endl << tmp->y << std::endl;
+        scene->addItem(tmp->sprite);
         //asign node to MJ
         if(tmp->blockType.compare(QString("MJ")) == 0){
             mj = tmp;
@@ -113,7 +116,11 @@ int engine::LoadMap(QGraphicsScene *scene){
 
     tmp = enemies->head;
     while(tmp != 0){
-        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
         MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
         scene->addItem(tmp->sprite);
         tmp = tmp->next;
@@ -121,7 +128,11 @@ int engine::LoadMap(QGraphicsScene *scene){
 
     tmp = blocks->head;
     while(tmp != 0){
-        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
         MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
         scene->addItem(tmp->sprite);
         //walkable[tmp->x][tmp->y-1] = tmp; Might no be needed here... Not sure
@@ -130,12 +141,18 @@ int engine::LoadMap(QGraphicsScene *scene){
 
     tmp = other->head;
     while(tmp != 0){
+
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
         if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
-            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
+            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(spriteName)));
         else{
-            tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+            tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
+            tmp->sprite->setZValue(-1);
         }
         tmp = tmp->next;
     }
@@ -152,10 +169,14 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
     Node *tmp = goodGuys->head;
     while(tmp != 0){
-        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
-        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
-        scene->addItem(tmp->sprite);
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
 
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+        //std::cout<< tmp->x<< std::endl << tmp->y << std::endl;
+        scene->addItem(tmp->sprite);
         //asign node to MJ
         if(tmp->blockType.compare(QString("MJ")) == 0){
             mj = tmp;
@@ -165,7 +186,11 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
     tmp = enemies->head;
     while(tmp != 0){
-        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
         MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
         scene->addItem(tmp->sprite);
 
@@ -179,20 +204,28 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
     tmp = blocks->head;
     while(tmp != 0){
-        tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
+        tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
         MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
         scene->addItem(tmp->sprite);
-        //add blocks to array
         walkable[tmp->y-1][tmp->x] = tmp;
         tmp = tmp->next;
     }
 
     tmp = other->head;
     while(tmp != 0){
+
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
         if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
-            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(tmp->location)));
+            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(spriteName)));
         else{
-            tmp->sprite = new QGraphicsRectWidget(QPixmap(tmp->location), BLOCK_SIZE, BLOCK_SIZE);
+            tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
             MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
             scene->addItem(tmp->sprite);
             tmp->sprite->setZValue(-1);
@@ -377,16 +410,16 @@ void engine::moveChar(int direction){
 }
 
 void engine::moveEnemies(){
+
+
+
     Node *tmp = enemies->head;
     while(tmp != 0){
         int direction = tmp->movement;
-
         //left
         if(direction == 0){
             if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL && walkable[tmp->y-1][tmp->x-1] == NULL){
-                std::cout<< "i should be moving\n";
-
-                tmp->sprite->moveBy(-30,0);
+                tmp->sprite->moveBy(-BLOCK_SIZE,0);
                 tmp->x = tmp->x - 1;
             }
             //at edge, turn right
@@ -415,8 +448,8 @@ void engine::moveEnemies(){
                 //animate sprite here
                 tmp->movement = 0;
             }
-        tmp = tmp->next;
         }
+        tmp = tmp->next;
     }
 }
 
@@ -473,6 +506,9 @@ void engine::dropBlock(){
     //place block
     if(walkable[blockY][blockX + facing] == NULL){
         walkable[blockY][blockX]->sprite->moveBy(facing * 30, 0);
+        walkable[blockY][blockX]->x = blockX + facing;
+        walkable[blockY][blockX]->y = blockY + 1;
+
         walkable[blockY][blockX + facing] = walkable[blockY][blockX];
         walkable[blockY][blockX] = NULL;
 
@@ -482,6 +518,8 @@ void engine::dropBlock(){
         int count = 0;
         while(tmp == NULL){
             walkable[blockY - count][blockX + facing]->sprite->moveBy(0, BLOCK_SIZE);
+            walkable[blockY - count][blockX + facing]->y = walkable[blockY - count][blockX + facing]->y - 1;
+
             walkable[blockY - count - 1][blockX + facing] = walkable[blockY - count][blockX + facing];
             walkable[blockY - count][blockX + facing] = NULL;
 

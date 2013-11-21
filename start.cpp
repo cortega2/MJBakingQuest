@@ -2,6 +2,8 @@
 //test
 #include <iostream>
 
+
+
 start::start(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::start)
@@ -9,32 +11,50 @@ start::start(QWidget *parent) :
     ui->setupUi(this);
 }
 
-start::~start()
-{
+start::~start(){
     delete ui;
 }
 
-void start::on_pushButton_clicked()
-{
-     gamewindow *mainWindow = new gamewindow( 0);
+void start::on_pushButton_clicked(){
 
-     mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
-     mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
+    bool ok;
+    QString session = QInputDialog::getText(this, tr("New session"),tr("Session Name:"), QLineEdit::Normal,"", &ok);
 
-     mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
-     mainWindow->resize( mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height() );
-     mainWindow->show();
+    if(ok){
+        gamewindow *mainWindow = new gamewindow(0, true, session);
 
-     hide();
+        mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
+        mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
+
+        mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
+        mainWindow->resize( mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height() );
+        mainWindow->show();
+
+        hide();
+    }
 }
 
-void start::on_pushButton_2_clicked()
-{
+void start::on_pushButton_2_clicked(){
+    bool ok;
+    QString session = QInputDialog::getText(this, tr("Continue Session"),tr("Enter Session:"), QLineEdit::Normal,"", &ok);
+
+    if(ok){
+        //should check to see if file exists
+        gamewindow *mainWindow = new gamewindow(0, false, session);
+
+        mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));
+        mainWindow->setWindowTitle(QString("Mary Jane's Baking Quest"));
+
+        mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
+        mainWindow->resize( mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height() );
+        mainWindow->show();
+
+        hide();
+    }
 
 }
 
-void start::on_pushButton_3_clicked()
-{
+void start::on_pushButton_3_clicked(){
     editWindow *mainWindow = new editWindow;
 
     mainWindow->setWindowIcon(QIcon("sprites/mexican_man.png"));

@@ -3,12 +3,20 @@
 //testcode
 #include <iostream>
 
-gamewindow::gamewindow(QWidget *parent) :
+gamewindow::gamewindow(QWidget *parent, bool newGame, QString sessionName) :
     QMainWindow(parent),
     ui(new Ui::gamewindow)
 {
-    left = 2;
-    right = -2;
+    QString load;
+    session = sessionName;
+    if(newGame){
+        load = "levels/defaultlevel";
+    }
+    else{
+        load = "saved/"+ sessionName;
+        //score and other stuff will go here or maybe lets not have a score but life count
+    }
+
 
     ui->setupUi(this);
     ginny = new engine();
@@ -25,7 +33,7 @@ gamewindow::gamewindow(QWidget *parent) :
     graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ginny->loadGame("levels/defaultlevel");
+    ginny->loadGame(load);
 
     //not sure if this is the best place to place the timer
     QTimer *timer = new QTimer(this);
@@ -33,8 +41,6 @@ gamewindow::gamewindow(QWidget *parent) :
     timer->start(500);
 
     mjHasBlock = false;
-
-
 }
 
 gamewindow::~gamewindow()
@@ -62,9 +68,11 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
             ginny->dropBlock();
     }
     //save game
-    else if(event->key() == Qt::Key_S){
-        //dummy for now
-        ginny->saveGame(" ");
+    else if(event->key() == Qt::Key_P){
+        if(!ginny->mjHasBlock)
+            ginny->saveGame(session);
+        else
+            std::cout << "Can not save right now, put block down\n";
     }
 
 }

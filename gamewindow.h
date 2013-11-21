@@ -18,7 +18,7 @@ class gamewindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit gamewindow(QWidget *parent = 0);
+    explicit gamewindow(QWidget *parent = 0, bool newGame = true, QString sessionName = NULL);
     ~gamewindow();
     int left;
     int right;
@@ -34,6 +34,8 @@ private:
 
     QGraphicsScene *graphicsScene;
     QGraphicsView *graphicsView;
+
+    QString session;
 
 //this is needed to listen to keys
 protected:

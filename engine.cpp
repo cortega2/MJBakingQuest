@@ -237,7 +237,7 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
 void engine::saveGame(QString name){
     //dummy for now
-    parsley->createFile("", goodGuys, enemies, blocks, other);
+    parsley->createFile(name, goodGuys, enemies, blocks, other);
 }
 
 //loads level without the file chooser, for now default level

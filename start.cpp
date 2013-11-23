@@ -52,14 +52,13 @@ void start::on_pushButton_2_clicked(){
 
         hide();
     }
-
 }
 
 void start::on_pushButton_3_clicked(){
     editWindow *mainWindow = new editWindow;
 
     mainWindow->setWindowIcon(QIcon("sprites/mexican_man.png"));
-    mainWindow->setWindowTitle(QString("Mexican Editor v1.0"));
+    mainWindow->setWindowTitle(QString("MJBQ Editor"));
 
     mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
     //mainWindow->centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);

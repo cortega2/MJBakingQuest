@@ -54,6 +54,8 @@ private slots:
 
     void on_actionCredits_triggered();
 
+    void on_actionAutomatic_Snapping_changed();
+
 private:
     Ui::MainWindow *ui;
     engine *ginny;

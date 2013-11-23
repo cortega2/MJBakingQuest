@@ -84,7 +84,7 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
             QString spriteName("");
             spriteName.append(fields.at(1).trimmed());
 
-            if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
+            if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("GOOD")) == 0)
                 good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             else if(fields.at(0).compare( QString("ENEMY")) == 0 ){
                 enemies->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());

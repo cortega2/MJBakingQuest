@@ -181,6 +181,13 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         if(tmp->blockType.compare(QString("MJ")) == 0){
             mj = tmp;
         }
+
+        else{
+            //set movement to either left or right
+            QTime time = QTime::currentTime();
+            qsrand((uint)time.msec());
+            tmp->movement = qrand() %(2);
+        }
         tmp = tmp->next;
     }
 
@@ -363,16 +370,21 @@ void engine::moveChar(int direction){
     else if(direction > 0 && prevFacing == facing){
         //going up
         if(walkable[mj->y-1][mj->x+1] != NULL && walkable[mj->y][mj->x+1] == NULL){
-            mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
-            mj->x = mj->x + 1;
-            mj->y = mj->y + 1;
 
-            //move block and update block on array
-            if(mjHasBlock){
+            if(mjHasBlock && walkable[mj->y+1][mj->x+1] == NULL){
+                mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
+                mj->x = mj->x + 1;
+                mj->y = mj->y + 1;
+
                 walkable[mjPrevY][mjPrevX]->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
                 walkable[mj->y][mj->x] =  walkable[mjPrevY][mjPrevX];
                 walkable[mjPrevY][mjPrevX] = NULL;
-
+            }
+            //move block and update block on array
+            else if(!mjHasBlock){
+                mj->sprite->moveBy(BLOCK_SIZE, -BLOCK_SIZE);
+                mj->x = mj->x + 1;
+                mj->y = mj->y + 1;
             }
         }
         //going down
@@ -409,10 +421,50 @@ void engine::moveChar(int direction){
     prevFacing = facing;
 }
 
+//moves the good characters
+void engine::moveGood(){
+    Node *tmp = goodGuys->head;
+    while(tmp != 0){
+        int direction = tmp->movement;
+        //left
+        if(direction == 0){
+            if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL && walkable[tmp->y-1][tmp->x-1] == NULL){
+                tmp->sprite->moveBy(-BLOCK_SIZE,0);
+                tmp->x = tmp->x - 1;
+            }
+            //at edge, turn right
+            else if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
+
+                /*tmp->sprite->moveBy(BLOCK_SIZE,0);
+                tmp->x = tmp->x + 1;
+                */
+                //animate sprite here
+                tmp->movement = 1;
+            }
+        }
+        //right
+        else if(direction == 1){
+            if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL && walkable[tmp->y-1][tmp->x+1] == NULL){
+                tmp->sprite->moveBy(BLOCK_SIZE,0);
+                tmp->x = tmp->x + 1;
+            }
+            //at edge turn left
+            else if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
+                /*
+                tmp->sprite->moveBy(-BLOCK_SIZE,0);
+                tmp->x = tmp->x - 1;
+                */
+
+                //animate sprite here
+                tmp->movement = 0;
+            }
+        }
+        tmp = tmp->next;
+    }
+}
+
+//moves the enemies
 void engine::moveEnemies(){
-
-
-
     Node *tmp = enemies->head;
     while(tmp != 0){
         int direction = tmp->movement;
@@ -504,6 +556,7 @@ void engine::dropBlock(){
     int blockX = mj->x;
 
     //place block
+    Node *ptr;
     if(walkable[blockY][blockX + facing] == NULL){
         walkable[blockY][blockX]->sprite->moveBy(facing * 30, 0);
         walkable[blockY][blockX]->x = blockX + facing;
@@ -511,7 +564,7 @@ void engine::dropBlock(){
 
         walkable[blockY][blockX + facing] = walkable[blockY][blockX];
         walkable[blockY][blockX] = NULL;
-
+        ptr = walkable[blockY][blockX + facing];
 
         //move block down if possible
         Node *tmp = walkable[blockY - 1][blockX + facing];
@@ -523,10 +576,27 @@ void engine::dropBlock(){
             walkable[blockY - count - 1][blockX + facing] = walkable[blockY - count][blockX + facing];
             walkable[blockY - count][blockX + facing] = NULL;
 
+
+            ptr = walkable[blockY - count - 1][blockX + facing];
+
             count ++;
             tmp = walkable[blockY - 1 - count][blockX + facing];
         }
 
+        //check to see if enemy got crushed
+        tmp = enemies->head;
+        while(tmp != 0){
+            if((ptr->x == tmp->x) && (ptr->y == tmp->y)){
+                std::cout << "enemy got crushed!\n";
+
+                //BAD FIX THIS ASAP!!!
+
+                tmp->sprite->hide();
+                enemies->remove(tmp);
+            }
+            tmp = tmp->next;
+        }
+        //update mj block status
         mjHasBlock = false;
     }
 

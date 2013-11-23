@@ -15,6 +15,7 @@ public:
     Node *next;
     Node *prev;
     Node();
+    ~Node();
     Node(QString type, QString location, int x, int y);
 };
 
@@ -22,11 +23,13 @@ class objStructure
 {
 public:
     objStructure();
+    //~objStructure();
     void add(QString type, QString location,int x, int y);
     void remove(QString type, int x, int y);
+    void remove(Node *gone);
     int getCount();
-    Node* head;
-    Node* tail;
+    Node *head;
+    Node *tail;
 
 private:
     int count;

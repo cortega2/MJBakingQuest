@@ -80,4 +80,5 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
 //timer function... maybe
 void gamewindow::moveEvent(){
     ginny->moveEnemies();
+    ginny->moveGood();
 }

@@ -40,6 +40,7 @@ void start::on_pushButton_2_clicked(){
 
     if(ok){
         //should check to see if file exists
+        //or better yet use a file chooser dialog
         gamewindow *mainWindow = new gamewindow(0, false, session);
 
         mainWindow->setWindowIcon(QIcon("sprites/MJ_left.png"));

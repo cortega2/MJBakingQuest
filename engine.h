@@ -37,6 +37,7 @@ public:
     void AddSprite(const char *spriteFName, int xLoc, int yLoc );
     void moveChar(int direction);
     void moveEnemies();
+    void moveGood();
     void getBlock();
     void dropBlock();
 

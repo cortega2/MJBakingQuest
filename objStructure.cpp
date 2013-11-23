@@ -1,10 +1,15 @@
 #include "objStructure.h"
+#include <iostream>
 
 Node::Node(QString type, QString location, int x, int y){
     blockType = type;
     this->location = location;
     this->x = x;
     this->y = y;
+}
+
+Node::~Node(){
+   delete this->sprite;
 }
 
 objStructure::objStructure(){
@@ -35,6 +40,41 @@ void objStructure::add(QString type, QString location, int x, int y){
         tail->next = 0;
         count++;
     }
+}
+
+void objStructure::remove(Node *gone){
+    //one node in list
+    std::cout<< head<<std::endl;
+    std::cout << tail << std::endl;
+    std::cout << gone << std::endl;
+
+    if(head == gone && tail == gone){
+        head = NULL;
+        tail = NULL;
+        std::cout<< "heerr\n";
+        gone->~Node();
+    }
+    /*
+    //gone is head
+    else if( head == gone){
+        head = head->next;
+        head->prev = NULL;
+        delete gone;
+    }
+    //gone is tail
+    else if(tail == gone){
+        tail = tail->prev;
+        tail->next = NULL;
+        delete gone;
+    }
+    //gone is other node
+    else{
+        gone->prev->next = gone->next;
+        gone->next->prev = gone->prev;
+        delete gone;
+    }
+    */
+    count--;
 }
 
 int objStructure::getCount(){

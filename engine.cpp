@@ -591,7 +591,7 @@ void engine::dropBlock(){
 
                 //BAD FIX THIS ASAP!!!
 
-                tmp->sprite->hide();
+                //tmp->sprite->hide();
                 enemies->remove(tmp);
             }
             tmp = tmp->next;

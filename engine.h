@@ -17,10 +17,6 @@ class engine
 {
 
 public:
-    //made mj and the array of blocks public, might change it back to private later if that is better
-    Node *mj;
-    Node *walkable[20][30];
-    bool mjHasBlock;
     engine();
     engine( QGraphicsScene *scene );
     ~engine();
@@ -40,6 +36,15 @@ public:
     void moveGood();
     void getBlock();
     void dropBlock();
+    void loadNext();
+
+    //made mj and the array of blocks public, might change it back to private later if that is better
+    Node *mj;
+    Node *walkable[20][30];
+    QGraphicsRectWidget *goodObj[5];
+    bool mjHasBlock;
+    int itemCount;
+    int life;
 
 private:
     const QRect *sSize;
@@ -48,6 +53,7 @@ private:
     objStructure *enemies;
     objStructure *blocks;
     objStructure *other;
+    objStructure *doors;
     parser *parsley;
     QBrush *brush;
     QString newName;
@@ -65,8 +71,7 @@ private:
     void setBrush();
     int LoadMap(QGraphicsScene *scene);
     int LoadMap(QGraphicsScene *scene, QString fileName);
-
-    //QGraphicsRectWidget *mj;
+    void reset(QString level);
 
 
 };

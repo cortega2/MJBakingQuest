@@ -17,6 +17,7 @@ gamewindow::gamewindow(QWidget *parent, bool newGame, QString sessionName) :
         //score and other stuff will go here or maybe lets not have a score but life count
     }
 
+    nextLevel = "levels/defaultlevel";
 
     ui->setupUi(this);
     ginny = new engine();
@@ -54,18 +55,27 @@ QGraphicsView* gamewindow::GetGraphicsView(){
 
 //listens to keypresses from the user and does an action based on the key that was pressed
 void gamewindow::keyPressEvent(QKeyEvent *event){
+    //if it is safe to animate. It is not safe when mj has 0 life and we are reloading the level
+    if(ginny->life<=0)
+        return;
+
     //move left
     if (event->key() == Qt::Key_A)
            ginny->moveChar(-1);
     //move right
     else if(event->key() == Qt::Key_D)
            ginny->moveChar(1);
-    //pick up or drop block
+    //open door or pick up or drop block
     else if(event->key() == Qt::Key_Space){
         if(!(ginny->mjHasBlock))
             ginny->getBlock();
         else
             ginny->dropBlock();
+
+        if(ginny->itemCount <=0){
+            //open door and load next leve
+            ginny->loadNext();
+        }
     }
     //save game
     else if(event->key() == Qt::Key_P){
@@ -74,11 +84,13 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
         else
             std::cout << "Can not save right now, put block down\n";
     }
-
 }
 
 //timer function... maybe
 void gamewindow::moveEvent(){
+    if(ginny->life<=0)
+        return;
+
     ginny->moveEnemies();
     ginny->moveGood();
 }

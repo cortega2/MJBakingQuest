@@ -6,10 +6,12 @@ Node::Node(QString type, QString location, int x, int y){
     this->location = location;
     this->x = x;
     this->y = y;
+    this->sprite = NULL;
 }
 
 Node::~Node(){
-   delete this->sprite;
+    if(this->sprite != NULL)
+        delete this->sprite;
 }
 
 objStructure::objStructure(){
@@ -17,6 +19,34 @@ objStructure::objStructure(){
     head = 0;
     tail = 0;
 }
+void objStructure::add(QString type, QString location, int x, int y, QString goodObj){
+    if(count == 0){
+        head = new Node(type, location, x, y);
+        head->prev = 0;
+        head->next = 0;
+        tail = head;
+        head->goodObj = goodObj;
+        count ++;
+    }
+    else if(count == 1){
+        tail = new Node(type, location, x, y);
+        tail->goodObj = goodObj;
+        head->next = tail;
+        tail->prev = head;
+        tail->next = 0;
+        count++;
+    }
+    else{
+        Node* tmp = new Node(type, location, x, y);
+        tmp->goodObj = goodObj;
+        tmp->prev = tail;
+        tail->next = tmp;
+        tail = tmp;
+        tail->next = 0;
+        count++;
+    }
+}
+
 void objStructure::add(QString type, QString location, int x, int y){
     if(count == 0){
         head = new Node(type, location, x, y);
@@ -69,6 +99,11 @@ void objStructure::remove(Node *gone){
         gone->~Node();
     }
     count--;
+}
+
+void objStructure::removeAll(){
+    while(count>0)
+        remove(head);
 }
 
 int objStructure::getCount(){

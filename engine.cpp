@@ -22,10 +22,13 @@ engine::engine(){
     enemies = new objStructure();
     blocks = new objStructure();
     other = new objStructure();
+    doors = new objStructure();
     parsley = new parser();
     facing = 0;
     prevFacing = 0;
+    itemCount = 0;
     mjHasBlock = false;
+    life = 3;
 
     //initialize array that holds politers to walkable blocks
     //useful for moving
@@ -33,6 +36,9 @@ engine::engine(){
         for(int x = 0; x<30; x++)
             walkable[y][x] = 0;
     }
+
+    for(int x = 0; x<5; x++)
+        goodObj[x] = NULL;
 
 }
 
@@ -95,7 +101,7 @@ void engine::DrawGrid(QGraphicsScene *scene){
 /* Loads a map into the Graphics Scene
  * Open a file chooser dialog */
 int engine::LoadMap(QGraphicsScene *scene){
-    parsley->readFile( parentWindow, goodGuys, enemies, blocks, other, NULL );
+    parsley->readFile( parentWindow, goodGuys, enemies, blocks, doors,other, NULL );
 
     Node *tmp = goodGuys->head;
     while(tmp != 0){
@@ -157,6 +163,24 @@ int engine::LoadMap(QGraphicsScene *scene){
         tmp = tmp->next;
     }
 
+    tmp = doors->head;
+    while(tmp != 0){
+
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
+        if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
+            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(spriteName)));
+        else{
+            tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
+            MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+            scene->addItem(tmp->sprite);
+            tmp->sprite->setZValue(-1);
+        }
+        tmp = tmp->next;
+    }
+
     return 1;
 }
 
@@ -165,7 +189,7 @@ int engine::LoadMap(QGraphicsScene *scene){
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
-    parsley->readFile(parentWindow, goodGuys, enemies, blocks, other, fileName );
+    parsley->readFile(parentWindow, goodGuys, enemies, blocks, doors,other, fileName );
 
     Node *tmp = goodGuys->head;
     while(tmp != 0){
@@ -187,6 +211,8 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
             QTime time = QTime::currentTime();
             qsrand((uint)time.msec());
             tmp->movement = qrand() %(2);
+            itemCount ++;
+            tmp->hasObj = true;
         }
         tmp = tmp->next;
     }
@@ -239,6 +265,25 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
         }
         tmp = tmp->next;
     }
+
+    tmp = doors->head;
+    while(tmp != 0){
+
+        QString spriteName("sprites/");
+        spriteName.append(tmp->location.trimmed());
+        spriteName.append(".png");
+
+        if(tmp->blockType.compare( QString("BACKGROUND")) == 0)
+            scene->setBackgroundBrush(QBrush(Qt::black, QPixmap(spriteName)));
+        else{
+            tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
+            MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
+            scene->addItem(tmp->sprite);
+            tmp->sprite->setZValue(-1);
+        }
+        tmp = tmp->next;
+    }
+
     return 1;
 }
 
@@ -276,6 +321,72 @@ void engine::setNewName (QString subName){
     newName = "sprites/";
     newName.append(subName);
     newName.append(".png");
+}
+
+void engine::loadNext(){
+    //check if mj is by the door if she is then load the next level
+    Node *tmp = doors->head;
+    while(tmp != NULL){
+        if( (tmp->x == mj->x) && (tmp->y == mj->y)){
+            life = 0;
+
+            QMessageBox msgBox;
+            msgBox.setText("Next Level loading...");
+            msgBox.exec();
+
+            reset(parsley->nextLevel);
+            break;
+        }
+        tmp = tmp->next;
+    }
+}
+
+//cannot be called while animation is still happening!
+//i dont know what will happen but i dont think it will be good
+void engine::reset(QString level){
+    //Error check on level
+    if(level == NULL || level.length() == 0){
+        std::cout << "the string that was passed to reset() is not acceptable\n";
+        return;
+   }
+
+    std::cout << level.toStdString() << std::endl;
+
+    //empty the linked list and remove the graphic objects
+    blocks->removeAll();
+    other->removeAll();
+    enemies->removeAll();
+    goodGuys->removeAll();
+    doors->removeAll();
+
+    //reset userstats
+    mj = NULL;
+    facing = 0;
+    prevFacing = 0;
+    itemCount = 0;
+    mjHasBlock = false;
+
+    //life = 3;
+    //cannot set life to 3 until things have been redrawn... i think
+    //confirmed life has to be set to 3 else where...
+
+    //initialize array that holds politers to walkable blocks
+    //useful for moving
+    for(int y = 0; y< 20; y++){
+        for(int x = 0; x<30; x++)
+            walkable[y][x] = NULL;
+    }
+
+    //reset and remove goodobj
+    for(int x = 0; x<5; x++){
+        if(goodObj[x] != NULL)
+            delete goodObj[x];
+        goodObj[x] = NULL;
+    }
+
+    loadGame(level);
+    life = 3;
+
 }
 
 /*method that is used to move mj
@@ -419,44 +530,86 @@ void engine::moveChar(int direction){
     }
 
     prevFacing = facing;
+
+    //collides with good guys
+    Node *tmp = goodGuys->head;
+    while(tmp != NULL){
+        if(tmp->blockType.compare(QString("MJ")) != 0 ){
+            if(mj->sprite->collidesWithItem(tmp->sprite) && tmp->hasObj){
+
+                //FIX THIS LATER!
+                goodObj[itemCount - 1] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
+                MoveBlock(goodObj[itemCount -1], uiScene, itemCount-1, 20);
+                uiScene->addItem(goodObj[itemCount - 1]);
+
+                tmp->hasObj = false;
+                itemCount --;
+            }
+        }
+        tmp = tmp->next;
+    }
+
+    //collides with enemies
+    tmp = enemies->head;
+    while(tmp != NULL){
+        if( (mj->x == tmp->x) && (mj->y == tmp->y) ){
+            //FIX THIS LATER!
+            life --;
+            if(life <= 0){
+                //remove everything that is drawned and reload the level
+                QMessageBox msgBox;
+                msgBox.setText("Your lives are gone. Restarting level");
+                msgBox.exec();
+
+                reset(parsley->curLevel);
+            }
+        }
+        tmp = tmp->next;
+    }
 }
 
 //moves the good characters
 void engine::moveGood(){
     Node *tmp = goodGuys->head;
     while(tmp != 0){
-        int direction = tmp->movement;
-        //left
-        if(direction == 0){
-            if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL && walkable[tmp->y-1][tmp->x-1] == NULL){
-                tmp->sprite->moveBy(-BLOCK_SIZE,0);
-                tmp->x = tmp->x - 1;
-            }
-            //at edge, turn right
-            else if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
+        if(tmp != mj){
 
-                /*tmp->sprite->moveBy(BLOCK_SIZE,0);
-                tmp->x = tmp->x + 1;
-                */
-                //animate sprite here
-                tmp->movement = 1;
+            int direction = tmp->movement;
+            //left
+            if(direction == 0){
+                if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL && walkable[tmp->y-1][tmp->x-1] == NULL){
+                    tmp->sprite->moveBy(-BLOCK_SIZE,0);
+                    tmp->x = tmp->x - 1;
+                }
+                //at edge, turn right
+                else if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL){
+                    //animate sprite here
+                    tmp->movement = 1;
+                }
             }
-        }
-        //right
-        else if(direction == 1){
-            if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL && walkable[tmp->y-1][tmp->x+1] == NULL){
-                tmp->sprite->moveBy(BLOCK_SIZE,0);
-                tmp->x = tmp->x + 1;
+            //right
+            else if(direction == 1){
+                if(tmp->x != 29 && walkable[tmp->y-2][tmp->x+1] != NULL && walkable[tmp->y-1][tmp->x+1] == NULL){
+                    tmp->sprite->moveBy(BLOCK_SIZE,0);
+                    tmp->x = tmp->x + 1;
+                }
+                //at edge turn left
+                else if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
+                    //animate sprite here
+                    tmp->movement = 0;
+                }
             }
-            //at edge turn left
-            else if( tmp->x != 0 && walkable[tmp->y-2][tmp->x-1] != NULL ){
-                /*
-                tmp->sprite->moveBy(-BLOCK_SIZE,0);
-                tmp->x = tmp->x - 1;
-                */
 
-                //animate sprite here
-                tmp->movement = 0;
+
+            //good guy collides with mj, if yes give item to mj
+            if(tmp->sprite->collidesWithItem(mj->sprite) && tmp->hasObj){
+                //FIX THIS LATER!
+                goodObj[itemCount - 1] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
+                MoveBlock(goodObj[itemCount -1], uiScene, itemCount-1, 20);
+                uiScene->addItem(goodObj[itemCount - 1]);
+
+                tmp->hasObj = false;
+                itemCount --;
             }
         }
         tmp = tmp->next;
@@ -496,11 +649,23 @@ void engine::moveEnemies(){
                 tmp->sprite->moveBy(-BLOCK_SIZE,0);
                 tmp->x = tmp->x - 1;
                 */
-
                 //animate sprite here
                 tmp->movement = 0;
             }
         }
+
+        //collides with mj
+        if( (mj->x == tmp->x) && (mj->y == tmp->y) ){
+            life --;
+            if(life <= 0){
+                //remove everything that is drawned and reload the level
+                QMessageBox msgBox;
+                msgBox.setText("Your lives are gone. Restarting level");
+                msgBox.exec();
+                reset(parsley->curLevel);
+            }
+        }
+
         tmp = tmp->next;
     }
 }
@@ -528,15 +693,11 @@ void engine::getBlock(){
 
             mj->sprite->moveBy(0, BLOCK_SIZE);
             mj->y = mj->y-1;
-
-            //might have to update block's location on the node
         }
         else{
             walkable[y-1][x]->sprite->moveBy((mjX - x) * 30, -(mjY -y+1) * 30);
             walkable[mjY][mjX] = walkable[y-1][x];
             walkable[y-1][x] = 0;
-
-            //might have to update block's location on the node
         }
         mjHasBlock = true;
     }
@@ -587,11 +748,7 @@ void engine::dropBlock(){
         tmp = enemies->head;
         while(tmp != 0){
             if((ptr->x == tmp->x) && (ptr->y == tmp->y)){
-                std::cout << "enemy got crushed!\n";
-
-                //BAD FIX THIS ASAP!!!
-
-                //tmp->sprite->hide();
+                //enemy got crushed remove it
                 enemies->remove(tmp);
             }
             tmp = tmp->next;

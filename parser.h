@@ -13,8 +13,10 @@ public:
     parser();
     ~parser();
     int readFile(QWidget *parent, objStructure *good, objStructure *enemies,
-                 objStructure *blocks, objStructure *other, QString fileName);
+                 objStructure *blocks, objStructure *doors, objStructure *other, QString fileName);
     void createFile(QString name, objStructure *goodGuys, objStructure *enemies, objStructure *blocks, objStructure *other);
+    QString curLevel;
+    QString nextLevel;
 private:
     objStructure* sprites;
     QFile *file;

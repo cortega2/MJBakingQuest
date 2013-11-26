@@ -13,7 +13,7 @@ parser::~parser(){
 //opens the name specified
 //add sprites to the objStructure
 int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies,
-                      objStructure *blocks, objStructure *other, QString fileName){
+                      objStructure *blocks, objStructure *doors, objStructure *other, QString fileName){
 
     //Opens a file chooser Dialog box
     if( fileName.isNull() ){
@@ -41,13 +41,23 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
             QString spriteName("");
             spriteName.append(fields.at(1).trimmed());
 
-            if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("MX")) == 0)
+            if(fields.at(0).compare( QString("MJ")) == 0){
                 good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("GOOD")) == 0){
+                good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt(), fields.at(4).trimmed());
+            }
             else if(fields.at(0).compare( QString("ENEMY")) == 0 ){
                 enemies->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             }
             else if(fields.at(0).compare( QString("BLOCK")) == 0 || fields.at(0).compare( QString("MBLOCK")) == 0 ){
                  blocks->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("DOOR")) == 0){
+                 doors->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("NEXT")) == 0){
+                nextLevel = fields.at(1).trimmed();
             }
             else{
 
@@ -61,11 +71,13 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
 
         }
         file.close();
-        return 1;
+        return 0;
     }
 
     //loads level specified in filename
     else{
+        curLevel = fileName;
+
         QFile file( fileName );
         if(!file.open(QIODevice::ReadOnly))
             return -1;
@@ -84,13 +96,23 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
             QString spriteName("");
             spriteName.append(fields.at(1).trimmed());
 
-            if(fields.at(0).compare( QString("MJ")) == 0 || fields.at(0).compare( QString("GOOD")) == 0)
+            if(fields.at(0).compare( QString("MJ")) == 0){
                 good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("GOOD")) == 0){
+                good->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt(), fields.at(4).trimmed());
+            }
             else if(fields.at(0).compare( QString("ENEMY")) == 0 ){
                 enemies->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
             }
             else if(fields.at(0).compare( QString("BLOCK")) == 0 || fields.at(0).compare( QString("MBLOCK")) == 0 ){
                  blocks->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("DOOR")) == 0){
+                 doors->add(fields.at(0), spriteName, fields.at(2).toInt(), fields.at(3).toInt());
+            }
+            else if(fields.at(0).compare( QString("NEXT")) == 0){
+                nextLevel = fields.at(1).trimmed();
             }
             else{
                 if(fields.at(0).compare( QString("BACKGROUND")) == 0 )
@@ -101,11 +123,11 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
            }
         }
         file.close();
-        return 1;
+        return 0;
     }
 
     //something broke if it gets down here
-    return 0;
+    return 1;
 }
 
 void parser::createFile(const QString name,  objStructure *goodGuys, objStructure *enemies,

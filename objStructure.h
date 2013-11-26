@@ -9,9 +9,11 @@ public:
     QGraphicsRectWidget *sprite;
     QString blockType;
     QString location;
+    QString goodObj;
     int x;
     int y;
     int movement;
+    bool hasObj;
     Node *next;
     Node *prev;
     Node();
@@ -25,8 +27,10 @@ public:
     objStructure();
     //~objStructure();
     void add(QString type, QString location,int x, int y);
+    void add(QString type, QString location, int x, int y, QString goodObj);
     void remove(QString type, int x, int y);
     void remove(Node *gone);
+    void removeAll();
     int getCount();
     Node *head;
     Node *tail;

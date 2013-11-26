@@ -24,6 +24,8 @@ public:
     int right;
     QGraphicsView* GetGraphicsView();
     bool mjHasBlock;
+    QString nextLevel;
+
 
 public slots:
     void moveEvent();

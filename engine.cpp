@@ -34,7 +34,7 @@ engine::engine(){
     //useful for moving
     for(int y = 0; y< 20; y++){
         for(int x = 0; x<30; x++)
-            walkable[y][x] = 0;
+            walkable[y][x] = NULL;
     }
 
     for(int x = 0; x<5; x++)

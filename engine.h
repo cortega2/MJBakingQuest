@@ -27,6 +27,7 @@ public:
     void loadGame(QString level);
     void saveGame(QString name);
     void ClickedOpenMap(void);
+    void ClickedSaveMap(void);
     void CloseMap(void);
     void ClickedDrawGridLines(void);
 
@@ -48,7 +49,6 @@ public:
 
 private:
     const QRect *sSize;
-
     objStructure *goodGuys;
     objStructure *enemies;
     objStructure *blocks;

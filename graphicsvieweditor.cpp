@@ -80,6 +80,7 @@ void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
 
 void GraphicsViewEditor::SnapToGrid(){
     QList<QGraphicsItem*> list = this->items();
+
     foreach( QGraphicsItem *item, list ){
         if(item != NULL ){
             if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){

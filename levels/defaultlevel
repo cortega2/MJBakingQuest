@@ -61,6 +61,7 @@ MJ, MJ_left, 9, 2
 #First enemy
 ENEMY, enemy1, 24, 11
 #first good guy
-GOOD, pauladeen, 3, 6 , butter
+GOOD, pauladeen, 3, 6, sprites/butter, 1
 DOOR, door, 0, 2
 NEXT, levels/levelone.txt
+CURRENT, levels/defaultlevel

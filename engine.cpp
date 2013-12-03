@@ -16,7 +16,6 @@
 #include <iostream>
 
 #define BLOCK_SIZE ( 30 )
-
 engine::engine(){
     goodGuys = new objStructure();
     enemies = new objStructure();
@@ -27,9 +26,8 @@ engine::engine(){
     facing = 0;
     prevFacing = 0;
     itemCount = 0;
+    curItems = 0;
     mjHasBlock = false;
-    life = 3;
-
     //initialize array that holds politers to walkable blocks
     //useful for moving
     for(int y = 0; y< 20; y++){
@@ -188,8 +186,9 @@ int engine::LoadMap(QGraphicsScene *scene){
  * Useful for autoloading the next level upon winning
  * it's almost identical to the one above it */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
-
     parsley->readFile(parentWindow, goodGuys, enemies, blocks, doors,other, fileName );
+
+    life = parsley->lives;
 
     Node *tmp = goodGuys->head;
     while(tmp != 0){
@@ -199,20 +198,27 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 
         tmp->sprite = new QGraphicsRectWidget(QPixmap(spriteName), BLOCK_SIZE, BLOCK_SIZE);
         MoveBlock(tmp->sprite, scene, tmp->x, tmp->y);
-        //std::cout<< tmp->x<< std::endl << tmp->y << std::endl;
         scene->addItem(tmp->sprite);
-        //asign node to MJ
-        if(tmp->blockType.compare(QString("MJ")) == 0){
-            mj = tmp;
-        }
 
+        //asign node to MJ
+        if(tmp->blockType.compare(QString("MJ")) == 0)
+            mj = tmp;
         else{
             //set movement to either left or right
             QTime time = QTime::currentTime();
             qsrand((uint)time.msec());
             tmp->movement = qrand() %(2);
-            itemCount ++;
-            tmp->hasObj = true;
+
+            //update item count
+            if(tmp->hasObj)
+                itemCount ++;
+            //draw object that mj already has from saved game
+            else if (tmp->hasObj == false){
+                goodObj[curItems] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
+                MoveBlock(goodObj[curItems], uiScene, curItems, 20);
+                uiScene->addItem(goodObj[curItems]);
+                curItems ++;
+            }
         }
         tmp = tmp->next;
     }
@@ -288,8 +294,8 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
 }
 
 void engine::saveGame(QString name){
-    //dummy for now
-    parsley->createFile(name, goodGuys, enemies, blocks, other);
+    parsley->lives = life;
+    parsley->createFile(name, goodGuys, enemies, blocks, doors,other);
 }
 
 //loads level without the file chooser, for now default level
@@ -349,9 +355,6 @@ void engine::reset(QString level){
         std::cout << "the string that was passed to reset() is not acceptable\n";
         return;
    }
-
-    std::cout << level.toStdString() << std::endl;
-
     //empty the linked list and remove the graphic objects
     blocks->removeAll();
     other->removeAll();
@@ -365,10 +368,6 @@ void engine::reset(QString level){
     prevFacing = 0;
     itemCount = 0;
     mjHasBlock = false;
-
-    //life = 3;
-    //cannot set life to 3 until things have been redrawn... i think
-    //confirmed life has to be set to 3 else where...
 
     //initialize array that holds politers to walkable blocks
     //useful for moving
@@ -385,8 +384,6 @@ void engine::reset(QString level){
     }
 
     loadGame(level);
-    life = 3;
-
 }
 
 /*method that is used to move mj
@@ -537,13 +534,13 @@ void engine::moveChar(int direction){
         if(tmp->blockType.compare(QString("MJ")) != 0 ){
             if(mj->sprite->collidesWithItem(tmp->sprite) && tmp->hasObj){
 
-                //FIX THIS LATER!
-                goodObj[itemCount - 1] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
-                MoveBlock(goodObj[itemCount -1], uiScene, itemCount-1, 20);
-                uiScene->addItem(goodObj[itemCount - 1]);
+                goodObj[curItems] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
+                MoveBlock(goodObj[curItems], uiScene, curItems, 20);
+                uiScene->addItem(goodObj[curItems]);
 
                 tmp->hasObj = false;
                 itemCount --;
+                curItems ++;
             }
         }
         tmp = tmp->next;
@@ -603,13 +600,13 @@ void engine::moveGood(){
 
             //good guy collides with mj, if yes give item to mj
             if(tmp->sprite->collidesWithItem(mj->sprite) && tmp->hasObj){
-                //FIX THIS LATER!
-                goodObj[itemCount - 1] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
-                MoveBlock(goodObj[itemCount -1], uiScene, itemCount-1, 20);
-                uiScene->addItem(goodObj[itemCount - 1]);
+                goodObj[curItems] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
+                MoveBlock(goodObj[curItems], uiScene, curItems, 20);
+                uiScene->addItem(goodObj[curItems]);
 
                 tmp->hasObj = false;
                 itemCount --;
+                curItems ++;
             }
         }
         tmp = tmp->next;
@@ -736,7 +733,6 @@ void engine::dropBlock(){
 
             walkable[blockY - count - 1][blockX + facing] = walkable[blockY - count][blockX + facing];
             walkable[blockY - count][blockX + facing] = NULL;
-
 
             ptr = walkable[blockY - count - 1][blockX + facing];
 

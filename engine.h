@@ -61,6 +61,7 @@ private:
     //variables used for moving and facing MJ in the right place
     int facing;
     int prevFacing;
+    int curItems;
 
     QGraphicsScene *uiScene;
     QWidget *parentWindow;

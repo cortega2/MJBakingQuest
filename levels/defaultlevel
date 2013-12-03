@@ -1,4 +1,4 @@
-#Types of blocks: BLOCK, MJ, MX, ENEMY, MBLOCK and others
+#Types of blocks: BLOCK, MJ, GOOD, ENEMY, MBLOCK and others
 BLOCK, concrete, 0, 1
 BLOCK, concrete, 1, 1
 BLOCK, concrete, 3, 1
@@ -37,6 +37,7 @@ BLOCK, concrete, 27, 10
 BLOCK, concrete, 28, 10
 BLOCK, concrete, 29, 10
 #
+MBLOCK, move_wood, 1, 2
 MBLOCK, move_wood, 27, 11
 MBLOCK, move_wood, 26, 11
 MBLOCK, move_wood, 28, 11
@@ -58,4 +59,9 @@ BACKGROUND, starrynight
 #
 MJ, MJ_left, 9, 2
 #First enemy
-ENEMY, enemy1, 1, 6
+ENEMY, enemy1, 24, 11
+#first good guy
+GOOD, pauladeen, 3, 6, sprites/butter, 1
+DOOR, door, 0, 2
+NEXT, levels/levelone.txt
+CURRENT, levels/defaultlevel

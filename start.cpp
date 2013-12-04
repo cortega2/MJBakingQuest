@@ -9,10 +9,14 @@ start::start(QWidget *parent) :
     ui(new Ui::start)
 {
     ui->setupUi(this);
+<<<<<<< HEAD
     player = new QMediaPlayer;
     player->setMedia(QUrl::fromLocalFile("sounds/Instrumentals - Afroman - Because I Got High  (Download).mp3"));
     player->setVolume(50);
     player->play();
+=======
+    this->setWindowFlags(Qt::FramelessWindowHint);
+>>>>>>> master
 }
 
 start::~start(){
@@ -71,5 +75,17 @@ void start::on_pushButton_3_clicked(){
     mainWindow->show();
     player->stop();
     hide();
+
+}
+
+void start::on_pushButton_4_clicked(){
+
+    MyMessageBox msgBox;
+    msgBox.setBaseSize(500,500);
+    msgBox.setText("Press the 'D' key to move Mary Jane Forward.                                                                                                    "
+                   "Press the 'A' key to move Mary Jane Backward.                                                                                                   "
+                   "Press the space bar to pick up or drop blocks.                                                                                                  "
+                   "Also press space bar when in front of a door to go through it.");
+    msgBox.exec();
 
 }

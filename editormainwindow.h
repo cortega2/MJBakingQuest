@@ -56,6 +56,8 @@ private slots:
 
     void on_actionAutomatic_Snapping_changed();
 
+    void on_actionSave_triggered();
+
 private:
     Ui::MainWindow *ui;
     engine *ginny;

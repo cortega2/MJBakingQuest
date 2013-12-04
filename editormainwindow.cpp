@@ -80,11 +80,16 @@ void editWindow::mouseReleaseEvent(QMouseEvent *event){
 void editWindow::on_actionCredits_triggered()
 {
     QMessageBox box;
-    box.setText(QString("Idea by Joseph Burnitz\nMostly coded by Joseph Burnitz\n"));
+    box.setText(QString("Editor by Joseph Burnitz\n"));
     box.exec();
 }
 
 void editWindow::on_actionAutomatic_Snapping_changed()
 {
         graphicsView->AutoSnap = this->ui->actionAutomatic_Snapping->isChecked();
+}
+
+void editWindow::on_actionSave_triggered()
+{
+    ginny->ClickedSaveMap();
 }

@@ -550,48 +550,6 @@ void engine::moveChar(int direction){
 
     prevFacing = facing;
     safeToCheckEnemyCollision = true;
-
-    //collides with good guys
-//    Node *tmp = goodGuys->head;
-//    while(tmp != NULL){
-//        if(tmp->blockType.compare(QString("MJ")) != 0 ){
-//            if(mj->sprite->collidesWithItem(tmp->sprite) && tmp->hasObj){
-
-//                goodObj[curItems] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
-//                MoveBlock(goodObj[curItems], uiScene, curItems, 20);
-//                uiScene->addItem(goodObj[curItems]);
-
-//                //play sound fx
-//                player->setMedia(QUrl::fromLocalFile("sounds/chime.wav"));
-//                player->setVolume(60);
-//                player->play();
-//                enemies->remove(tmp);
-
-//                tmp->hasObj = false;
-//                itemCount --;
-//                curItems ++;
-//            }
-//        }
-//        tmp = tmp->next;
-//    }
-
-//    //collides with enemies
-//    Node *tmp = enemies->head;
-//    while(tmp != NULL){
-//        if( (mj->x == tmp->x) && (mj->y == tmp->y) ){
-//            //FIX THIS LATER!
-//            life --;
-//            if(life <= 0){
-//                //remove everything that is drawned and reload the level
-//                QMessageBox msgBox;
-//                msgBox.setText("Your lives are gone. Restarting level");
-//                msgBox.exec();
-
-//                reset(parsley->curLevel);
-//            }
-//        }
-//        tmp = tmp->next;
-//    }
 }
 
 //moves the good characters
@@ -625,25 +583,6 @@ void engine::moveGood(){
                     tmp->movement = 0;
                 }
             }
-
-
-//            //good guy collides with mj, if yes give item to mj
-//            if(tmp->sprite->collidesWithItem(mj->sprite) && tmp->hasObj){
-//                goodObj[curItems] = new QGraphicsRectWidget(QPixmap(tmp->goodObj), BLOCK_SIZE, BLOCK_SIZE);
-//                MoveBlock(goodObj[curItems], uiScene, curItems, 20);
-//                uiScene->addItem(goodObj[curItems]);
-
-//                //play sound fx
-//                player->setMedia(QUrl::fromLocalFile("sounds/gotObj.wav"));
-//                player->setVolume(60);
-//                player->play();
-//                enemies->remove(tmp);
-
-//                //update
-//                tmp->hasObj = false;
-//                itemCount --;
-//                curItems ++;
-//            }
         }
         tmp = tmp->next;
     }
@@ -688,19 +627,6 @@ void engine::moveEnemies(){
                 tmp->movement = 0;
             }
         }
-
-//        //collides with mj
-//        if( (mj->x == tmp->x) && (mj->y == tmp->y) ){
-//            life --;
-//            if(life <= 0){
-//                //remove everything that is drawned and reload the level
-//                QMessageBox msgBox;
-//                msgBox.setText("Your lives are gone. Restarting level");
-//                msgBox.exec();
-//                reset(parsley->curLevel);
-//            }
-//        }
-
         tmp = tmp->next;
     }
 }

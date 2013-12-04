@@ -9,14 +9,11 @@ start::start(QWidget *parent) :
     ui(new Ui::start)
 {
     ui->setupUi(this);
-<<<<<<< HEAD
+    this->setWindowFlags(Qt::FramelessWindowHint);
     player = new QMediaPlayer;
     player->setMedia(QUrl::fromLocalFile("sounds/Instrumentals - Afroman - Because I Got High  (Download).mp3"));
     player->setVolume(50);
     player->play();
-=======
-    this->setWindowFlags(Qt::FramelessWindowHint);
->>>>>>> master
 }
 
 start::~start(){

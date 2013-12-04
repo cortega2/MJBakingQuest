@@ -30,8 +30,18 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
+
 private:
     Ui::start *ui;
+};
+
+class MyMessageBox : public QMessageBox {
+    public:
+    void resizeEvent() {
+    setFixedSize(640, 480);
+    }
 };
 
 #endif // START_H

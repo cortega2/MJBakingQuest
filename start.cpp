@@ -68,3 +68,15 @@ void start::on_pushButton_3_clicked(){
     hide();
 
 }
+
+void start::on_pushButton_4_clicked(){
+
+    MyMessageBox msgBox;
+    msgBox.setBaseSize(500,500);
+    msgBox.setText("Press the 'D' key to move Mary Jane Forward.                                                                                                    "
+                   "Press the 'A' key to move Mary Jane Backward.                                                                                                   "
+                   "Press the space bar to pick up or drop blocks.                                                                                                  "
+                   "Also press space bar when in front of a door to go through it.");
+    msgBox.exec();
+
+}

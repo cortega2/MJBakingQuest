@@ -11,6 +11,9 @@ editWindow::editWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ui->checkBoxIsBlockMovable->setParent(ui->menubar);
+    ui->checkBoxIsBlockMovable->move(300,0);
+
     graphicsView = new GraphicsViewEditor( ginny );
     graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
 

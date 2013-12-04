@@ -22,6 +22,7 @@ QGraphicsRectWidget::QGraphicsRectWidget(QPixmap pMap, int blockWidth, int block
 
 QGraphicsRectWidget::QGraphicsRectWidget(const char* spriteName, int blockWidth, int blockHeight){
     brush= new QBrush( QPixmap(spriteName) );
+    spriteFileName = new QString(spriteName);
     size = new QRect(0,0, blockWidth, blockHeight);
 }
 

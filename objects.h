@@ -13,6 +13,7 @@ class QGraphicsRectWidget : public QGraphicsWidget{
 
     //QBrush *brush;
     QRect *size;
+    QString *spriteFileName;
 public:
     QBrush *brush;
     QGraphicsRectWidget();

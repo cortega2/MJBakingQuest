@@ -1,8 +1,16 @@
 #include "graphicsvieweditor.h"
 
-
+/**
+ * @brief GraphicsViewEditor::cellDoubleClicked
+ * @param row
+ * @param column
+ * this is where the new sprite actually gets added to the canvas/scene
+ */
 void GraphicsViewEditor::cellDoubleClicked(int row, int column){
-    ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(), (int)floor(rightClickMenu->x()/BLOCK_SIZE), (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
+    ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(),
+                     (int)floor(rightClickMenu->x()/BLOCK_SIZE),
+                     (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
+
     rightClickMenu->hide();
 }
 
@@ -80,7 +88,7 @@ void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
 
 void GraphicsViewEditor::SnapToGrid(){
     QList<QGraphicsItem*> list = this->items();
-
+    qDebug() << "SNAP! blocks on the board " << list.size();
     foreach( QGraphicsItem *item, list ){
         if(item != NULL ){
             if( ((int)item->x() % BLOCK_SIZE) <= BLOCK_SIZE/2 ){

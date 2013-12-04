@@ -81,3 +81,8 @@ void start::on_pushButton_4_clicked(){
     msgBox.exec();
 
 }
+
+void start::on_pushButton_6_clicked()
+{
+    qApp->exit();
+}

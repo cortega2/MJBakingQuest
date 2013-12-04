@@ -331,7 +331,8 @@ void engine::ClickedSaveMap(void){
           qDebug() << "yes";
           saveGame( text );
         }
-    }else{
+    }
+    else{
         //file doesn't exist sooo
         saveGame( text );
     }

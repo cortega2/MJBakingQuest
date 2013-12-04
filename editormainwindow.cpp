@@ -23,9 +23,12 @@ editWindow::editWindow(QWidget *parent) :
     graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    graphicsView->setMouseTracking(true);
+    //borderless doesn't look good
+    //this->setWindowFlags(Qt::FramelessWindowHint);
 
-    setMouseTracking(true);
+    //this extra computation doesn't really aid anything
+    //graphicsView->setMouseTracking(true);
+    //setMouseTracking(true);
 }
 /* need to clean up stuff when your done! */
 editWindow::~editWindow(){
@@ -72,9 +75,7 @@ void editWindow::on_actionSnap_Now_triggered()
 }
 
 void editWindow::mouseReleaseEvent(QMouseEvent *event){
-    /*if(graphicsView->AutoSnap){
-        graphicsView->SnapToGrid();
-    }*/
+
 }
 
 void editWindow::on_actionCredits_triggered()
@@ -86,7 +87,7 @@ void editWindow::on_actionCredits_triggered()
 
 void editWindow::on_actionAutomatic_Snapping_changed()
 {
-        graphicsView->AutoSnap = this->ui->actionAutomatic_Snapping->isChecked();
+    graphicsView->AutoSnap = this->ui->actionAutomatic_Snapping->isChecked();
 }
 
 void editWindow::on_actionSave_triggered()

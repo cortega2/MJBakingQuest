@@ -411,6 +411,11 @@ void engine::reset(QString level){
             delete goodObj[x];
         goodObj[x] = NULL;
     }
+    //reset and remove hearts
+    for(int x = 0; x<life; x++){
+        delete hearts[x];
+        hearts[x] = NULL;
+    }
 
     loadGame(level);
 }
@@ -760,7 +765,7 @@ void engine::checkCollisions(){
         if( (mj->x == tmp->x) && (mj->y == tmp->y) && safeToCheckEnemyCollision ){
             life --;
             if(life >=0)
-                hearts[life]->close();
+                delete hearts[life];
             if(life <= 0){
                 //remove everything that is drawned and reload the level
                 QMessageBox msgBox;

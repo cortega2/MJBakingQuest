@@ -32,6 +32,7 @@ private slots:
 
 private:
     Ui::start *ui;
+    QMediaPlayer *player;
 };
 
 #endif // START_H

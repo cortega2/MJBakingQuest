@@ -9,6 +9,7 @@ start::start(QWidget *parent) :
     ui(new Ui::start)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::FramelessWindowHint);
 }
 
 start::~start(){

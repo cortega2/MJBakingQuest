@@ -38,10 +38,31 @@ gamewindow::gamewindow(QWidget *parent, bool newGame, QString sessionName) :
 
     ginny->loadGame(load);
 
-    //not sure if this is the best place to place the timer
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(moveEvent()));
     timer->start(500);
+
+    QTimer *mediaTimer = new QTimer(this);
+    connect(mediaTimer, SIGNAL(timeout()), this, SLOT(mediaEvent()));
+    mediaTimer->start(20);
+
+    //choose random song
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+    int random = qrand() % (3);
+    QString song;
+    if(random == 0)
+        song = "sounds/aquarium.mp3";
+    else if(random == 1)
+        song = "sounds/05 - Rafting Starlit Everglades.mp3";
+    else
+        song = "sounds/Karaoke Bob Marley  Is This Love - Reggae -  www.clubkaraoke.cl.mp3";
+
+    //start playing music from specified file
+    player = new QMediaPlayer;
+    player->setMedia(QUrl::fromLocalFile(song));
+    player->setVolume(50);
+    player->play();
 
     mjHasBlock = false;
 }
@@ -88,11 +109,33 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
     }
 }
 
-//timer function... maybe
+//timer function for moving enemies
 void gamewindow::moveEvent(){
     if(ginny->life<=0)
         return;
 
     ginny->moveEnemies();
     ginny->moveGood();
+}
+//timer function for media player
+void gamewindow::mediaEvent(){
+    //once song finishes start a new one
+    if(player->mediaStatus() == 8 || player->mediaStatus() == 7){
+        QTime time = QTime::currentTime();
+        qsrand((uint)time.msec());
+        int random = qrand() % (3);
+        QString song;
+        if(random == 0)
+            song = "sounds/aquarium.mp3";
+        else if(random == 1)
+            song = "sounds/05 - Rafting Starlit Everglades.mp3";
+        else
+            song = "sounds/Karaoke Bob Marley  Is This Love - Reggae -  www.clubkaraoke.cl.mp3";
+
+        player->setMedia(QUrl::fromLocalFile(song));
+        player->setVolume(50);
+        player->play();
+    }
+
+    ginny->checkCollisions();
 }

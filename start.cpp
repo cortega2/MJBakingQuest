@@ -10,6 +10,10 @@ start::start(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
+    player = new QMediaPlayer;
+    player->setMedia(QUrl::fromLocalFile("sounds/Instrumentals - Afroman - Because I Got High  (Download).mp3"));
+    player->setVolume(50);
+    player->play();
 }
 
 start::~start(){
@@ -30,7 +34,7 @@ void start::on_pushButton_clicked(){
         mainWindow->setCentralWidget( mainWindow->GetGraphicsView() );
         mainWindow->resize( mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height() );
         mainWindow->show();
-
+        player->stop();
         hide();
     }
 }
@@ -51,6 +55,7 @@ void start::on_pushButton_2_clicked(){
         mainWindow->resize( mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height() );
         mainWindow->show();
 
+        player->stop();
         hide();
     }
 }
@@ -65,7 +70,7 @@ void start::on_pushButton_3_clicked(){
     //mainWindow->centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);
     mainWindow->resize(mainWindow->centralWidget()->width(), mainWindow->centralWidget()->height()+10);
     mainWindow->show();
-
+    player->stop();
     hide();
 
 }

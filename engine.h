@@ -38,6 +38,7 @@ public:
     void getBlock();
     void dropBlock();
     void loadNext();
+    void checkCollisions();
 
     //made mj and the array of blocks public, might change it back to private later if that is better
     Node *mj;
@@ -57,11 +58,13 @@ private:
     parser *parsley;
     QBrush *brush;
     QString newName;
+    QMediaPlayer *player;
 
     //variables used for moving and facing MJ in the right place
     int facing;
     int prevFacing;
     int curItems;
+    bool safeToCheckEnemyCollision;
 
     QGraphicsScene *uiScene;
     QWidget *parentWindow;

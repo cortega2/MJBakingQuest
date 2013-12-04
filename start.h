@@ -39,6 +39,7 @@ private slots:
 
 private:
     Ui::start *ui;
+    QMediaPlayer *player;
 };
 
 class MyMessageBox : public QMessageBox {

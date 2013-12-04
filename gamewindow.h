@@ -8,6 +8,7 @@
 #include "ui_gamewindow.h"
 #include "definitions.h"
 
+
 namespace Ui {
 class gamewindow;
 }
@@ -29,15 +30,15 @@ public:
 
 public slots:
     void moveEvent();
+    void mediaEvent();
 
 private:
     Ui::gamewindow *ui;
     engine *ginny;
-
     QGraphicsScene *graphicsScene;
     QGraphicsView *graphicsView;
-
     QString session;
+    QMediaPlayer *player;
 
 //this is needed to listen to keys
 protected:

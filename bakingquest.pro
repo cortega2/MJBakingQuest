@@ -1,5 +1,7 @@
 QT += widgets
 QT += core gui
+QT += multimedia
+
 
 SOURCES = \
     objects.cpp \

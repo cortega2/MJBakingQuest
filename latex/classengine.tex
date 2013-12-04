@@ -4,39 +4,42 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{classengine_aaffbfa4e20b4b627f2336eb6b40db348}{\hyperlink{classengine_aaffbfa4e20b4b627f2336eb6b40db348}{engine} ()}\label{classengine_aaffbfa4e20b4b627f2336eb6b40db348}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_aaffbfa4e20b4b627f2336eb6b40db348}{engine\-::engine} Creates all objects defined in the parser for each level. It also keeps track of how many walkable objects (M\-J, good guys, enemies) and hearts (for the health bar) are to appear in the level. \end{DoxyCompactList}\item 
 \hypertarget{classengine_a5fc1dc660b130df073d776e17f443ef5}{{\bfseries engine} (Q\-Graphics\-Scene $\ast$scene)}\label{classengine_a5fc1dc660b130df073d776e17f443ef5}
 
 \item 
-\hypertarget{classengine_aeaac5db377f37a85bfae53711e8248c0}{Q\-Graphics\-Scene $\ast$ {\bfseries Get\-Scene} ()}\label{classengine_aeaac5db377f37a85bfae53711e8248c0}
+\hypertarget{classengine_aeaac5db377f37a85bfae53711e8248c0}{Q\-Graphics\-Scene $\ast$ \hyperlink{classengine_aeaac5db377f37a85bfae53711e8248c0}{Get\-Scene} ()}\label{classengine_aeaac5db377f37a85bfae53711e8248c0}
 
-\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_aeaac5db377f37a85bfae53711e8248c0}{engine\-::\-Get\-Scene} returns a pointer to the current graphics scene \end{DoxyCompactList}\item 
 \hypertarget{classengine_a0421c21bd062075ab965333e05f20626}{void {\bfseries Set\-Scene} (Q\-Graphics\-Scene $\ast$scene)}\label{classengine_a0421c21bd062075ab965333e05f20626}
 
 \item 
 \hypertarget{classengine_ad0d2625e9b6f5b9ed18df6076001ea73}{void {\bfseries Set\-Parent\-Window} (Q\-Widget $\ast$p\-Window)}\label{classengine_ad0d2625e9b6f5b9ed18df6076001ea73}
 
 \item 
-\hypertarget{classengine_a4e8515e2f893531685ab028f42567137}{void {\bfseries load\-Game} (Q\-String level)}\label{classengine_a4e8515e2f893531685ab028f42567137}
+\hypertarget{classengine_a4e8515e2f893531685ab028f42567137}{void \hyperlink{classengine_a4e8515e2f893531685ab028f42567137}{load\-Game} (Q\-String level)}\label{classengine_a4e8515e2f893531685ab028f42567137}
 
-\item 
-\hypertarget{classengine_a6e3fca96515e269117b4cc46750f363e}{void {\bfseries save\-Game} (Q\-String name)}\label{classengine_a6e3fca96515e269117b4cc46750f363e}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a4e8515e2f893531685ab028f42567137}{engine\-::load\-Game} loads level without the file chooser, for now default level \end{DoxyCompactList}\item 
+\hypertarget{classengine_a6e3fca96515e269117b4cc46750f363e}{void \hyperlink{classengine_a6e3fca96515e269117b4cc46750f363e}{save\-Game} (Q\-String name)}\label{classengine_a6e3fca96515e269117b4cc46750f363e}
 
-\item 
-\hypertarget{classengine_a02ad5e7f4d1073a97f77d153c9685ff8}{void {\bfseries Clicked\-Open\-Map} (void)}\label{classengine_a02ad5e7f4d1073a97f77d153c9685ff8}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a6e3fca96515e269117b4cc46750f363e}{engine\-::save\-Game} Created a file with the current map and status of the game. This method does the reverse of Load\-Map where instead od loading the objects from the map file, it creates a map file with the object in the level and the the states they are in. \end{DoxyCompactList}\item 
+\hypertarget{classengine_a02ad5e7f4d1073a97f77d153c9685ff8}{void \hyperlink{classengine_a02ad5e7f4d1073a97f77d153c9685ff8}{Clicked\-Open\-Map} (void)}\label{classengine_a02ad5e7f4d1073a97f77d153c9685ff8}
 
-\item 
-\hypertarget{classengine_ae322ec44826013a47ac954f9b8fc24b2}{void {\bfseries Clicked\-Save\-Map} (void)}\label{classengine_ae322ec44826013a47ac954f9b8fc24b2}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a02ad5e7f4d1073a97f77d153c9685ff8}{engine\-::\-Clicked\-Open\-Map} Opens the file chooser dialog and loads the map \end{DoxyCompactList}\item 
+\hypertarget{classengine_ae322ec44826013a47ac954f9b8fc24b2}{void \hyperlink{classengine_ae322ec44826013a47ac954f9b8fc24b2}{Clicked\-Save\-Map} (void)}\label{classengine_ae322ec44826013a47ac954f9b8fc24b2}
 
-\item 
-\hypertarget{classengine_a68b46ec574d97c62f29206fd201b34b5}{void {\bfseries Close\-Map} (void)}\label{classengine_a68b46ec574d97c62f29206fd201b34b5}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_ae322ec44826013a47ac954f9b8fc24b2}{engine\-::\-Clicked\-Save\-Map} Opens the file save dialog and allows user to save current level to a new file, or overwrite an already saved file \end{DoxyCompactList}\item 
+\hypertarget{classengine_a68b46ec574d97c62f29206fd201b34b5}{void \hyperlink{classengine_a68b46ec574d97c62f29206fd201b34b5}{Close\-Map} (void)}\label{classengine_a68b46ec574d97c62f29206fd201b34b5}
 
-\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a68b46ec574d97c62f29206fd201b34b5}{engine\-::\-Close\-Map} Clears out the scene \end{DoxyCompactList}\item 
 \hypertarget{classengine_aff95606d7fa78ddd3f13b0573d8fa284}{void {\bfseries Clicked\-Draw\-Grid\-Lines} (void)}\label{classengine_aff95606d7fa78ddd3f13b0573d8fa284}
 
 \item 
-\hypertarget{classengine_a804d510d34deaebcfff0bf5af93568ec}{void {\bfseries Add\-Sprite} (const char $\ast$sprite\-F\-Name, int x\-Loc, int y\-Loc)}\label{classengine_a804d510d34deaebcfff0bf5af93568ec}
+\hypertarget{classengine_a804d510d34deaebcfff0bf5af93568ec}{void \hyperlink{classengine_a804d510d34deaebcfff0bf5af93568ec}{Add\-Sprite} (const char $\ast$sprite\-F\-Name, int x\-Loc, int y\-Loc)}\label{classengine_a804d510d34deaebcfff0bf5af93568ec}
 
-\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a804d510d34deaebcfff0bf5af93568ec}{engine\-::\-Add\-Sprite} Creates a widget for sprites, givien a sprite picture, and a position. The sprite also holds properties that tell wheter or not it is a movable object. \end{DoxyCompactList}\item 
 \hypertarget{classengine_ac084e69968320aa57383fc251f54b887}{void {\bfseries move\-Char} (int direction)}\label{classengine_ac084e69968320aa57383fc251f54b887}
 
 \item 
@@ -52,7 +55,10 @@
 \hypertarget{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}{void {\bfseries drop\-Block} ()}\label{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}
 
 \item 
-\hypertarget{classengine_a56c6f2331fa2045f184b183c89f9c199}{void {\bfseries load\-Next} ()}\label{classengine_a56c6f2331fa2045f184b183c89f9c199}
+\hypertarget{classengine_a56c6f2331fa2045f184b183c89f9c199}{void \hyperlink{classengine_a56c6f2331fa2045f184b183c89f9c199}{load\-Next} ()}\label{classengine_a56c6f2331fa2045f184b183c89f9c199}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a56c6f2331fa2045f184b183c89f9c199}{engine\-::load\-Next} checks if mj is by the door if she is then load the next level \end{DoxyCompactList}\item 
+\hypertarget{classengine_a1fa4f5009e031570cd0e40d7056c8a61}{void {\bfseries check\-Collisions} ()}\label{classengine_a1fa4f5009e031570cd0e40d7056c8a61}
 
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
@@ -80,5 +86,5 @@
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-C\-:/\-Users/\-Joslyn/\-Documents/\-Git\-Hub/\-M\-J\-Baking\-Quest/engine.\-h\item 
-C\-:/\-Users/\-Joslyn/\-Documents/\-Git\-Hub/\-M\-J\-Baking\-Quest/engine.\-cpp\end{DoxyCompactItemize}
+Doxygen/engine.\-h\item 
+Doxygen/engine.\-cpp\end{DoxyCompactItemize}

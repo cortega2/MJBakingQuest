@@ -22,7 +22,7 @@ gamewindow::gamewindow(QWidget *parent, bool newGame, QString sessionName) :
     ui->setupUi(this);
     ginny = new engine();
 
-    this->setWindowFlags(Qt::FramelessWindowHint);
+    //this->setWindowFlags(Qt::FramelessWindowHint);
 
     graphicsView = new GraphicsView();
     graphicsView->setGeometry( QRect(0, 0, BLOCK_SIZE*30, BLOCK_SIZE*20 ) );

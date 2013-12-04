@@ -158,26 +158,12 @@
     </size>
    </property>
   </widget>
-  <widget class="QCommandLinkButton" name="commandLinkButton">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>220</y>
-     <width>168</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>CommandLinkButton</string>
-   </property>
-  </widget>
   <zorder>pushButton_5</zorder>
   <zorder>pushButton</zorder>
   <zorder>pushButton_2</zorder>
   <zorder>pushButton_3</zorder>
   <zorder>pushButton_4</zorder>
   <zorder>pushButton_6</zorder>
-  <zorder>commandLinkButton</zorder>
  </widget>
  <resources/>
  <connections/>

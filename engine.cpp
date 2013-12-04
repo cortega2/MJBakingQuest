@@ -39,6 +39,8 @@ engine::engine(){
 
     for(int x = 0; x<5; x++)
         goodObj[x] = NULL;
+    for(int x = 0; x<3; x++)
+        hearts[x] = NULL;
 
 }
 
@@ -191,6 +193,11 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
     parsley->readFile(parentWindow, goodGuys, enemies, blocks, doors,other, fileName );
 
     life = parsley->lives;
+    for(int x =0; x<life; x++){
+        hearts[x] = new QGraphicsRectWidget(QPixmap("sprites/heart.png"), BLOCK_SIZE, BLOCK_SIZE);
+        MoveBlock(hearts[x], uiScene, 27+x, 20);
+        uiScene->addItem(hearts[x]);
+    }
 
     Node *tmp = goodGuys->head;
     while(tmp != 0){
@@ -369,8 +376,7 @@ void engine::loadNext(){
     }
 }
 
-//cannot be called while animation is still happening!
-//i dont know what will happen but i dont think it will be good
+//cannot be called when animation is still taking place
 void engine::reset(QString level){
     //Error check on level
     if(level == NULL || level.length() == 0){
@@ -752,7 +758,8 @@ void engine::checkCollisions(){
     while(tmp != NULL){
         if( (mj->x == tmp->x) && (mj->y == tmp->y) && safeToCheckEnemyCollision ){
             life --;
-            safeToCheckEnemyCollision = false;
+            if(life >=0)
+                hearts[life]->close();
             if(life <= 0){
                 //remove everything that is drawned and reload the level
                 QMessageBox msgBox;
@@ -761,6 +768,8 @@ void engine::checkCollisions(){
 
                 reset(parsley->curLevel);
             }
+
+            safeToCheckEnemyCollision = false;
         }
         tmp = tmp->next;
     }

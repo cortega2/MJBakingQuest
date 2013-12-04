@@ -59,15 +59,16 @@ private:
     QBrush *brush;
     QString newName;
     QMediaPlayer *player;
+    QGraphicsScene *uiScene;
+    QWidget *parentWindow;
+    QGraphicsRectWidget *hearts[3];
 
     //variables used for moving and facing MJ in the right place
     int facing;
     int prevFacing;
+
     int curItems;
     bool safeToCheckEnemyCollision;
-
-    QGraphicsScene *uiScene;
-    QWidget *parentWindow;
 
     void DrawGrid(QGraphicsScene *scene);
     void MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int y);

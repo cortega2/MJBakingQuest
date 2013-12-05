@@ -39,6 +39,7 @@ public:
     void dropBlock();
     void loadNext();
     void checkCollisions();
+    void startOver();
 
     //made mj and the array of blocks public, might change it back to private later if that is better
     Node *mj;

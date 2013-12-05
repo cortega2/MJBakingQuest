@@ -13,11 +13,12 @@ editWindow::editWindow(QWidget *parent) :
 
     ui->radioButtonMBLOCK->setParent(ui->menubar);
     ui->radioButtonNonMovableBlock->setParent(ui->menubar);
-
     ui->radioButtonMBLOCK->setChecked(true);
-
     ui->radioButtonMBLOCK->move(500,1);
     ui->radioButtonNonMovableBlock->move(ui->radioButtonMBLOCK->x()+ui->radioButtonMBLOCK->width(),1);
+
+    ui->lineEdit->setParent(ui->menubar);
+    ui->lineEdit->move(ui->radioButtonNonMovableBlock->x()+ui->radioButtonNonMovableBlock->width(),0);
 
     graphicsView = new GraphicsViewEditor( ginny );
     graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
@@ -97,6 +98,8 @@ void editWindow::on_actionAutomatic_Snapping_changed()
 void editWindow::on_actionSave_triggered()
 {
     ginny->life = 3;
+    ginny->parsley->nextLevel = this->ui->lineEdit->text().prepend("levels/");
+    ginny->parsley->curLevel = this->ui->lineEdit->text().prepend("levels/");
     ginny->ClickedSaveMap();
 }
 

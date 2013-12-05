@@ -47,12 +47,13 @@ public:
     bool mjHasBlock;
     int itemCount;
     int life;
+    objStructure *blocks;
 
 private:
     const QRect *sSize;
     objStructure *goodGuys;
     objStructure *enemies;
-    objStructure *blocks;
+
     objStructure *other;
     objStructure *doors;
     parser *parsley;

@@ -96,8 +96,8 @@ void editWindow::on_actionAutomatic_Snapping_changed()
 
 void editWindow::on_actionSave_triggered()
 {
+    ginny->life = 3;
     ginny->ClickedSaveMap();
-    //ginny->saveGame( QString("poop") );
 }
 
 void editWindow::on_radioButtonMBLOCK_clicked()

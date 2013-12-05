@@ -2,12 +2,32 @@
 
 
 void GraphicsViewEditor::cellDoubleClicked(int row, int column){
-    ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(), (int)floor(rightClickMenu->x()/BLOCK_SIZE), (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
+    ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(),
+                     (int)floor(rightClickMenu->x()/BLOCK_SIZE),
+                     (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
+
+    QString type;
+
+    if( this->mBlockChecked )
+        type.append("MBLOCK");
+    else
+        type.append("BLOCK");
+
+    //this adds blocks to the thing inputting a stripped file name
+    ginny->blocks->add( type,
+                        rightClickMenu->item(row,column)->text().section(".",0,0).mid(8),
+                       (int)floor(rightClickMenu->x()/BLOCK_SIZE),
+                       (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
+
     rightClickMenu->hide();
 }
 
 GraphicsViewEditor::GraphicsViewEditor(engine *gin){
+    //gives us a local reference to the engine
     ginny = gin;
+
+    mBlockChecked = true;
+
     rightClickMenu = new QTableWidget( this );
 
     //connecting the doubleClick signal in the right click menu to the action
@@ -22,6 +42,7 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
     QStringList spritesList = directory.entryList(nameFilter);
 
     //Sets up the rightclick menu
+    //making enough room to hold all sprites
     rightClickMenu->setIconSize(QSize(BLOCK_SIZE,BLOCK_SIZE));
     rightClickMenu->setColumnCount( 5 );
     rightClickMenu->setRowCount( static_cast<int>(ceil(spritesList.size()/5)) );
@@ -32,11 +53,14 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
 
     rightClickMenu->setShowGrid(false);
 
+    //ensures the container for the sprites menu is exactly fitting
     rightClickMenu->setMaximumWidth(rightClickMenu->columnWidth(0) * rightClickMenu->columnCount() );
     rightClickMenu->setMinimumWidth(rightClickMenu->columnWidth(0) * rightClickMenu->columnCount() );
     rightClickMenu->setMaximumHeight( rightClickMenu->rowHeight(0) * rightClickMenu->rowCount() );
     rightClickMenu->setMinimumHeight( rightClickMenu->rowHeight(0) * rightClickMenu->rowCount() );
 
+    //I didn't want the scrollbars, etc showing up when a user right clicks
+    //this makes it be just the sprites
     rightClickMenu->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     rightClickMenu->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     rightClickMenu->verticalHeader()->setVisible(false);
@@ -54,6 +78,7 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
             ico = new QIcon("sprites/"+spritesList.at(k));
 
             item->setIcon( *ico );
+            //item->setText(QString("sprites/"+spritesList.at(k)));
             item->setText(QString("sprites/"+spritesList.at(k)));
             item->setSizeHint(QSize(item->sizeHint().width(), BLOCK_SIZE ));
 
@@ -110,5 +135,14 @@ void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
         this->setCursor(QCursor(Qt::ArrowCursor));
     }if(this->AutoSnap){
         this->SnapToGrid();
+
+        //I should have subclasses how the graphicsscene holds items and redid this whole thing,
+        //that would have made everything wayyyyyy easier. ohwell
+        if ( ginny->blocks->tail && this->itemAt(event->pos()) ){
+            ginny->blocks->tail->x = (int)floor( this->itemAt(event->pos())->x()/BLOCK_SIZE);
+            ginny->blocks->tail->y = (int)floor( (ginny->GetScene()->height()-( this->itemAt( event->pos())->y())) / BLOCK_SIZE);
+            qDebug() << ginny->blocks->tail->y;
+            qDebug() << ginny->blocks->tail->x;
+        }
     }
 }

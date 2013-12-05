@@ -44,8 +44,8 @@ private slots:
     /* For some reason, these dont all work...
         FIXED IT, centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);*/
     //void mousePressEvent(QMouseEvent * event);
-    void mouseReleaseEvent(QMouseEvent * event);
-    // void mouseDoubleClickEvent(QMouseEvent * e);
+    //void mouseReleaseEvent(QMouseEvent * event);
+    //void mouseDoubleClickEvent(QMouseEvent * e);
     //void mouseMoveEvent(QMouseEvent * event);
 
     void on_actionUsage_triggered();
@@ -57,6 +57,10 @@ private slots:
     void on_actionAutomatic_Snapping_changed();
 
     void on_actionSave_triggered();
+
+    void on_radioButtonMBLOCK_clicked();
+
+    void on_radioButtonNonMovableBlock_clicked();
 
 private:
     Ui::MainWindow *ui;

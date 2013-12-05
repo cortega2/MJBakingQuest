@@ -13,8 +13,9 @@ void GraphicsViewEditor::cellDoubleClicked(int row, int column){
     else
         type.append("BLOCK");
 
+    //this adds blocks to the thing inputting a stripped file name
     ginny->blocks->add( type,
-                       rightClickMenu->item(row,column)->text(),
+                        rightClickMenu->item(row,column)->text().section(".",0,0).mid(8),
                        (int)floor(rightClickMenu->x()/BLOCK_SIZE),
                        (int)floor( (ginny->GetScene()->height()-(rightClickMenu->y()))/BLOCK_SIZE) );
 
@@ -77,6 +78,7 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
             ico = new QIcon("sprites/"+spritesList.at(k));
 
             item->setIcon( *ico );
+            //item->setText(QString("sprites/"+spritesList.at(k)));
             item->setText(QString("sprites/"+spritesList.at(k)));
             item->setSizeHint(QSize(item->sizeHint().width(), BLOCK_SIZE ));
 
@@ -134,8 +136,8 @@ void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
     }if(this->AutoSnap){
         this->SnapToGrid();
 
-        //(int)floor( this->itemAt(event->pos())->x()/BLOCK_SIZE),
-        //(int)floor( (ginny->GetScene()->height()-( this->itemAt( event->pos() )->y() ))/BLOCK_SIZE)
+        //I should have subclasses how the graphicsscene holds items and redid this whole thing,
+        //that would have made everything wayyyyyy easier. ohwell
         if ( ginny->blocks->tail && this->itemAt(event->pos()) ){
             ginny->blocks->tail->x = (int)floor( this->itemAt(event->pos())->x()/BLOCK_SIZE);
             ginny->blocks->tail->y = (int)floor( (ginny->GetScene()->height()-( this->itemAt( event->pos())->y())) / BLOCK_SIZE);

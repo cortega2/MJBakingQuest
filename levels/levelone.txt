@@ -1,5 +1,5 @@
 #
-#Types of blocks: BLOCK, MJ, MX, ENEMY, MBLOCK and others
+#Types of blocks: BLOCK, MJ, GOOD, ENEMY, MBLOCK and others
 #this is a comment
 #
 BLOCK, woodfloor, 0, 1
@@ -201,4 +201,7 @@ MBLOCK, move_wood, 14, 2
 GOOD, mexican_man, 20, 2, sprites/vanilla, 1
 #Second enemy
 ENEMY, enemy3, 15, 2
+#one more enemy
+ENEMY, enemy2, 28, 12
 CURRENT, levels/levelone.txt
+NEXT, levels/leveltwo.txt

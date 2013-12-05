@@ -31,3 +31,5 @@ FORMS += \
     editormainwindow.ui \
     start.ui \
     gamewindow.ui
+	
+	RC_FILE = bakingquest.rc

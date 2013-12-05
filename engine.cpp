@@ -376,6 +376,11 @@ void engine::loadNext(){
         tmp = tmp->next;
     }
 }
+//starts the current level over by first clearing out the life and then callong reset
+void engine::startOver(){
+    life =0;
+    reset(parsley->curLevel);
+}
 
 //cannot be called when animation is still taking place
 void engine::reset(QString level){
@@ -412,8 +417,9 @@ void engine::reset(QString level){
         goodObj[x] = NULL;
     }
     //reset and remove hearts
-    for(int x = 0; x<life; x++){
-        delete hearts[x];
+    for(int x = 0; x<3; x++){
+        if(hearts[x] != NULL)
+            delete hearts[x];
         hearts[x] = NULL;
     }
 
@@ -764,8 +770,10 @@ void engine::checkCollisions(){
     while(tmp != NULL){
         if( (mj->x == tmp->x) && (mj->y == tmp->y) && safeToCheckEnemyCollision ){
             life --;
-            if(life >=0)
+            if(life >=0){
                 delete hearts[life];
+                hearts[life] = NULL;
+            }
             if(life <= 0){
                 //remove everything that is drawned and reload the level
                 QMessageBox msgBox;

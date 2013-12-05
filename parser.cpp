@@ -152,6 +152,9 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
 void parser::createFile(const QString name,  objStructure *goodGuys, objStructure *enemies,
                         objStructure *blocks, objStructure *doors, objStructure *other){
 
+    if(!QDir().exists("saved"))
+        QDir().mkdir("saved");
+
     QFile file("saved/" + name);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);

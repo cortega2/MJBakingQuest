@@ -84,10 +84,14 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
 
     //move left
     if (event->key() == Qt::Key_A)
-           ginny->moveChar(-1);
+        ginny->moveChar(-1);
     //move right
     else if(event->key() == Qt::Key_D)
-           ginny->moveChar(1);
+        ginny->moveChar(1);
+    //reset the current level
+    else if(event->key() == Qt::Key_R){
+        ginny->startOver();
+    }
     //open door or pick up or drop block
     else if(event->key() == Qt::Key_Space){
         if(!(ginny->mjHasBlock))

@@ -48,6 +48,7 @@ public:
     int itemCount;
     int life;
     objStructure *blocks;
+    parser *parsley;
 
 private:
     const QRect *sSize;
@@ -56,7 +57,7 @@ private:
 
     objStructure *other;
     objStructure *doors;
-    parser *parsley;
+
     QBrush *brush;
     QString newName;
     QMediaPlayer *player;

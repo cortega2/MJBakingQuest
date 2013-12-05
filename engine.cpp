@@ -329,11 +329,11 @@ void engine::ClickedSaveMap(void){
         if( reply == QMessageBox::Yes)
         {
           qDebug() << "yes";
-          saveGame( text );
+          this->saveGame( text );
         }
     }else{
         //file doesn't exist sooo
-        saveGame( text );
+        this->saveGame( text );
     }
 }
 

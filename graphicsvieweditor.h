@@ -11,6 +11,7 @@ public:
     GraphicsViewEditor(engine *gin);
     void SnapToGrid();
     bool AutoSnap;
+    bool mBlockChecked;
 
     Q_OBJECT
 public slots:
@@ -22,6 +23,7 @@ protected:
     QTableWidget *rightClickMenu;
 private:
     engine *ginny;
+    QString lastSprite;
 
 };
 

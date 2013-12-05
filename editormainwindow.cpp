@@ -11,6 +11,14 @@ editWindow::editWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ui->radioButtonMBLOCK->setParent(ui->menubar);
+    ui->radioButtonNonMovableBlock->setParent(ui->menubar);
+
+    ui->radioButtonMBLOCK->setChecked(true);
+
+    ui->radioButtonMBLOCK->move(500,1);
+    ui->radioButtonNonMovableBlock->move(ui->radioButtonMBLOCK->x()+ui->radioButtonMBLOCK->width(),1);
+
     graphicsView = new GraphicsViewEditor( ginny );
     graphicsView->setGeometry( QRect(0,ui->menubar->height(),BLOCK_SIZE*30,BLOCK_SIZE*20 + ui->menubar->height()) );
 
@@ -74,10 +82,6 @@ void editWindow::on_actionSnap_Now_triggered()
     graphicsView->SnapToGrid();
 }
 
-void editWindow::mouseReleaseEvent(QMouseEvent *event){
-
-}
-
 void editWindow::on_actionCredits_triggered()
 {
     QMessageBox box;
@@ -92,5 +96,16 @@ void editWindow::on_actionAutomatic_Snapping_changed()
 
 void editWindow::on_actionSave_triggered()
 {
-    ginny->ClickedSaveMap();
+    //ginny->ClickedSaveMap();
+    ginny->saveGame( QString("poop") );
+}
+
+void editWindow::on_radioButtonMBLOCK_clicked()
+{
+    graphicsView->mBlockChecked = this->ui->radioButtonMBLOCK->isChecked();
+}
+
+void editWindow::on_radioButtonNonMovableBlock_clicked()
+{
+    graphicsView->mBlockChecked = this->ui->radioButtonMBLOCK->isChecked();
 }

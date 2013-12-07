@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>My Project: Doxygen/gamewindow.h Source File</title>
+<title>My Project: gamewindow.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -77,11 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_1148ebc2b25b55095aebf6f4cbb6efca.html">Doxygen</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">gamewindow.h</div>  </div>
@@ -118,8 +114,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> moveEvent();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> mediaEvent();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgamewindow.html#a69fdf6888c6496deedba54f588867415">moveEvent</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgamewindow.html#a4a43db9e7606e3e24a63baf6d36a7e79">mediaEvent</a>();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    Ui::gamewindow *ui;</div>
@@ -131,17 +127,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//this is needed to listen to keys</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> keyPressEvent(QKeyEvent *event);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgamewindow.html#a403dc8059cacafc856e7a38bb660e161">keyPressEvent</a>(QKeyEvent *event);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif // GAMEWINDOW_H</span></div>
+<div class="ttc" id="classgamewindow_html_a403dc8059cacafc856e7a38bb660e161"><div class="ttname"><a href="classgamewindow.html#a403dc8059cacafc856e7a38bb660e161">gamewindow::keyPressEvent</a></div><div class="ttdeci">void keyPressEvent(QKeyEvent *event)</div><div class="ttdoc">gamewindow::keyPressEvent listens to keypresses from the user and does an action based on the key tha...</div><div class="ttdef"><b>Definition:</b> gamewindow.cpp:91</div></div>
 <div class="ttc" id="classengine_html"><div class="ttname"><a href="classengine.html">engine</a></div><div class="ttdef"><b>Definition:</b> engine.h:16</div></div>
 <div class="ttc" id="classgamewindow_html"><div class="ttname"><a href="classgamewindow.html">gamewindow</a></div><div class="ttdef"><b>Definition:</b> gamewindow.h:17</div></div>
-<div class="ttc" id="classgamewindow_html_a3e131541b6a8c961d0156a62a02b7862"><div class="ttname"><a href="classgamewindow.html#a3e131541b6a8c961d0156a62a02b7862">gamewindow::gamewindow</a></div><div class="ttdeci">gamewindow(QWidget *parent=0, bool newGame=true, QString sessionName=NULL)</div><div class="ttdef"><b>Definition:</b> gamewindow.cpp:12</div></div>
+<div class="ttc" id="classgamewindow_html_a69fdf6888c6496deedba54f588867415"><div class="ttname"><a href="classgamewindow.html#a69fdf6888c6496deedba54f588867415">gamewindow::moveEvent</a></div><div class="ttdeci">void moveEvent()</div><div class="ttdoc">gamewindow::moveEvent sets up timer function for moving enemies </div><div class="ttdef"><b>Definition:</b> gamewindow.cpp:130</div></div>
+<div class="ttc" id="classgamewindow_html_a3e131541b6a8c961d0156a62a02b7862"><div class="ttname"><a href="classgamewindow.html#a3e131541b6a8c961d0156a62a02b7862">gamewindow::gamewindow</a></div><div class="ttdeci">gamewindow(QWidget *parent=0, bool newGame=true, QString sessionName=NULL)</div><div class="ttdoc">gamewindow::gamewindow Loads games depending on if its new or saved. Also sets up timer for music to ...</div><div class="ttdef"><b>Definition:</b> gamewindow.cpp:14</div></div>
+<div class="ttc" id="classgamewindow_html_a4a43db9e7606e3e24a63baf6d36a7e79"><div class="ttname"><a href="classgamewindow.html#a4a43db9e7606e3e24a63baf6d36a7e79">gamewindow::mediaEvent</a></div><div class="ttdeci">void mediaEvent()</div><div class="ttdoc">gamewindow::moveEvent sets up timer function for media player for music played in the background ...</div><div class="ttdef"><b>Definition:</b> gamewindow.cpp:141</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 4 2013 11:19:46 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 6 2013 18:19:41 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -1,3 +1,9 @@
+/*! \abstract engine
+ *         This class is the engine for the whole project. The engine is where the parser (which parses the levels that are loaded) is called
+ *         and the objects (characters, scenery, etc.) are created. It also defines the different options for the game, start new game,
+ *         save game, or continue a game.
+ */
+
 /*
  * engine.cpp
  * Originally Authored by Joseph Burnitz
@@ -11,11 +17,13 @@
 */
 
 #include "engine.h"
-
-//test code
 #include <iostream>
-
 #define BLOCK_SIZE ( 30 )
+
+/*! \brief engine::engine
+ *         Creates all objects defined in the parser for each level. It also keeps track of how many walkable objects (MJ, good guys, enemies) and hearts
+ *        (for the health bar) are to appear in the level.
+ */
 engine::engine(){
     goodGuys = new objStructure();
     enemies = new objStructure();
@@ -59,14 +67,21 @@ engine::~engine(){
     delete parsley;
 }
 
-/* returns a pointer to the current graphics scene */
+/*! \brief engine::GetScene
+ *         returns a pointer to the current graphics scene
+ */
 QGraphicsScene* engine::GetScene(){
     return uiScene;
 }
+
 void engine::SetScene(QGraphicsScene *scene){
     uiScene = scene;
 }
 
+/*! \brief engine::AddSprite
+ *         Creates a widget for sprites, givien a sprite picture, and a position. The sprite also holds properties that tell wheter or not it is a movable
+ *         object.
+ */
 void engine::AddSprite(const char* spriteFName, int xLoc, int yLoc ){
     QGraphicsRectWidget *tmp = new QGraphicsRectWidget( spriteFName, BLOCK_SIZE, BLOCK_SIZE );
     tmp->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -80,14 +95,17 @@ void engine::SetParentWindow( QWidget *pWindow ){
     parentWindow = pWindow;
 }
 
-/* Moves a block by offset of their size
- * 0,0 is in the lower left, e.g. Quadrant 1 */
+/*! \brief engine::MoveBlock
+ * Moves a block by offset of their size
+ * 0,0 is in the lower left, e.g. Quadrant 1
+*/
 void engine::MoveBlock(QGraphicsWidget *box, QGraphicsScene *scene, int x, int yOffset){
     box->moveBy(BLOCK_SIZE*x,scene->height()-BLOCK_SIZE*yOffset);
 }
 
-/* Draws a grid lines through the
- * scene for line up/snap to purposes */
+/*! \brief engine::DrawGrid
+ * Draws a grid lines through the scene for line up / snap to purposes
+ */
 void engine::DrawGrid(QGraphicsScene *scene){
     int gridWidth = (scene->width())/BLOCK_SIZE;
     int gridHeight = (scene->height())/BLOCK_SIZE;
@@ -100,8 +118,10 @@ void engine::DrawGrid(QGraphicsScene *scene){
     }
 }
 
-/* Loads a map into the Graphics Scene
- * Open a file chooser dialog */
+/*! \brief engine::LoadMap
+ * Loads a map into the Graphics Scene
+ * Open a file chooser dialog
+ */
 int engine::LoadMap(QGraphicsScene *scene){
     parsley->readFile( parentWindow, goodGuys, enemies, blocks, doors,other, NULL );
 
@@ -186,9 +206,11 @@ int engine::LoadMap(QGraphicsScene *scene){
     return 1;
 }
 
-/* Loads the level file specified by the fileName
+/*! \brief engine::LoadMap
+ * Loads the level file specified by the fileName
  * Useful for autoloading the next level upon winning
- * it's almost identical to the one above it */
+ * it's almost identical to the one above it
+ */
 int engine::LoadMap(QGraphicsScene *scene, QString fileName){
     parsley->readFile(parentWindow, goodGuys, enemies, blocks, doors,other, fileName );
 
@@ -302,20 +324,33 @@ int engine::LoadMap(QGraphicsScene *scene, QString fileName){
     return 1;
 }
 
+/*! \brief engine::saveGame
+ * Created a file with the current map and status of the game.
+ * This method does the reverse of LoadMap where instead od loading the objects from the map file, it creates a map file with the object in the level and the
+ * the states they are in.
+ */
 void engine::saveGame(QString name){
     parsley->lives = life;
     parsley->createFile(name, goodGuys, enemies, blocks, doors,other);
 }
 
-//loads level without the file chooser, for now default level
+/*! \brief engine::loadGame
+ *loads level without the file chooser, for now default level
+ */
 void engine::loadGame(QString level){
     LoadMap(uiScene, level);
 }
 
-/* Opens the file chooser dialog and loads the map */
+/*! \brief engine::ClickedOpenMap
+ *Opens the file chooser dialog and loads the map
+ */
 void engine::ClickedOpenMap(void){
     LoadMap(uiScene);
 }
+
+/*! \brief engine::ClickedSaveMap
+ * Opens the file save dialog and allows user to save current level to a new file, or overwrite an already saved file
+ */
 void engine::ClickedSaveMap(void){
 
     QString text = QInputDialog::getText( parentWindow, "Save Level", "Level name:", QLineEdit::Normal, "levelname", NULL );
@@ -338,7 +373,9 @@ void engine::ClickedSaveMap(void){
     }
 }
 
-/* Clears out the scene */
+/*! \brief engine::CloseMap
+ * Clears out the scene
+ */
 void engine::CloseMap(void){
     //AskToSave...
     qDeleteAll( uiScene->items() );
@@ -353,12 +390,18 @@ void engine::setBrush(){
     brush = new QBrush( QPixmap(newName) );
 }
 
+/*! \brief engine::setNewName
+ * Sets sprite name so that picture file can be accessed and loaded
+ */
 void engine::setNewName (QString subName){
     newName = "sprites/";
     newName.append(subName);
     newName.append(".png");
 }
 
+/*! \brief engine::loadNext
+ *  checks if mj is by the door if she is then load the next level
+ */
 void engine::loadNext(){
     //check if mj is by the door if she is then load the next level
     Node *tmp = doors->head;
@@ -376,13 +419,19 @@ void engine::loadNext(){
         tmp = tmp->next;
     }
 }
-//starts the current level over by first clearing out the life and then callong reset
+
+/*! \brief engine::moveChar
+ *     starts the current level over by first clearing out the life and then callong reset
+ */
 void engine::startOver(){
     life =0;
     reset(parsley->curLevel);
 }
 
-//cannot be called when animation is still taking place
+/*! \brief engine::reset
+ * resets the level by seting objects totheir orignal positions and states
+ * cannot be called when animation is still taking place
+ */
 void engine::reset(QString level){
     //Error check on level
     if(level == NULL || level.length() == 0){
@@ -426,9 +475,9 @@ void engine::reset(QString level){
     loadGame(level);
 }
 
-/*method that is used to move mj
- *THINGS TO DO: when mj moves up and is carrying a block, check to make sure the block fits in the space
- *ie, make sure blocks dont go through each other
+/*! \brief engine::moveChar
+ *     method that is used to move mj.
+ *     This method changes her sprite picture and updates her posistion
  */
 void engine::moveChar(int direction){
 
@@ -570,7 +619,9 @@ void engine::moveChar(int direction){
     safeToCheckEnemyCollision = true;
 }
 
-//moves the good characters
+/*! \brief engine::moveGood
+ * moves the good characters
+ */
 void engine::moveGood(){
     Node *tmp = goodGuys->head;
     while(tmp != 0){
@@ -606,7 +657,9 @@ void engine::moveGood(){
     }
 }
 
-//moves the enemies
+/*! \brief engine::moveEnemies
+ * moves the good characters
+ */
 void engine::moveEnemies(){
     Node *tmp = enemies->head;
     while(tmp != 0){
@@ -649,9 +702,10 @@ void engine::moveEnemies(){
     }
 }
 
-/*Still needs improvement
- *right now if mj picks a block under her feet she is moves down,
- *but she still needs to be able to pick up blocks that are diagnal from her
+/*! \brief engine::getBlock
+ * allows MJ to pick up blocks below her (when she is facing front)
+ * or on the right or left of her, depending on which direction she
+ * is facing
  */
 void engine::getBlock(){
     int y = mj->y;
@@ -659,7 +713,7 @@ void engine::getBlock(){
     if(facing ==0)
         y = y - 1;
 
-    //needs to be updated
+
     //checks to see if the block that mj is facing is of type MBLOCK
     if(walkable[y-1][x]!= 0 && walkable[y-1][x]->blockType.compare("MBLOCK") == 0){
         int mjX = mj->x;
@@ -682,9 +736,11 @@ void engine::getBlock(){
     }
 }
 
-//using mj's position we find the position of the block she is carrying and check to see if the place where
-//the player wants to drop it is a legal place, ie there is no block there.
-//NEEDS CLEAN UP!
+/*! \brief engine::dropBlock()
+ * using mj's position we find the position of the block she is carrying
+ * and check to see if the place where the player wants to drop it is a legal
+ * place, ie there is no block there. If block lands on an enemy, they die (disappear)
+ */
 void engine::dropBlock(){
 
     //has to face left or right
@@ -740,6 +796,12 @@ void engine::dropBlock(){
 
 }
 
+/*! \brief engine::checkCollision()
+ *  checks to see if MJ collides with any of the people
+ *  if she collides with a good guy, she gets the item they are holding
+ *  if she collides with an enemy, she loses a life, until she runs out
+ *  when she runs out the game resets to the beginning of that level
+ */
 void engine::checkCollisions(){
     //check to see if mj collides with a good guy
     Node *tmp = goodGuys->head;

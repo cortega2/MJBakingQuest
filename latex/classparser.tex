@@ -6,11 +6,9 @@
 \item 
 \hyperlink{classparser_ac4cb16e924a735dfb5837772afa1a1a9}{parser} ()
 \item 
-\hypertarget{classparser_aa16938ad5757d700376a6fadb4e11e2a}{int {\bfseries read\-File} (Q\-Widget $\ast$parent, \hyperlink{classobj_structure}{obj\-Structure} $\ast$good, \hyperlink{classobj_structure}{obj\-Structure} $\ast$enemies, \hyperlink{classobj_structure}{obj\-Structure} $\ast$blocks, \hyperlink{classobj_structure}{obj\-Structure} $\ast$doors, \hyperlink{classobj_structure}{obj\-Structure} $\ast$other, Q\-String file\-Name)}\label{classparser_aa16938ad5757d700376a6fadb4e11e2a}
-
+int \hyperlink{classparser_aa16938ad5757d700376a6fadb4e11e2a}{read\-File} (Q\-Widget $\ast$parent, \hyperlink{classobj_structure}{obj\-Structure} $\ast$good, \hyperlink{classobj_structure}{obj\-Structure} $\ast$enemies, \hyperlink{classobj_structure}{obj\-Structure} $\ast$blocks, \hyperlink{classobj_structure}{obj\-Structure} $\ast$doors, \hyperlink{classobj_structure}{obj\-Structure} $\ast$other, Q\-String file\-Name)
 \item 
-\hypertarget{classparser_ace9c694c314e8314bcee42ca751f64a0}{void {\bfseries create\-File} (Q\-String name, \hyperlink{classobj_structure}{obj\-Structure} $\ast$good\-Guys, \hyperlink{classobj_structure}{obj\-Structure} $\ast$enemies, \hyperlink{classobj_structure}{obj\-Structure} $\ast$blocks, \hyperlink{classobj_structure}{obj\-Structure} $\ast$doors, \hyperlink{classobj_structure}{obj\-Structure} $\ast$other)}\label{classparser_ace9c694c314e8314bcee42ca751f64a0}
-
+void \hyperlink{classparser_ace9c694c314e8314bcee42ca751f64a0}{create\-File} (Q\-String name, \hyperlink{classobj_structure}{obj\-Structure} $\ast$good\-Guys, \hyperlink{classobj_structure}{obj\-Structure} $\ast$enemies, \hyperlink{classobj_structure}{obj\-Structure} $\ast$blocks, \hyperlink{classobj_structure}{obj\-Structure} $\ast$doors, \hyperlink{classobj_structure}{obj\-Structure} $\ast$other)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -34,9 +32,37 @@
 {}
 \end{DoxyParamCaption}
 )}}\label{classparser_ac4cb16e924a735dfb5837772afa1a1a9}
-\hyperlink{classparser_ac4cb16e924a735dfb5837772afa1a1a9}{parser\-::parser} The parser loads the levels as a map for the game. It reads the level file and categorizes each line as a different object (block, door, mj, enemy, etc.). Then it takes in the other information as parameters of the object corresponding to the object picture, location, and type. 
+parser The parser loads the levels as a map for the game. It reads the level file and categorizes each line as a different object (block, door, mj, enemy, etc.). Then it takes in the other information as parameters of the object corresponding to the object picture, location, and type. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classparser_ace9c694c314e8314bcee42ca751f64a0}{\index{parser@{parser}!create\-File@{create\-File}}
+\index{create\-File@{create\-File}!parser@{parser}}
+\subsubsection[{create\-File}]{\setlength{\rightskip}{0pt plus 5cm}void parser\-::create\-File (
+\begin{DoxyParamCaption}
+\item[{Q\-String}]{name, }
+\item[{{\bf obj\-Structure} $\ast$}]{good\-Guys, }
+\item[{{\bf obj\-Structure} $\ast$}]{enemies, }
+\item[{{\bf obj\-Structure} $\ast$}]{blocks, }
+\item[{{\bf obj\-Structure} $\ast$}]{doors, }
+\item[{{\bf obj\-Structure} $\ast$}]{other}
+\end{DoxyParamCaption}
+)}}\label{classparser_ace9c694c314e8314bcee42ca751f64a0}
+\hyperlink{classparser_ace9c694c314e8314bcee42ca751f64a0}{parser\-::create\-File} Creates level text file from a saved game, based on the objects currently on the screen, their positions, and their states \hypertarget{classparser_aa16938ad5757d700376a6fadb4e11e2a}{\index{parser@{parser}!read\-File@{read\-File}}
+\index{read\-File@{read\-File}!parser@{parser}}
+\subsubsection[{read\-File}]{\setlength{\rightskip}{0pt plus 5cm}int parser\-::read\-File (
+\begin{DoxyParamCaption}
+\item[{Q\-Widget $\ast$}]{parent, }
+\item[{{\bf obj\-Structure} $\ast$}]{good, }
+\item[{{\bf obj\-Structure} $\ast$}]{enemies, }
+\item[{{\bf obj\-Structure} $\ast$}]{blocks, }
+\item[{{\bf obj\-Structure} $\ast$}]{doors, }
+\item[{{\bf obj\-Structure} $\ast$}]{other, }
+\item[{Q\-String}]{file\-Name}
+\end{DoxyParamCaption}
+)}}\label{classparser_aa16938ad5757d700376a6fadb4e11e2a}
+\hyperlink{classparser_aa16938ad5757d700376a6fadb4e11e2a}{parser\-::read\-File} Reads a file, either one specified by user though the file dialog or opens the name specified add sprites to the \hyperlink{classobj_structure}{obj\-Structure} 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-Doxygen/parser.\-h\item 
-Doxygen/parser.\-cpp\end{DoxyCompactItemize}
+parser.\-h\item 
+parser.\-cpp\end{DoxyCompactItemize}

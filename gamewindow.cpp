@@ -1,8 +1,16 @@
-#include "gamewindow.h"
+/*! \abstract gamewindow
+ *         This class sets up the window for game play.
+ *         This window loads a new game or a saved game.
+ *         It also has the keyboard connections set up for the user.
+ */
 
-//testcode
+#include "gamewindow.h"
 #include <iostream>
 
+/*! \brief gamewindow::gamewindow
+ * Loads games depending on if its new or saved. Also sets up timer for music to play
+ * in the background. The order of the music is randomly picked.
+ */
 gamewindow::gamewindow(QWidget *parent, bool newGame, QString sessionName) :
     QMainWindow(parent),
     ui(new Ui::gamewindow)
@@ -76,7 +84,10 @@ QGraphicsView* gamewindow::GetGraphicsView(){
     return graphicsView;
 }
 
-//listens to keypresses from the user and does an action based on the key that was pressed
+/*! \brief gamewindow::keyPressEvent
+ * listens to keypresses from the user and does an action
+ * based on the key that was pressed
+ */
 void gamewindow::keyPressEvent(QKeyEvent *event){
     //if it is safe to animate. It is not safe when mj has 0 life and we are reloading the level
     if(ginny->life<=0)
@@ -113,7 +124,9 @@ void gamewindow::keyPressEvent(QKeyEvent *event){
     }
 }
 
-//timer function for moving enemies
+/*! \brief gamewindow::moveEvent
+ * sets up timer function for moving enemies
+ */
 void gamewindow::moveEvent(){
     if(ginny->life<=0)
         return;
@@ -121,7 +134,10 @@ void gamewindow::moveEvent(){
     ginny->moveEnemies();
     ginny->moveGood();
 }
-//timer function for media player
+
+/*! \brief gamewindow::moveEvent
+ * sets up timer function for media player for music played in the background
+ */
 void gamewindow::mediaEvent(){
     //once song finishes start a new one
     if(player->mediaStatus() == 8 || player->mediaStatus() == 7){

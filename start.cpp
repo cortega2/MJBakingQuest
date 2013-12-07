@@ -1,9 +1,14 @@
+/*! \abstract start
+ *         This is the start up screen. This class creates a start up window, that links to the game window or the level editor window. The window also
+ *         includes a help button with instructions for playing the game.
+ */
+
 #include "start.h"
-//test
 #include <iostream>
 
-
-
+/*! \abstract start::start
+ *   Opens start window and plays start up music
+ */
 start::start(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::start)
@@ -20,6 +25,9 @@ start::~start(){
     delete ui;
 }
 
+/*! \abstract start::on_pushButton_clicked
+ *   Opens a new game
+ */
 void start::on_pushButton_clicked(){
     bool ok;
     QString session;
@@ -52,6 +60,9 @@ void start::on_pushButton_clicked(){
     hide();
 }
 
+/*! \abstract start::on_pushButton_2_clicked
+ *   Opens a saved game
+ */
 void start::on_pushButton_2_clicked(){
     QString session;
     while(true){
@@ -86,6 +97,9 @@ void start::on_pushButton_2_clicked(){
 
 }
 
+/*! \abstract start::on_pushButton_3_clicked
+ *   Opens the level editor
+ */
 void start::on_pushButton_3_clicked(){
     editWindow *mainWindow = new editWindow;
 
@@ -101,6 +115,9 @@ void start::on_pushButton_3_clicked(){
 
 }
 
+/*! \abstract start::on_pushButton_4_clicked
+ *   Opens help window
+ */
 void start::on_pushButton_4_clicked(){
 
     MyMessageBox msgBox;
@@ -114,6 +131,9 @@ void start::on_pushButton_4_clicked(){
 
 }
 
+/*! \abstract start::on_pushButton_6_clicked
+ *   Exits game
+ */
 void start::on_pushButton_6_clicked(){
     qApp->exit();
 }

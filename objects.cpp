@@ -1,3 +1,7 @@
+/*! \abstract objects
+ *    The objects class creates the brushes that paint all of the objects (characters, movable items, and scenery) in the game window.
+ */
+
 #include "objects.h"
 
 QGraphicsRectWidget::~QGraphicsRectWidget(){

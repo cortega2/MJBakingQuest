@@ -1,9 +1,14 @@
-#include "editormainwindow.h"
+/*! \abstract editormainwindow
+ *         This class sets up the window of the level editor.
+ *         This window includes menus for help, tools to build a level and a file menu.
+ */
 
-//test code
+#include "editormainwindow.h"
 #include <iostream>
 
-
+/*! \brief editwindow::editWindow
+ *         Uses GraphicsView to display level editor window. Calls engine to generate items for window.
+ */
 editWindow::editWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -39,7 +44,10 @@ editWindow::editWindow(QWidget *parent) :
     //graphicsView->setMouseTracking(true);
     //setMouseTracking(true);
 }
-/* need to clean up stuff when your done! */
+
+/*! \brief editWindow::~editWindow
+ *         To clean up stuff when your done!
+ */
 editWindow::~editWindow(){
     delete ui;
     delete ginny;
@@ -47,10 +55,12 @@ editWindow::~editWindow(){
     delete graphicsScene;
 }
 
+//p
 QGraphicsView* editWindow::GetGraphicsView(){
     return graphicsView;
 }
 
+//p
 QGraphicsScene* editWindow::GetGraphicsScene(){
     return graphicsScene;
 }

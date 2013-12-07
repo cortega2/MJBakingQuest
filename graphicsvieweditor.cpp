@@ -1,6 +1,15 @@
+/*! \abstract Graphicsvieweditor
+ *         The GraphicsViewEditor is the class that sets up the level editor tool. The class creates a grid menu that displays all of the available sprites
+ *         for the user tocreate their level. It also defines how the user uses the tool through the mouse.
+ */
+
 #include "graphicsvieweditor.h"
 
-
+/*! \abstract GraphicsViewEditor::cellDoubleClicked
+ * opens menu of sprites when the leveleditor is right clicked. if
+ * a sprite is right clicked the sprite alone is added to the
+ * screen.
+ */
 void GraphicsViewEditor::cellDoubleClicked(int row, int column){
     ginny->AddSprite(rightClickMenu->item(row,column)->text().toStdString().c_str(),
                      (int)floor(rightClickMenu->x()/BLOCK_SIZE),
@@ -22,6 +31,12 @@ void GraphicsViewEditor::cellDoubleClicked(int row, int column){
     rightClickMenu->hide();
 }
 
+/*! \abstract GraphicsViewEditor::GraphicsViewEditor
+ * Connects right click to the double right click which is the action desired
+ * for adding sprites to the screen. It also connects the picture to the action
+ * so that the sprite alone shows on the screen. And it sets up the table for
+ * the sprite menu.
+ */
 GraphicsViewEditor::GraphicsViewEditor(engine *gin){
     //gives us a local reference to the engine
     ginny = gin;
@@ -91,6 +106,10 @@ GraphicsViewEditor::GraphicsViewEditor(engine *gin){
     rightClickMenu->setCursor(Qt::ArrowCursor);
 }
 
+/*! \abstract GraphicsViewEditor::mousePressEvent
+ * Connects mouse press signals for clicking the sprite menu and holding the
+ * selected sprites
+ */
 void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
     if(event->button() == Qt::LeftButton ){
         this->setCursor(QCursor(Qt::ClosedHandCursor));
@@ -103,6 +122,10 @@ void GraphicsViewEditor::mousePressEvent(QMouseEvent * event){
     }
 }
 
+/*! \abstract GraphicsViewEditor::SnapToGrid()
+ * Sets up snap to grid so that when sprites are dragged into a position on
+ * screen it locks in to the square coordinate position
+ */
 void GraphicsViewEditor::SnapToGrid(){
     QList<QGraphicsItem*> list = this->items();
 
@@ -130,6 +153,10 @@ void GraphicsViewEditor::SnapToGrid(){
     }
 }
 
+/*! \abstract GraphicsViewEditor::mouseReleaseEvent()
+ * Allows for dragging the sprite around to position it using the mouse release
+ * and it snaps to the grid
+ */
 void GraphicsViewEditor::mouseReleaseEvent(QMouseEvent * event){
     if(event->button() == Qt::LeftButton ){
         this->setCursor(QCursor(Qt::ArrowCursor));

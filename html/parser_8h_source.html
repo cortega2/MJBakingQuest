@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>My Project: Doxygen/parser.h Source File</title>
+<title>My Project: parser.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -77,11 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_1148ebc2b25b55095aebf6f4cbb6efca.html">Doxygen</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">parser.h</div>  </div>
@@ -101,9 +97,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classparser.html#ac4cb16e924a735dfb5837772afa1a1a9">parser</a>();</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ~<a class="code" href="classparser.html">parser</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> readFile(QWidget *parent, <a class="code" href="classobj_structure.html">objStructure</a> *good, <a class="code" href="classobj_structure.html">objStructure</a> *enemies,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classparser.html#aa16938ad5757d700376a6fadb4e11e2a">readFile</a>(QWidget *parent, <a class="code" href="classobj_structure.html">objStructure</a> *good, <a class="code" href="classobj_structure.html">objStructure</a> *enemies,</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                 <a class="code" href="classobj_structure.html">objStructure</a> *blocks, <a class="code" href="classobj_structure.html">objStructure</a> *doors, <a class="code" href="classobj_structure.html">objStructure</a> *other, QString fileName);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> createFile(QString name, <a class="code" href="classobj_structure.html">objStructure</a> *goodGuys, <a class="code" href="classobj_structure.html">objStructure</a> *enemies, <a class="code" href="classobj_structure.html">objStructure</a> *blocks, <a class="code" href="classobj_structure.html">objStructure</a> *doors,<a class="code" href="classobj_structure.html">objStructure</a> *other);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classparser.html#ace9c694c314e8314bcee42ca751f64a0">createFile</a>(QString name, <a class="code" href="classobj_structure.html">objStructure</a> *goodGuys, <a class="code" href="classobj_structure.html">objStructure</a> *enemies, <a class="code" href="classobj_structure.html">objStructure</a> *blocks, <a class="code" href="classobj_structure.html">objStructure</a> *doors,<a class="code" href="classobj_structure.html">objStructure</a> *other);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    QString curLevel;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QString nextLevel;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> lives;</div>
@@ -114,13 +110,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif // PARSER_H</span></div>
+<div class="ttc" id="classparser_html_ace9c694c314e8314bcee42ca751f64a0"><div class="ttname"><a href="classparser.html#ace9c694c314e8314bcee42ca751f64a0">parser::createFile</a></div><div class="ttdeci">void createFile(QString name, objStructure *goodGuys, objStructure *enemies, objStructure *blocks, objStructure *doors, objStructure *other)</div><div class="ttdef"><b>Definition:</b> parser.cpp:160</div></div>
 <div class="ttc" id="classobj_structure_html"><div class="ttname"><a href="classobj_structure.html">objStructure</a></div><div class="ttdef"><b>Definition:</b> objStructure.h:24</div></div>
 <div class="ttc" id="classparser_html"><div class="ttname"><a href="classparser.html">parser</a></div><div class="ttdef"><b>Definition:</b> parser.h:10</div></div>
-<div class="ttc" id="classparser_html_ac4cb16e924a735dfb5837772afa1a1a9"><div class="ttname"><a href="classparser.html#ac4cb16e924a735dfb5837772afa1a1a9">parser::parser</a></div><div class="ttdeci">parser()</div><div class="ttdef"><b>Definition:</b> parser.cpp:11</div></div>
+<div class="ttc" id="classparser_html_ac4cb16e924a735dfb5837772afa1a1a9"><div class="ttname"><a href="classparser.html#ac4cb16e924a735dfb5837772afa1a1a9">parser::parser</a></div><div class="ttdeci">parser()</div><div class="ttdef"><b>Definition:</b> parser.cpp:9</div></div>
+<div class="ttc" id="classparser_html_aa16938ad5757d700376a6fadb4e11e2a"><div class="ttname"><a href="classparser.html#aa16938ad5757d700376a6fadb4e11e2a">parser::readFile</a></div><div class="ttdeci">int readFile(QWidget *parent, objStructure *good, objStructure *enemies, objStructure *blocks, objStructure *doors, objStructure *other, QString fileName)</div><div class="ttdef"><b>Definition:</b> parser.cpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 4 2013 11:19:46 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 6 2013 18:19:41 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -1,6 +1,9 @@
-#include "parser.h"
+/*! \abstract parser
+ *         The parser loads the levels as a map for the game. It reads the level file and categorizes each line as a different object (block, door, mj,
+ *         enemy, etc.). Then it takes in the other information as parameters of the object corresponding to the object picture, location, and type.
+ */
 
-//test code
+#include "parser.h"
 #include <iostream>
 
 parser::parser(){
@@ -13,9 +16,10 @@ parser::~parser(){
     delete sprites;
 }
 
-//reads a file, either one specified by user though the file diolog or
-//opens the name specified
-//add sprites to the objStructure
+/*! \abstract parser::readFile
+ * Reads a file, either one specified by user though the file dialog or opens the
+ * name specified add sprites to the objStructure
+ */
 int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies,
                       objStructure *blocks, objStructure *doors, objStructure *other, QString fileName){
     //the default value
@@ -149,6 +153,10 @@ int parser::readFile( QWidget *parent, objStructure *good, objStructure *enemies
     return 1;
 }
 
+/*! \abstract parser::createFile
+ * Creates level text file from a saved game, based on the objects currently on the
+ * screen, their positions, and their states
+ */
 void parser::createFile(const QString name,  objStructure *goodGuys, objStructure *enemies,
                         objStructure *blocks, objStructure *doors, objStructure *other){
 

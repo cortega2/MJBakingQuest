@@ -10,17 +10,17 @@ Inheritance diagram for gamewindow\-:\begin{figure}[H]
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classgamewindow_a69fdf6888c6496deedba54f588867415}{void {\bfseries move\-Event} ()}\label{classgamewindow_a69fdf6888c6496deedba54f588867415}
+\hypertarget{classgamewindow_a69fdf6888c6496deedba54f588867415}{void \hyperlink{classgamewindow_a69fdf6888c6496deedba54f588867415}{move\-Event} ()}\label{classgamewindow_a69fdf6888c6496deedba54f588867415}
 
-\item 
-\hypertarget{classgamewindow_a4a43db9e7606e3e24a63baf6d36a7e79}{void {\bfseries media\-Event} ()}\label{classgamewindow_a4a43db9e7606e3e24a63baf6d36a7e79}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classgamewindow_a69fdf6888c6496deedba54f588867415}{gamewindow\-::move\-Event} sets up timer function for moving enemies \end{DoxyCompactList}\item 
+\hypertarget{classgamewindow_a4a43db9e7606e3e24a63baf6d36a7e79}{void \hyperlink{classgamewindow_a4a43db9e7606e3e24a63baf6d36a7e79}{media\-Event} ()}\label{classgamewindow_a4a43db9e7606e3e24a63baf6d36a7e79}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classgamewindow_a69fdf6888c6496deedba54f588867415}{gamewindow\-::move\-Event} sets up timer function for media player for music played in the background \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classgamewindow_a3e131541b6a8c961d0156a62a02b7862}{gamewindow} (Q\-Widget $\ast$parent=0, bool new\-Game=true, Q\-String session\-Name=N\-U\-L\-L)
-\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{classgamewindow_a3e131541b6a8c961d0156a62a02b7862}{gamewindow\-::gamewindow} Loads games depending on if its new or saved. Also sets up timer for music to play in the background. The order of the music is randomly picked. \end{DoxyCompactList}\item 
 \hypertarget{classgamewindow_ac1f14593e7296da6c62db78f159e48c8}{Q\-Graphics\-View $\ast$ {\bfseries Get\-Graphics\-View} ()}\label{classgamewindow_ac1f14593e7296da6c62db78f159e48c8}
 
 \end{DoxyCompactItemize}
@@ -42,9 +42,9 @@ Inheritance diagram for gamewindow\-:\begin{figure}[H]
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classgamewindow_a403dc8059cacafc856e7a38bb660e161}{void {\bfseries key\-Press\-Event} (Q\-Key\-Event $\ast$event)}\label{classgamewindow_a403dc8059cacafc856e7a38bb660e161}
+\hypertarget{classgamewindow_a403dc8059cacafc856e7a38bb660e161}{void \hyperlink{classgamewindow_a403dc8059cacafc856e7a38bb660e161}{key\-Press\-Event} (Q\-Key\-Event $\ast$event)}\label{classgamewindow_a403dc8059cacafc856e7a38bb660e161}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classgamewindow_a403dc8059cacafc856e7a38bb660e161}{gamewindow\-::key\-Press\-Event} listens to keypresses from the user and does an action based on the key that was pressed \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
@@ -57,9 +57,13 @@ Inheritance diagram for gamewindow\-:\begin{figure}[H]
 \item[{Q\-String}]{session\-Name = {\ttfamily NULL}}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classgamewindow_a3e131541b6a8c961d0156a62a02b7862}
-\hyperlink{classgamewindow_a3e131541b6a8c961d0156a62a02b7862}{gamewindow\-::gamewindow} This class sets up the window for game play. This window loads a new game or a saved game. It also has the keyboard connections set up for the user. 
+
+
+\hyperlink{classgamewindow_a3e131541b6a8c961d0156a62a02b7862}{gamewindow\-::gamewindow} Loads games depending on if its new or saved. Also sets up timer for music to play in the background. The order of the music is randomly picked. 
+
+gamewindow This class sets up the window for game play. This window loads a new game or a saved game. It also has the keyboard connections set up for the user. 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-Doxygen/gamewindow.\-h\item 
-Doxygen/gamewindow.\-cpp\end{DoxyCompactItemize}
+gamewindow.\-h\item 
+gamewindow.\-cpp\end{DoxyCompactItemize}

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>My Project: Doxygen/editormainwindow.h Source File</title>
+<title>My Project: editormainwindow.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -77,11 +78,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_1148ebc2b25b55095aebf6f4cbb6efca.html">Doxygen</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">editormainwindow.h</div>  </div>
@@ -133,8 +129,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">/* For some reason, these dont all work...</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">        FIXED IT, centralWidget()-&gt;setAttribute(Qt::WA_TransparentForMouseEvents);*/</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">//void mousePressEvent(QMouseEvent * event);</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> mouseReleaseEvent(QMouseEvent * event);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// void mouseDoubleClickEvent(QMouseEvent * e);</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//void mouseReleaseEvent(QMouseEvent * event);</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//void mouseDoubleClickEvent(QMouseEvent * e);</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//void mouseMoveEvent(QMouseEvent * event);</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> on_actionUsage_triggered();</div>
@@ -147,16 +143,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> on_actionSave_triggered();</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    Ui::MainWindow *ui;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="classengine.html">engine</a> *ginny;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    QGraphicsScene *graphicsScene;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="class_graphics_view_editor.html">GraphicsViewEditor</a> *graphicsView;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif // MAINWINDOW_H</span></div>
-<div class="ttc" id="classedit_window_html_a0fc9d66a5d73435b5d1bf5626a8862c9"><div class="ttname"><a href="classedit_window.html#a0fc9d66a5d73435b5d1bf5626a8862c9">editWindow::~editWindow</a></div><div class="ttdeci">~editWindow()</div><div class="ttdoc">editWindow::~editWindow To clean up stuff when your done! </div><div class="ttdef"><b>Definition:</b> editormainwindow.cpp:42</div></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> on_radioButtonMBLOCK_clicked();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> on_radioButtonNonMovableBlock_clicked();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    Ui::MainWindow *ui;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classengine.html">engine</a> *ginny;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    QGraphicsScene *graphicsScene;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="class_graphics_view_editor.html">GraphicsViewEditor</a> *graphicsView;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif // MAINWINDOW_H</span></div>
+<div class="ttc" id="classedit_window_html_a0fc9d66a5d73435b5d1bf5626a8862c9"><div class="ttname"><a href="classedit_window.html#a0fc9d66a5d73435b5d1bf5626a8862c9">editWindow::~editWindow</a></div><div class="ttdeci">~editWindow()</div><div class="ttdoc">editWindow::~editWindow To clean up stuff when your done! </div><div class="ttdef"><b>Definition:</b> editormainwindow.cpp:51</div></div>
 <div class="ttc" id="class_graphics_view_editor_html"><div class="ttname"><a href="class_graphics_view_editor.html">GraphicsViewEditor</a></div><div class="ttdef"><b>Definition:</b> graphicsvieweditor.h:8</div></div>
 <div class="ttc" id="classengine_html"><div class="ttname"><a href="classengine.html">engine</a></div><div class="ttdef"><b>Definition:</b> engine.h:16</div></div>
 <div class="ttc" id="classedit_window_html_a494969043b61ec9664804df9253cb8c9"><div class="ttname"><a href="classedit_window.html#a494969043b61ec9664804df9253cb8c9">editWindow::editWindow</a></div><div class="ttdeci">editWindow(QWidget *parent=0)</div><div class="ttdoc">editwindow::editWindow Uses GraphicsView to display level editor window. Calls engine to generate ite...</div><div class="ttdef"><b>Definition:</b> editormainwindow.cpp:12</div></div>
@@ -164,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 4 2013 11:19:46 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 6 2013 18:19:41 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

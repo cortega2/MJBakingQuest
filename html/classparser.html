@@ -95,11 +95,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac4cb16e924a735dfb5837772afa1a1a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classparser.html#ac4cb16e924a735dfb5837772afa1a1a9">parser</a> ()</td></tr>
 <tr class="separator:ac4cb16e924a735dfb5837772afa1a1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa16938ad5757d700376a6fadb4e11e2a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa16938ad5757d700376a6fadb4e11e2a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>readFile</b> (QWidget *parent, <a class="el" href="classobj_structure.html">objStructure</a> *good, <a class="el" href="classobj_structure.html">objStructure</a> *enemies, <a class="el" href="classobj_structure.html">objStructure</a> *blocks, <a class="el" href="classobj_structure.html">objStructure</a> *doors, <a class="el" href="classobj_structure.html">objStructure</a> *other, QString fileName)</td></tr>
+<tr class="memitem:aa16938ad5757d700376a6fadb4e11e2a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classparser.html#aa16938ad5757d700376a6fadb4e11e2a">readFile</a> (QWidget *parent, <a class="el" href="classobj_structure.html">objStructure</a> *good, <a class="el" href="classobj_structure.html">objStructure</a> *enemies, <a class="el" href="classobj_structure.html">objStructure</a> *blocks, <a class="el" href="classobj_structure.html">objStructure</a> *doors, <a class="el" href="classobj_structure.html">objStructure</a> *other, QString fileName)</td></tr>
 <tr class="separator:aa16938ad5757d700376a6fadb4e11e2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace9c694c314e8314bcee42ca751f64a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace9c694c314e8314bcee42ca751f64a0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>createFile</b> (QString name, <a class="el" href="classobj_structure.html">objStructure</a> *goodGuys, <a class="el" href="classobj_structure.html">objStructure</a> *enemies, <a class="el" href="classobj_structure.html">objStructure</a> *blocks, <a class="el" href="classobj_structure.html">objStructure</a> *doors, <a class="el" href="classobj_structure.html">objStructure</a> *other)</td></tr>
+<tr class="memitem:ace9c694c314e8314bcee42ca751f64a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classparser.html#ace9c694c314e8314bcee42ca751f64a0">createFile</a> (QString name, <a class="el" href="classobj_structure.html">objStructure</a> *goodGuys, <a class="el" href="classobj_structure.html">objStructure</a> *enemies, <a class="el" href="classobj_structure.html">objStructure</a> *blocks, <a class="el" href="classobj_structure.html">objStructure</a> *doors, <a class="el" href="classobj_structure.html">objStructure</a> *other)</td></tr>
 <tr class="separator:ace9c694c314e8314bcee42ca751f64a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -127,18 +125,127 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>lives</b></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="classparser.html#ac4cb16e924a735dfb5837772afa1a1a9">parser::parser</a> The parser loads the levels as a map for the game. It reads the level file and categorizes each line as a different object (block, door, mj, enemy, etc.). Then it takes in the other information as parameters of the object corresponding to the object picture, location, and type. </p>
+<p>parser The parser loads the levels as a map for the game. It reads the level file and categorizes each line as a different object (block, door, mj, enemy, etc.). Then it takes in the other information as parameters of the object corresponding to the object picture, location, and type. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ace9c694c314e8314bcee42ca751f64a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void parser::createFile </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>goodGuys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>enemies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>doors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>other</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="classparser.html#ace9c694c314e8314bcee42ca751f64a0">parser::createFile</a> Creates level text file from a saved game, based on the objects currently on the screen, their positions, and their states </p>
+
+</div>
+</div>
+<a class="anchor" id="aa16938ad5757d700376a6fadb4e11e2a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parser::readFile </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>good</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>enemies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>doors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classobj_structure.html">objStructure</a> *&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>fileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="classparser.html#aa16938ad5757d700376a6fadb4e11e2a">parser::readFile</a> Reads a file, either one specified by user though the file dialog or opens the name specified add sprites to the <a class="el" href="classobj_structure.html">objStructure</a> </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Doxygen/<a class="el" href="parser_8h_source.html">parser.h</a></li>
-<li>Doxygen/parser.cpp</li>
+<li><a class="el" href="parser_8h_source.html">parser.h</a></li>
+<li>parser.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 4 2013 11:19:48 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 6 2013 18:19:47 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

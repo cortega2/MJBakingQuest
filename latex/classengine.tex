@@ -40,27 +40,30 @@
 \hypertarget{classengine_a804d510d34deaebcfff0bf5af93568ec}{void \hyperlink{classengine_a804d510d34deaebcfff0bf5af93568ec}{Add\-Sprite} (const char $\ast$sprite\-F\-Name, int x\-Loc, int y\-Loc)}\label{classengine_a804d510d34deaebcfff0bf5af93568ec}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a804d510d34deaebcfff0bf5af93568ec}{engine\-::\-Add\-Sprite} Creates a widget for sprites, givien a sprite picture, and a position. The sprite also holds properties that tell wheter or not it is a movable object. \end{DoxyCompactList}\item 
-\hypertarget{classengine_ac084e69968320aa57383fc251f54b887}{void {\bfseries move\-Char} (int direction)}\label{classengine_ac084e69968320aa57383fc251f54b887}
+\hypertarget{classengine_ac084e69968320aa57383fc251f54b887}{void \hyperlink{classengine_ac084e69968320aa57383fc251f54b887}{move\-Char} (int direction)}\label{classengine_ac084e69968320aa57383fc251f54b887}
 
-\item 
-\hypertarget{classengine_ab27f5792c30dfd6e6cc4fcfd390d15eb}{void {\bfseries move\-Enemies} ()}\label{classengine_ab27f5792c30dfd6e6cc4fcfd390d15eb}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_ac084e69968320aa57383fc251f54b887}{engine\-::move\-Char} method that is used to move mj. This method changes her sprite picture and updates her posistion \end{DoxyCompactList}\item 
+\hypertarget{classengine_ab27f5792c30dfd6e6cc4fcfd390d15eb}{void \hyperlink{classengine_ab27f5792c30dfd6e6cc4fcfd390d15eb}{move\-Enemies} ()}\label{classengine_ab27f5792c30dfd6e6cc4fcfd390d15eb}
 
-\item 
-\hypertarget{classengine_ad010e22061b9a72eb0ff69821ffbfbc6}{void {\bfseries move\-Good} ()}\label{classengine_ad010e22061b9a72eb0ff69821ffbfbc6}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_ab27f5792c30dfd6e6cc4fcfd390d15eb}{engine\-::move\-Enemies} moves the good characters \end{DoxyCompactList}\item 
+\hypertarget{classengine_ad010e22061b9a72eb0ff69821ffbfbc6}{void \hyperlink{classengine_ad010e22061b9a72eb0ff69821ffbfbc6}{move\-Good} ()}\label{classengine_ad010e22061b9a72eb0ff69821ffbfbc6}
 
-\item 
-\hypertarget{classengine_a3fc3e6605e74eb8ba71316b15471a1c3}{void {\bfseries get\-Block} ()}\label{classengine_a3fc3e6605e74eb8ba71316b15471a1c3}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_ad010e22061b9a72eb0ff69821ffbfbc6}{engine\-::move\-Good} moves the good characters \end{DoxyCompactList}\item 
+\hypertarget{classengine_a3fc3e6605e74eb8ba71316b15471a1c3}{void \hyperlink{classengine_a3fc3e6605e74eb8ba71316b15471a1c3}{get\-Block} ()}\label{classengine_a3fc3e6605e74eb8ba71316b15471a1c3}
 
-\item 
-\hypertarget{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}{void {\bfseries drop\-Block} ()}\label{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a3fc3e6605e74eb8ba71316b15471a1c3}{engine\-::get\-Block} allows M\-J to pick up blocks below her (when she is facing front) or on the right or left of her, depending on which direction she is facing \end{DoxyCompactList}\item 
+\hypertarget{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}{void \hyperlink{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}{drop\-Block} ()}\label{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}
 
-\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_ac37f50e0ee7aa83b113d8e4dbd9ee069}{engine\-::drop\-Block()} using mj's position we find the position of the block she is carrying and check to see if the place where the player wants to drop it is a legal place, ie there is no block there. If block lands on an enemy, they die (disappear) \end{DoxyCompactList}\item 
 \hypertarget{classengine_a56c6f2331fa2045f184b183c89f9c199}{void \hyperlink{classengine_a56c6f2331fa2045f184b183c89f9c199}{load\-Next} ()}\label{classengine_a56c6f2331fa2045f184b183c89f9c199}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{classengine_a56c6f2331fa2045f184b183c89f9c199}{engine\-::load\-Next} checks if mj is by the door if she is then load the next level \end{DoxyCompactList}\item 
-\hypertarget{classengine_a1fa4f5009e031570cd0e40d7056c8a61}{void {\bfseries check\-Collisions} ()}\label{classengine_a1fa4f5009e031570cd0e40d7056c8a61}
+\hypertarget{classengine_a1fa4f5009e031570cd0e40d7056c8a61}{void \hyperlink{classengine_a1fa4f5009e031570cd0e40d7056c8a61}{check\-Collisions} ()}\label{classengine_a1fa4f5009e031570cd0e40d7056c8a61}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em engine\-::check\-Collision() checks to see if M\-J collides with any of the people if she collides with a good guy, she gets the item they are holding if she collides with an enemy, she loses a life, until she runs out when she runs out the game resets to the beginning of that level \end{DoxyCompactList}\item 
+\hypertarget{classengine_a6ffdddfa828e97da265f0483509f7554}{void \hyperlink{classengine_a6ffdddfa828e97da265f0483509f7554}{start\-Over} ()}\label{classengine_a6ffdddfa828e97da265f0483509f7554}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classengine_ac084e69968320aa57383fc251f54b887}{engine\-::move\-Char} starts the current level over by first clearing out the life and then callong reset \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -81,10 +84,16 @@
 \item 
 \hypertarget{classengine_a03e0b46f80c31f67235837a8cbb9ee27}{int {\bfseries life}}\label{classengine_a03e0b46f80c31f67235837a8cbb9ee27}
 
+\item 
+\hypertarget{classengine_ab72a971b9c7b2c4206a8d27c5a26f83d}{\hyperlink{classobj_structure}{obj\-Structure} $\ast$ {\bfseries blocks}}\label{classengine_ab72a971b9c7b2c4206a8d27c5a26f83d}
+
+\item 
+\hypertarget{classengine_a5d5f9c8f20bc2e91e4bba4afac71dbad}{\hyperlink{classparser}{parser} $\ast$ {\bfseries parsley}}\label{classengine_a5d5f9c8f20bc2e91e4bba4afac71dbad}
+
 \end{DoxyCompactItemize}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-Doxygen/engine.\-h\item 
-Doxygen/engine.\-cpp\end{DoxyCompactItemize}
+engine.\-h\item 
+engine.\-cpp\end{DoxyCompactItemize}

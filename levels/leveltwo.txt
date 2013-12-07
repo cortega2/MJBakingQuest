@@ -6,6 +6,8 @@ CURRENT, levels/leveltwo.txt
 #Level atributes
 MJ, MJ_left, 2, 4
 GOOD, columbian_man, 27, 4, sprites/chocolate, 205
+other, butter, 0, 20
+other, vanilla, 1, 20
 ENEMY, enemy4, 28, 4
 BLOCK, ground, 0, 1
 BLOCK, ground, 1, 1
@@ -124,5 +126,5 @@ MBLOCK, move_wood, 29, 4
 MBLOCK, staircase, 17, 6
 other, tree, 6, 4
 other, trash, 7, 4
-other, door, 1, 6
+DOOR, door, 1, 6
 BACKGROUND, bluesky

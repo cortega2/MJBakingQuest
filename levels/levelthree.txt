@@ -1,0 +1,57 @@
+#
+#Types of blocks: BLOCK, MJ, GOOD, ENEMY, MBLOCK and others
+#this is a comment
+#
+BLOCK, woodfloor, 0, 1
+BLOCK, woodfloor, 1, 1
+BLOCK, woodfloor, 2, 1
+BLOCK, woodfloor, 3, 1
+BLOCK, woodfloor, 4, 1
+BLOCK, woodfloor, 5, 1
+BLOCK, woodfloor, 6, 1
+BLOCK, woodfloor, 7, 1
+BLOCK, woodfloor, 8, 1
+BLOCK, woodfloor, 9, 1
+BLOCK, woodfloor, 10, 1
+BLOCK, woodfloor, 11, 1
+BLOCK, woodfloor, 12, 1
+BLOCK, woodfloor, 13, 1
+BLOCK, woodfloor, 14, 1
+BLOCK, woodfloor, 15, 1
+BLOCK, woodfloor, 16, 1
+BLOCK, woodfloor, 17, 1
+BLOCK, woodfloor, 18, 1
+BLOCK, woodfloor, 19, 1
+BLOCK, woodfloor, 20, 1
+BLOCK, woodfloor, 21, 1
+BLOCK, woodfloor, 22, 1
+BLOCK, woodfloor, 23, 1
+BLOCK, woodfloor, 24, 1
+BLOCK, woodfloor, 25, 1
+BLOCK, woodfloor, 26, 1
+BLOCK, woodfloor, 27, 1
+BLOCK, woodfloor, 28, 1
+BLOCK, woodfloor, 29, 1
+#
+#
+other, window2, 28, 6
+other, y, 11, 5
+other, o, 12, 5
+other, u, 13, 5
+other, W, 15, 5
+other, I, 16, 5
+other, N, 17, 5
+other, !, 18, 5
+other, oven, 14, 2
+other, familypic, 4, 2
+other, light_house, 2, 20
+other, light_house, 10, 20
+other, light_house, 18, 20
+other, light_house, 26, 20
+other, door, 1, 2
+other, butter, 13, 4
+other, vanilla, 14, 4
+other, chocolate, 15, 4
+BACKGROUND, kitchen
+other, MJ_left, 15, 2
+CURRENT, levels/levelthree.txt

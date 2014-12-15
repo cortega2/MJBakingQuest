@@ -783,7 +783,7 @@ void engine::dropBlock(){
         while(tmp != 0){
             if((ptr->x == tmp->x) && (ptr->y == tmp->y)){
                 //enemy got crushed remove it and play sound fx
-                player->setMedia(QUrl::fromLocalFile("sounds/squish.wav"));
+                player->setMedia(QUrl::fromLocalFile(QFileInfo("sounds/squish.wav").absoluteFilePath()));
                 player->setVolume(60);
                 player->play();
                 enemies->remove(tmp);
@@ -815,7 +815,7 @@ void engine::checkCollisions(){
                 uiScene->addItem(goodObj[curItems]);
 
                 //play sound fx
-                player->setMedia(QUrl::fromLocalFile("sounds/chime.wav"));
+                player->setMedia(QUrl::fromLocalFile(QFileInfo("sounds/chime.wav").absoluteFilePath() ));
                 player->setVolume(70);
                 player->play();
 

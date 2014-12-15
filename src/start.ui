@@ -31,7 +31,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>newgame_button.png</normaloff>newgame_button.png</iconset>
+     <normaloff>pics/newgame_button.png</normaloff>pics/newgame_button.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -54,7 +54,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>continuegame_button.png</normaloff>continuegame_button.png</iconset>
+     <normaloff>pics/continuegame_button.png</normaloff>pics/continuegame_button.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -77,7 +77,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>leveleditor_button.png</normaloff>leveleditor_button.png</iconset>
+     <normaloff>pics/leveleditor_button.png</normaloff>pics/leveleditor_button.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -103,7 +103,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>startscreen.png</normaloff>startscreen.png</iconset>
+     <normaloff>pics/startscreen.png</normaloff>pics/startscreen.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -126,7 +126,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>help_button.png</normaloff>help_button.png</iconset>
+     <normaloff>pics/help_button.png</normaloff>pics/help_button.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -149,7 +149,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>quit_button.png</normaloff>quit_button.png</iconset>
+     <normaloff>pics/quit_button.png</normaloff>pics/quit_button.png</iconset>
    </property>
    <property name="iconSize">
     <size>

@@ -9,8 +9,7 @@ SOURCES = \
     objStructure.cpp \
     parser.cpp \
     editormainwindow.cpp \
-    main.cpp \
-    start.cpp \
+    edit_main.cpp \
     gamewindow.cpp \
     graphicsvieweditor.cpp
 
@@ -20,16 +19,13 @@ HEADERS += \
     objStructure.h \
     parser.h \
     editormainwindow.h \
-    start.h \
     gamewindow.h \
     graphicsvieweditor.h \
     definitions.h
 
-TARGET = bakingquest
+TARGET = MixMaster
 
 FORMS += \
     editormainwindow.ui \
-    start.ui \
-    gamewindow.ui
 	
 	RC_FILE = bakingquest.rc

@@ -16,13 +16,15 @@ start::start(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
     player = new QMediaPlayer;
-    player->setMedia(QUrl::fromLocalFile("sounds/Instrumentals - Afroman - Because I Got High  (Download).mp3"));
+
+    player->setMedia(QUrl::fromLocalFile(QFileInfo("sounds/afroman_because_i_got_high_instrumental.mp3").absoluteFilePath() ));
     player->setVolume(50);
     player->play();
 }
 
 start::~start(){
     delete ui;
+    delete player;
 }
 
 /*! \abstract start::on_pushButton_clicked

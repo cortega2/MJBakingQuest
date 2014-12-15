@@ -62,13 +62,13 @@ gamewindow::gamewindow(QWidget *parent, bool newGame, QString sessionName) :
     if(random == 0)
         song = "sounds/aquarium.mp3";
     else if(random == 1)
-        song = "sounds/05 - Rafting Starlit Everglades.mp3";
+        song = "sounds/rafting_starlit_everglades.mp3";
     else
-        song = "sounds/Karaoke Bob Marley  Is This Love - Reggae -  www.clubkaraoke.cl.mp3";
+        song = "sounds/bob_marley_is_this_love.mp3";
 
     //start playing music from specified file
     player = new QMediaPlayer;
-    player->setMedia(QUrl::fromLocalFile(song));
+    player->setMedia(QUrl::fromLocalFile(QFileInfo(song).absoluteFilePath() ) );
     player->setVolume(50);
     player->play();
 

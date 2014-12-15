@@ -10,7 +10,6 @@ SOURCES = \
     parser.cpp \
     editormainwindow.cpp \
     edit_main.cpp \
-    gamewindow.cpp \
     graphicsvieweditor.cpp
 
 HEADERS += \
@@ -19,7 +18,6 @@ HEADERS += \
     objStructure.h \
     parser.h \
     editormainwindow.h \
-    gamewindow.h \
     graphicsvieweditor.h \
     definitions.h
 

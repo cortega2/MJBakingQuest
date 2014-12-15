@@ -1,3 +1,12 @@
+#include <QWidget>
+#include <QtCore>
+#include <QObject>
+
+#include "engine.h"
+#include "editormainwindow.h"
+//#include "gamewindow.h"
+#include "definitions.h"
+
 int main(int argc, char *argv[]){
     QApplication app(argc, argv);
 

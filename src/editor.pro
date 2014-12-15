@@ -2,6 +2,7 @@ QT += widgets
 QT += core gui
 QT += multimedia
 
+TEMPLATE = app
 
 SOURCES = \
     objects.cpp \

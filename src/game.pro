@@ -2,6 +2,7 @@ QT += widgets
 QT += core gui
 QT += multimedia
 
+TEMPLATE = app
 
 SOURCES = \
     objects.cpp \
@@ -25,11 +26,11 @@ HEADERS += \
     graphicsvieweditor.h \
     definitions.h
 
-TARGET = bakingquest
+TARGET = baking_game
 
 FORMS += \
     editormainwindow.ui \
     start.ui \
     gamewindow.ui
 	
-	RC_FILE = bakingquest.rc
+RC_FILE = bakingquest.rc

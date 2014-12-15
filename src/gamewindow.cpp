@@ -148,9 +148,9 @@ void gamewindow::mediaEvent(){
         if(random == 0)
             song = "sounds/aquarium.mp3";
         else if(random == 1)
-            song = "sounds/05 - Rafting Starlit Everglades.mp3";
+            song = "sounds/rafting_starlit_everglades.mp3";
         else
-            song = "sounds/Karaoke Bob Marley  Is This Love - Reggae -  www.clubkaraoke.cl.mp3";
+            song = "sounds/bob_marley_is_this_love.mp3";
 
         player->setMedia(QUrl::fromLocalFile(song));
         player->setVolume(50);
